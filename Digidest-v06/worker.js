@@ -1,4 +1,4 @@
-// Digit Destiny — Cloudflare Worker
+// Digit Destiny — Cloudflare Worker - 31 Jul 2026 (CI auto-deploy test)
 // Routes: /api/calculate  /api/reading  /api/compatibility  /api/daily/:number
 //         /api/telegram/webhook  /api/warm
 // Cron:   daily insight push via scheduled handler
