@@ -1,0 +1,13 @@
+name = "digit-destiny-api"
+main = "worker.js"
+compatibility_date = "2026-06-16"
+
+kv_namespaces = [
+  { binding = "DIGIT_DESTINY_KV", id = "931f3410247f41d4af10dd9f5c579caf" }
+]
+
+[vars]
+DIGDEST_OPENROUTER_MODEL = "deepseek/deepseek-chat"
+
+[triggers]
+crons = ["0 1 * * *"]

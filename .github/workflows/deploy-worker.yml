@@ -1,0 +1,23 @@
+name: Deploy Worker
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Digidest-v06/worker.js"
+      - "Digidest-v06/wrangler.toml"
+      - ".github/workflows/deploy-worker.yml"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 97fddbb5e146dc6d2296115140ea68ef
+          workingDirectory: "Digidest-v06"
+          command: deploy

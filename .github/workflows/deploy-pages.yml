@@ -1,0 +1,21 @@
+name: Deploy Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Digidest-v06/Upload/**"
+      - ".github/workflows/deploy-pages.yml"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 97fddbb5e146dc6d2296115140ea68ef
+          command: pages deploy Digidest-v06/Upload --project-name=digit-destiny-v06
