@@ -6,6 +6,7 @@ on:
     paths:
       - "Digidest-v06/Upload/**"
       - ".github/workflows/deploy-pages.yml"
+  workflow_dispatch: {}
 
 jobs:
   deploy:
