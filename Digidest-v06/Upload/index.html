@@ -468,7 +468,7 @@
     /* ── INPUT SECTION ── */
     .input-section {
       margin-bottom: 48px;
-      background: rgba(28,21,9,0.7);
+      background: rgba(40,31,15,0.78);
       border: 1px solid rgba(156,122,60,0.2);
       border-top: 2px solid var(--bronze-dim);
       padding: 36px 32px 32px;
@@ -956,11 +956,11 @@
 
     .skeleton-line {
       height: 13px;
-      background: linear-gradient(90deg, var(--leather) 25%, var(--umber) 50%, var(--leather) 75%);
+      background: linear-gradient(90deg, var(--umber) 25%, rgba(156,122,60,0.35) 50%, var(--umber) 75%);
       background-size: 200% 100%;
       animation: skeleton-sweep 1.6s infinite;
       border-radius: 1px;
-      opacity: 0.6;
+      opacity: 0.85;
     }
 
     .skeleton-line:nth-child(2) { width: 82%; }
@@ -969,6 +969,21 @@
     @keyframes skeleton-sweep {
       0%   { background-position: 200% 0; }
       100% { background-position: -200% 0; }
+    }
+
+    .ai-working-label {
+      font-family: var(--font-display);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--bronze);
+      margin-top: 10px;
+      animation: label-blink 1.8s ease-in-out infinite;
+    }
+
+    @keyframes label-blink {
+      0%, 100% { opacity: 0.35; }
+      50%      { opacity: 0.9; }
     }
 
     .fallback-tag {
@@ -1152,6 +1167,8 @@
       white-space: nowrap;
       transition: all 0.2s;
       height: 42px;
+      position: relative;
+      overflow: hidden;
     }
 
     .compat-submit-btn:hover:not(:disabled) {
@@ -1161,6 +1178,16 @@
     }
 
     .compat-submit-btn:disabled { opacity: 0.3; cursor: default; }
+
+    .compat-submit-btn.loading { color: transparent; opacity: 1; }
+
+    .compat-submit-btn.loading::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(156,122,60,0.35), transparent);
+      animation: shimmer 1.4s infinite;
+    }
 
     .compat-result { display: none; border-left: 2px solid var(--cinnabar-dim); padding-left: 24px; }
     .compat-result.visible { display: block; }
@@ -1487,7 +1514,8 @@
     @media (prefers-reduced-motion: reduce) {
       .number-ring, .number-digit, .number-ring-inner, .number-ticks,
       .reveal-btn.loading::after, .skeleton-line, .compat-bar-fill,
-      .hero-sigil svg, .hero-scroll, .reading-panel::before {
+      .hero-sigil svg, .hero-scroll, .reading-panel::before,
+      .ai-working-label, .compat-submit-btn.loading::after {
         animation: none;
         transition: none;
       }
@@ -1803,7 +1831,7 @@
     .synthesis-loading .skeleton-line {
       height: 14px;
       border-radius: 2px;
-      background: linear-gradient(90deg, rgba(156,122,60,0.08) 25%, rgba(156,122,60,0.15) 50%, rgba(156,122,60,0.08) 75%);
+      background: linear-gradient(90deg, rgba(156,122,60,0.10) 25%, rgba(156,122,60,0.4) 50%, rgba(156,122,60,0.10) 75%);
       background-size: 200% 100%;
       animation: skeleton-shimmer 1.5s infinite;
     }
@@ -2369,6 +2397,9 @@
         yearLabel: 'Year',
         revealBtn: 'Reveal My Number',
         revealLoading: 'Reading the numbers...',
+        aiWorkingReading: 'Consulting the numbers…',
+        aiWorkingSynthesis: 'Weaving your portrait…',
+        aiWorkingDaily: 'Reading today\'s pattern…',
         numberEyebrow: 'Your Life Path Number',
         stepsShow: 'Show reduction steps',
         stepsHide: 'Hide reduction steps',
@@ -2460,6 +2491,9 @@
         yearLabel: 'Tahun',
         revealBtn: 'Ungkap Angkaku',
         revealLoading: 'Membaca angka-angka...',
+        aiWorkingReading: 'Menyimak angka-angka…',
+        aiWorkingSynthesis: 'Merangkai potretmu…',
+        aiWorkingDaily: 'Membaca pola hari ini…',
         numberEyebrow: 'Angka Jalur Hidupmu',
         stepsShow: 'Tampilkan langkah reduksi',
         stepsHide: 'Sembunyikan langkah reduksi',
@@ -2742,6 +2776,10 @@
         skel.appendChild(line);
       }
       body.appendChild(skel);
+      var synthesisWorkingLabel = document.createElement('div');
+      synthesisWorkingLabel.className = 'ai-working-label';
+      synthesisWorkingLabel.textContent = S.aiWorkingSynthesis;
+      body.appendChild(synthesisWorkingLabel);
 
       fetch(API_BASE + '/api/synthesis', {
         method: 'POST',
@@ -3300,6 +3338,10 @@
         skel.appendChild(line);
       }
       textEl.appendChild(skel);
+      var readingWorkingLabel = document.createElement('div');
+      readingWorkingLabel.className = 'ai-working-label';
+      readingWorkingLabel.textContent = S.aiWorkingReading;
+      textEl.appendChild(readingWorkingLabel);
 
       panel.appendChild(dot);
       panel.appendChild(label);
@@ -3368,6 +3410,10 @@
         skel.appendChild(line);
       }
       dailyText.appendChild(skel);
+      var dailyWorkingLabel = document.createElement('div');
+      dailyWorkingLabel.className = 'ai-working-label';
+      dailyWorkingLabel.textContent = S.aiWorkingDaily;
+      dailyText.appendChild(dailyWorkingLabel);
 
       fetch(API_BASE + '/api/daily/' + state.number + '?lang=' + lang)
       .then(function(res) { return res.json(); })
@@ -3591,7 +3637,7 @@
 
       var isoDate = buildISODate(day, month, year);
       compatSubmitBtn.disabled = true;
-      compatSubmitBtn.textContent = '...';
+      compatSubmitBtn.classList.add('loading');
 
       fetch(API_BASE + '/api/calculate', {
         method: 'POST',
@@ -3610,12 +3656,12 @@
       .then(function(res) { return res.json(); })
       .then(function(data) {
         compatSubmitBtn.disabled = false;
-        compatSubmitBtn.textContent = S.compatSubmitBtn;
+        compatSubmitBtn.classList.remove('loading');
         renderCompatResult(data);
       })
       .catch(function() {
         compatSubmitBtn.disabled = false;
-        compatSubmitBtn.textContent = S.compatSubmitBtn;
+        compatSubmitBtn.classList.remove('loading');
         showError(compatError, S.errConn);
       });
     }
