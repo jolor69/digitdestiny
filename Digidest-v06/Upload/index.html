@@ -1,0 +1,3734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The date you were born was never random. Find out why.">
+  <meta property="og:title" content="Digit Destiny — Know Your Number">
+  <meta property="og:description" content="The date you were born was never random. Find out why.">
+  <meta property="og:image" content="https://digitdestiny.neulab.xyz/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:url" content="https://digitdestiny.neulab.xyz">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://digitdestiny.neulab.xyz/og-image.jpg">
+  <title>Digit Destiny — Know Your Number</title>
+  <link rel="icon" type="image/svg+xml" href="/dd-logo-v1.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IM+Fell+English:ital@0;1&family=Courier+Prime&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --earth:        #0C0A07;
+      --leather:      #1C1509;
+      --umber:        #2A1F0E;
+      --vellum:       #E8D5A3;
+      --vellum-dim:   #9A8C70;
+      --vellum-ghost: #4A4030;
+      --bronze:       #9C7A3C;
+      --bronze-dim:   #5A4520;
+      --temple:       #C4A35A;
+      --cinnabar:     #8B3A2A;
+      --cinnabar-dim: #4A1F15;
+      --ember:        #C4622A;
+      --error:        #C45A3A;
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'IM Fell English', Georgia, serif;
+      --font-mono:    'Courier Prime', 'Courier New', monospace;
+    }
+
+    html {
+      background: var(--earth);
+      color: var(--vellum);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    /* ══════════════════════════════════════════
+       LANDING HERO
+    ══════════════════════════════════════════ */
+
+    .landing {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 60px 24px 80px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* Parchment texture overlay */
+    .landing::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(44,28,10,0.6) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(139,58,42,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 80% 10%, rgba(196,163,90,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* Aged edge vignette */
+    .landing::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 100% 100% at 50% 50%, transparent 50%, rgba(8,6,3,0.7) 100%);
+      pointer-events: none;
+    }
+
+    /* ── SIGIL ── */
+    .hero-sigil {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(600px, 90vw);
+      height: min(600px, 90vw);
+      opacity: 0.07;
+      pointer-events: none;
+    }
+
+    .hero-sigil svg {
+      width: 100%;
+      height: 100%;
+      animation: sigil-breathe 8s ease-in-out infinite;
+    }
+
+    @keyframes sigil-breathe {
+      0%, 100% { opacity: 0.85; transform: rotate(0deg); }
+      50%       { opacity: 1;    transform: rotate(3deg); }
+    }
+
+    /* ── HERO CONTENT ── */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 640px;
+    }
+
+    .hero-sigil-mark {
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--bronze);
+      margin-bottom: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .hero-sigil-mark::before,
+    .hero-sigil-mark::after {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--bronze-dim));
+    }
+
+    .hero-sigil-mark::after {
+      background: linear-gradient(90deg, var(--bronze-dim), transparent);
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--vellum);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--temple);
+      display: block;
+    }
+
+    .hero-rule {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--bronze), transparent);
+      margin: 28px auto;
+    }
+
+    .hero-lore {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+      color: var(--vellum-dim);
+      line-height: 1.7;
+      max-width: 480px;
+      margin: 0 auto 48px;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--temple);
+      border: 1px solid var(--bronze-dim);
+      padding: 14px 40px;
+      cursor: pointer;
+      background: none;
+      transition: border-color 0.3s, color 0.3s, background 0.3s;
+      position: relative;
+    }
+
+    .hero-cta::before {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border: 1px solid rgba(196,163,90,0.15);
+      pointer-events: none;
+    }
+
+    .hero-cta:hover {
+      background: rgba(156,122,60,0.12);
+      border-color: var(--bronze);
+      color: var(--temple);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.4;
+      animation: scroll-pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes scroll-pulse {
+      0%, 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); }
+      50%       { opacity: 0.6; transform: translateX(-50%) translateY(4px); }
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(180deg, var(--bronze), transparent);
+    }
+
+    .hero-scroll-text {
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--vellum-dim);
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how-section {
+      width: 100%;
+      max-width: 860px;
+      padding: 80px 24px;
+      position: relative;
+    }
+
+    .how-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(180deg, var(--bronze-dim), transparent);
+    }
+
+    .how-eyebrow {
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--bronze);
+      margin-bottom: 56px;
+    }
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      position: relative;
+    }
+
+    .how-grid::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: calc(16.66% + 12px);
+      right: calc(16.66% + 12px);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--bronze-dim), var(--bronze-dim), transparent);
+      opacity: 0.4;
+    }
+
+    .how-step {
+      text-align: center;
+      padding: 0 24px;
+    }
+
+    .how-step-num {
+      width: 56px;
+      height: 56px;
+      border: 1px solid var(--bronze-dim);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: var(--temple);
+      position: relative;
+      background: var(--earth);
+    }
+
+    .how-step-num::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1px solid rgba(156,122,60,0.15);
+    }
+
+    .how-step-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: var(--vellum);
+      margin-bottom: 10px;
+    }
+
+    .how-step-desc {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 0.875rem;
+      color: var(--vellum-dim);
+      line-height: 1.6;
+    }
+
+    /* ── SECTION DIVIDER ── */
+    .section-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 16px 0 40px;
+    }
+
+    .section-ornament-line {
+      flex: 1;
+      max-width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--bronze-dim));
+    }
+
+    .section-ornament-line.right {
+      background: linear-gradient(90deg, var(--bronze-dim), transparent);
+    }
+
+    .section-ornament-mark {
+      font-family: var(--font-display);
+      font-size: 18px;
+      color: var(--bronze-dim);
+      line-height: 1;
+    }
+
+    /* ══════════════════════════════════════════
+       APP SECTION (below landing)
+    ══════════════════════════════════════════ */
+
+    .app-section {
+      width: 100%;
+      background: linear-gradient(180deg, var(--earth) 0%, var(--leather) 100%);
+      border-top: 1px solid rgba(156,122,60,0.15);
+      padding-bottom: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .app-anchor {
+      position: relative;
+      top: -1px;
+    }
+
+    .app-header {
+      width: 100%;
+      max-width: 680px;
+      padding: 64px 24px 0;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .app-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 300;
+      color: var(--vellum);
+      margin-bottom: 8px;
+    }
+
+    .app-subtitle {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--vellum-dim);
+    }
+
+    /* ── PROFILES STRIP ── */
+    .profiles-strip {
+      width: 100%;
+      max-width: 680px;
+      padding: 0 24px;
+      display: none;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .profiles-strip.visible { display: flex; }
+
+    .profile-chip {
+      background: none;
+      border: 1px solid var(--bronze-dim);
+      color: var(--vellum-dim);
+      font-family: var(--font-display);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      padding: 6px 16px;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .profile-chip:hover, .profile-chip.active {
+      border-color: var(--bronze);
+      color: var(--temple);
+      background: rgba(156,122,60,0.06);
+    }
+
+    .profile-chip-add {
+      background: none;
+      border: 1px dashed var(--bronze-dim);
+      color: var(--vellum-ghost);
+      font-family: var(--font-display);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      padding: 6px 16px;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .profile-chip-add:hover {
+      border-color: var(--bronze);
+      color: var(--bronze);
+    }
+
+    /* ── MAIN CONTENT ── */
+    .main {
+      width: 100%;
+      max-width: 680px;
+      padding: 0 24px 80px;
+      flex: 1;
+    }
+
+    /* ── INPUT SECTION ── */
+    .input-section {
+      margin-bottom: 48px;
+      background: rgba(28,21,9,0.7);
+      border: 1px solid rgba(156,122,60,0.2);
+      border-top: 2px solid var(--bronze-dim);
+      padding: 36px 32px 32px;
+      position: relative;
+    }
+
+    .input-section::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 32px;
+      right: 32px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--bronze), transparent);
+    }
+
+    .input-label {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--bronze);
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    .date-row {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1.5fr;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .select-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .select-sublabel {
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--vellum-ghost);
+      font-family: var(--font-display);
+    }
+
+    .date-select {
+      appearance: none;
+      -webkit-appearance: none;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--bronze-dim);
+      color: var(--vellum);
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 300;
+      padding: 8px 28px 8px 0;
+      cursor: pointer;
+      width: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5' viewBox='0 0 8 5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%235A4520'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 6px center;
+      transition: border-color 0.25s;
+    }
+
+    .date-select:focus { outline: none; border-bottom-color: var(--temple); }
+    .date-select option { background: var(--leather); color: var(--vellum); }
+    .date-select.has-value { border-bottom-color: var(--bronze); color: var(--vellum); }
+
+    .input-error {
+      font-size: 12px;
+      color: var(--error);
+      min-height: 18px;
+      margin-bottom: 16px;
+      display: none;
+      font-style: italic;
+    }
+
+    .input-error.visible { display: block; }
+
+    .reveal-btn {
+      width: 100%;
+      background: none;
+      border: 1px solid var(--bronze-dim);
+      color: var(--vellum-dim);
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 18px 24px;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .reveal-btn::before {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border: 1px solid rgba(156,122,60,0.1);
+      pointer-events: none;
+      transition: border-color 0.3s;
+    }
+
+    .reveal-btn:hover:not(:disabled) {
+      border-color: var(--bronze);
+      color: var(--temple);
+      background: rgba(156,122,60,0.08);
+    }
+
+    .reveal-btn:hover:not(:disabled)::before {
+      border-color: rgba(196,163,90,0.2);
+    }
+
+    .reveal-btn:disabled { opacity: 0.3; cursor: default; }
+
+    .reveal-btn.loading { color: transparent; }
+
+    .reveal-btn.loading::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(156,122,60,0.2), transparent);
+      animation: shimmer 1.4s infinite;
+    }
+
+    @keyframes shimmer {
+      0%   { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* ── DIVIDERS ── */
+    .divider {
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--bronze-dim), transparent);
+      opacity: 0.35;
+      margin: 48px 0;
+    }
+
+    /* ══════════════════════════════════════════
+       RITUAL OVERLAY
+    ══════════════════════════════════════════ */
+    .ritual-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(6, 4, 1, 0.97);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .ritual-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .ritual-overlay.fade-out {
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    /* Spinning sigil */
+    .ritual-sigil {
+      width: 180px;
+      height: 180px;
+      position: relative;
+    }
+    .ritual-sigil svg {
+      width: 100%;
+      height: 100%;
+    }
+    .ritual-ring-outer {
+      transform-origin: center;
+      animation: ritual-spin-slow 8s linear infinite;
+    }
+    .ritual-ring-inner {
+      transform-origin: center;
+      animation: ritual-spin-reverse 5s linear infinite;
+    }
+    .ritual-triangle-up {
+      transform-origin: center;
+      animation: ritual-pulse 2s ease-in-out infinite;
+    }
+    .ritual-triangle-down {
+      transform-origin: center;
+      animation: ritual-pulse 2s ease-in-out infinite reverse;
+    }
+    @keyframes ritual-spin-slow {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    @keyframes ritual-spin-reverse {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(-360deg); }
+    }
+    @keyframes ritual-pulse {
+      0%, 100% { opacity: 0.3; }
+      50%       { opacity: 0.8; }
+    }
+
+    /* Centre number flash */
+    .ritual-number {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 4rem;
+      font-weight: 300;
+      color: var(--temple);
+      opacity: 0;
+      text-shadow: 0 0 40px rgba(196,163,90,0.6);
+      animation: ritual-number-appear 0.6s ease forwards;
+      animation-delay: 4.4s;
+    }
+    @keyframes ritual-number-appear {
+      0%   { opacity: 0; transform: scale(0.7); }
+      60%  { opacity: 1; transform: scale(1.1); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* Phase text */
+    .ritual-phase {
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--bronze);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      min-height: 20px;
+      text-align: center;
+    }
+    .ritual-phase.visible { opacity: 1; }
+
+    /* Scanning bar */
+    .ritual-bar-wrap {
+      width: 180px;
+      height: 1px;
+      background: rgba(156,122,60,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    .ritual-bar-fill {
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, var(--bronze), transparent);
+      animation: ritual-scan 1.2s ease-in-out infinite;
+    }
+    @keyframes ritual-scan {
+      0%   { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    /* NUMBER REVEAL */
+
+    .number-section {
+      display: none;
+      text-align: center;
+      margin-bottom: 56px;
+      position: relative;
+    }
+
+    .number-section.visible { display: block; }
+
+    .number-eyebrow {
+      font-family: var(--font-display);
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--bronze);
+      margin-bottom: 36px;
+    }
+
+    .number-glyph-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 180px;
+      height: 180px;
+      margin-bottom: 28px;
+    }
+
+    /* Outer alchemical ring */
+    .number-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1px solid var(--bronze);
+      opacity: 0;
+    }
+
+    .number-ring.revealed {
+      animation: ring-reveal 1.4s ease forwards;
+    }
+
+    @keyframes ring-reveal {
+      0%   { opacity: 0; transform: scale(0.6); }
+      65%  { opacity: 0.7; transform: scale(1.03); }
+      100% { opacity: 0.5; transform: scale(1); }
+    }
+
+    /* Inner ring */
+    .number-ring-inner {
+      position: absolute;
+      inset: 12px;
+      border-radius: 50%;
+      border: 1px solid rgba(156,122,60,0.25);
+      opacity: 0;
+      transition: opacity 0.8s 0.6s;
+    }
+
+    .number-ring-inner.revealed { opacity: 1; }
+
+    /* Tick marks on outer ring */
+    .number-ticks {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.6s 0.9s;
+    }
+
+    .number-ticks.revealed { opacity: 0.4; }
+
+    .number-digit {
+      font-family: var(--font-display);
+      font-size: 6.5rem;
+      font-weight: 300;
+      color: var(--temple);
+      line-height: 1;
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.7s 0.3s ease, transform 0.7s 0.3s ease;
+      text-shadow: 0 0 40px rgba(196,163,90,0.25);
+    }
+
+    .number-digit.revealed { opacity: 1; transform: translateY(0); }
+
+    .number-archetype {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--vellum);
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+    }
+
+    .number-date-label {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 12px;
+      color: var(--vellum-dim);
+      margin-bottom: 24px;
+    }
+
+    .steps-toggle {
+      background: none;
+      border: none;
+      color: var(--bronze-dim);
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      padding: 4px 0;
+      transition: color 0.2s;
+    }
+
+    .steps-toggle:hover { color: var(--bronze); }
+
+    .steps-block {
+      display: none;
+      margin-top: 20px;
+      padding: 20px 24px;
+      background: rgba(28,21,9,0.8);
+      border-top: 1px solid rgba(156,122,60,0.2);
+      border-bottom: 1px solid rgba(156,122,60,0.2);
+      text-align: left;
+    }
+
+    .steps-block.open { display: block; }
+
+    .step-line {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--vellum-ghost);
+      line-height: 2.2;
+      letter-spacing: 0.03em;
+    }
+
+    .step-line-final { color: var(--temple); }
+
+    /* ══════════════════════════════════════════
+       READING PANELS
+    ══════════════════════════════════════════ */
+
+    .readings-section { display: none; margin-bottom: 48px; }
+    .readings-section.visible { display: block; }
+
+    .reading-panel {
+      padding: 28px 0 28px 28px;
+      margin-bottom: 0;
+      border-left: 1px solid var(--bronze-dim);
+      position: relative;
+      transition: border-color 0.4s;
+    }
+
+    .reading-panel::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -1px;
+      width: 1px;
+      height: 0;
+      background: var(--temple);
+      transition: height 0.6s ease;
+    }
+
+    .reading-panel.loaded::before { height: 100%; }
+    .reading-panel.loaded { border-left-color: rgba(156,122,60,0.4); }
+
+    /* Dot on left rail */
+    .reading-panel-dot {
+      position: absolute;
+      left: -4px;
+      top: 32px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      border: 1px solid var(--bronze-dim);
+      background: var(--earth);
+      transition: border-color 0.4s, background 0.4s;
+    }
+
+    .reading-panel.loaded .reading-panel-dot {
+      border-color: var(--temple);
+      background: var(--bronze);
+    }
+
+    .reading-panel-label {
+      font-family: var(--font-display);
+      font-size: 9px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--bronze-dim);
+      margin-bottom: 14px;
+      transition: color 0.4s;
+    }
+
+    .reading-panel.loaded .reading-panel-label { color: var(--bronze); }
+
+    .reading-panel-text {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--vellum);
+      min-height: 60px;
+    }
+
+    /* Between panels gap */
+    .reading-panel + .reading-panel { margin-top: 8px; }
+
+    .reading-skeleton {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .skeleton-line {
+      height: 13px;
+      background: linear-gradient(90deg, var(--leather) 25%, var(--umber) 50%, var(--leather) 75%);
+      background-size: 200% 100%;
+      animation: skeleton-sweep 1.6s infinite;
+      border-radius: 1px;
+      opacity: 0.6;
+    }
+
+    .skeleton-line:nth-child(2) { width: 82%; }
+    .skeleton-line:nth-child(3) { width: 65%; }
+
+    @keyframes skeleton-sweep {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .fallback-tag {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-style: normal;
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cinnabar);
+      border: 1px solid var(--cinnabar-dim);
+      padding: 3px 10px;
+      margin-top: 12px;
+    }
+
+    /* ── ACTION ROW ── */
+    .action-row {
+      display: none;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+      padding-top: 8px;
+    }
+
+    .action-row.visible { display: flex; }
+
+    .action-btn {
+      background: none;
+      border: 1px solid var(--bronze-dim);
+      color: var(--vellum-dim);
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .action-btn:hover {
+      border-color: var(--bronze);
+      color: var(--temple);
+      background: rgba(156,122,60,0.06);
+    }
+
+    .action-btn.primary {
+      border-color: var(--bronze);
+      color: var(--temple);
+    }
+
+    .action-confirm {
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--bronze);
+      padding: 10px 0;
+      display: none;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .action-confirm.visible { display: flex; }
+
+    /* ── SAVE PANEL ── */
+    .save-panel {
+      display: none;
+      padding: 24px 28px;
+      background: rgba(42,31,14,0.6);
+      border: 1px solid var(--cinnabar-dim);
+      border-left: 2px solid var(--cinnabar);
+      margin-bottom: 40px;
+    }
+
+    .save-panel.visible { display: block; }
+
+    .save-panel-label {
+      font-family: var(--font-display);
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--cinnabar);
+      margin-bottom: 18px;
+    }
+
+    .save-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .save-input {
+      background: none;
+      border: none;
+      border-bottom: 1px solid var(--bronze-dim);
+      color: var(--vellum);
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 15px;
+      padding: 6px 0;
+      width: 200px;
+      transition: border-color 0.2s;
+    }
+
+    .save-input:focus { outline: none; border-bottom-color: var(--bronze); }
+
+    .save-confirm-btn {
+      background: none;
+      border: 1px solid var(--bronze-dim);
+      color: var(--bronze);
+      font-family: var(--font-display);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 9px 18px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .save-confirm-btn:hover {
+      background: rgba(156,122,60,0.12);
+      border-color: var(--bronze);
+      color: var(--temple);
+    }
+
+    .save-limit-note {
+      font-size: 12px;
+      color: var(--error);
+      font-style: italic;
+      margin-top: 12px;
+      display: none;
+    }
+
+    .save-limit-note.visible { display: block; }
+
+    /* ── SECTION HEADERS ── */
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--bronze-dim);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--bronze-dim), transparent);
+      opacity: 0.35;
+    }
+
+    /* ── COMPATIBILITY ── */
+    .compat-section { display: none; margin-bottom: 56px; }
+    .compat-section.visible { display: block; }
+
+    .compat-form { margin-bottom: 28px; }
+
+    .compat-date-row {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1.5fr auto;
+      gap: 16px;
+      align-items: end;
+      margin-bottom: 16px;
+    }
+
+    .compat-submit-btn {
+      background: none;
+      border: 1px solid var(--bronze-dim);
+      color: var(--bronze-dim);
+      font-family: var(--font-display);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 10px 14px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      height: 42px;
+    }
+
+    .compat-submit-btn:hover:not(:disabled) {
+      border-color: var(--bronze);
+      color: var(--temple);
+      background: rgba(156,122,60,0.06);
+    }
+
+    .compat-submit-btn:disabled { opacity: 0.3; cursor: default; }
+
+    .compat-result { display: none; border-left: 2px solid var(--cinnabar-dim); padding-left: 24px; }
+    .compat-result.visible { display: block; }
+
+    .compat-score-label {
+      font-family: var(--font-display);
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--cinnabar);
+      margin-bottom: 12px;
+    }
+
+    .compat-score-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .compat-score-number {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--temple);
+      line-height: 1;
+    }
+
+    .compat-bar-wrap {
+      flex: 1;
+      height: 1px;
+      background: var(--umber);
+    }
+
+    .compat-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--cinnabar), var(--temple));
+      transition: width 1s ease;
+    }
+
+    .compat-text {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--vellum);
+    }
+
+    /* ── DAILY INSIGHT ── */
+    .daily-section { display: none; margin-bottom: 56px; }
+    .daily-section.visible { display: block; }
+
+    .daily-panel {
+      padding: 28px 32px;
+      background: rgba(28,21,9,0.8);
+      border-top: 1px solid rgba(196,163,90,0.3);
+      border-bottom: 1px solid rgba(156,122,60,0.15);
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .daily-panel::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--temple), transparent);
+    }
+
+    .daily-date-label {
+      font-family: var(--font-display);
+      font-size: 9px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--temple);
+      margin-bottom: 14px;
+    }
+
+    .daily-text {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--vellum);
+    }
+
+    .telegram-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--vellum-dim);
+      text-decoration: none;
+      border-bottom: 1px solid var(--bronze-dim);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .telegram-cta:hover { color: var(--bronze); border-bottom-color: var(--bronze); }
+
+    .telegram-icon { width: 13px; height: 13px; fill: currentColor; }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      width: 100%;
+      max-width: 680px;
+      padding: 32px 24px;
+      border-top: 1px solid rgba(156,122,60,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-wordmark {
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--bronze-dim);
+    }
+
+    .footer-note {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 11px;
+      color: var(--vellum-ghost);
+    }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(16px);
+      background: var(--leather);
+      border: 1px solid var(--bronze-dim);
+      color: var(--vellum);
+      font-family: var(--font-display);
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      padding: 12px 28px;
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.3s;
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 200;
+    }
+
+    .toast.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ══════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════ */
+
+    /* ── HERO AI LINE ── */
+    .hero-ai-line {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      color: rgba(156,122,60,0.6);
+      margin-top: 20px;
+      margin-bottom: 0;
+    }
+
+    /* ── AI BANNER ── */
+    .ai-banner {
+      width: 100%;
+      padding: 18px 24px;
+      background: rgba(156,122,60,0.06);
+      border-top: 1px solid rgba(156,122,60,0.15);
+      border-bottom: 1px solid rgba(156,122,60,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      text-align: center;
+    }
+    .ai-banner-mark {
+      color: rgba(156,122,60,0.4);
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+    .ai-banner span:not(.ai-banner-mark) {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 0.9rem;
+      letter-spacing: 0.03em;
+      color: rgba(156,122,60,0.75);
+      max-width: 600px;
+    }
+
+    /* ══════════════════════════════════════════
+       FEATURES SECTION
+    ══════════════════════════════════════════ */
+
+    .feat-section {
+      width: 100%;
+      max-width: 900px;
+      padding: 64px 24px 80px;
+      text-align: center;
+      position: relative;
+    }
+
+    .feat-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(180deg, var(--bronze-dim), transparent);
+    }
+
+    .feat-eyebrow {
+      font-family: var(--font-display);
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--bronze);
+      margin-bottom: 20px;
+    }
+
+    .feat-headline {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 300;
+      color: var(--vellum);
+      margin-bottom: 56px;
+      letter-spacing: -0.01em;
+    }
+
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-bottom: 56px;
+    }
+
+    .feat-card {
+      padding: 32px 28px;
+      border: 1px solid rgba(156,122,60,0.12);
+      text-align: left;
+      background: rgba(28,21,9,0.4);
+      position: relative;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .feat-card:hover {
+      background: rgba(28,21,9,0.7);
+      border-color: rgba(156,122,60,0.25);
+    }
+
+    .feat-card-glyph {
+      font-size: 12px;
+      color: var(--bronze-dim);
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+
+    .feat-card-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--vellum);
+      margin-bottom: 10px;
+      letter-spacing: 0.02em;
+    }
+
+    .feat-card-desc {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 0.875rem;
+      color: var(--vellum-dim);
+      line-height: 1.65;
+    }
+
+    .feat-cta-wrap {
+      display: flex;
+      justify-content: center;
+      padding-top: 8px;
+    }
+
+    @media (max-width: 700px) {
+      .feat-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .feat-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .how-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .how-grid::before { display: none; }
+      .date-row {
+        grid-template-columns: 1fr 1fr;
+      }
+      .select-wrap:last-child { grid-column: 1 / -1; }
+      .compat-date-row {
+        grid-template-columns: 1fr 1fr;
+      }
+      .compat-submit-btn { grid-column: 1 / -1; width: 100%; }
+      .number-digit { font-size: 5rem; }
+      .input-section { padding: 28px 20px 24px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .number-ring, .number-digit, .number-ring-inner, .number-ticks,
+      .reveal-btn.loading::after, .skeleton-line, .compat-bar-fill,
+      .hero-sigil svg, .hero-scroll, .reading-panel::before {
+        animation: none;
+        transition: none;
+      }
+      .number-ring.revealed { opacity: 0.5; transform: scale(1); }
+      .number-digit.revealed { opacity: 1; transform: translateY(0); }
+      .number-ring-inner.revealed { opacity: 1; }
+      .number-ticks.revealed { opacity: 0.4; }
+      .reading-panel.loaded::before { height: 100%; }
+    }
+    /* ── TOP MICRO-BANNER ── */
+    .top-banner {
+      width: 100%;
+      padding: 7px 20px;
+      background: rgba(156,122,60,0.08);
+      border-bottom: 1px solid rgba(156,122,60,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+    .top-banner span:not(.top-banner-sep) {
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: rgba(156,122,60,0.65);
+    }
+    .top-banner-sep {
+      color: rgba(156,122,60,0.3);
+      font-size: 11px;
+    }
+    .top-banner-link {
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--bronze);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .top-banner-link:hover { opacity: 0.7; }
+
+    /* ── FOOTER EXPANDED ── */
+    .site-footer {
+      width: 100%;
+      padding: 0 32px 32px;
+    }
+    .footer-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(156,122,60,0.2), transparent);
+      margin-bottom: 40px;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .footer-wordmark {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      color: var(--bronze);
+    }
+    .footer-note {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 0.8rem;
+      color: var(--vellum-dim);
+      opacity: 0.6;
+    }
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      text-align: right;
+    }
+    .footer-neulab-label {
+      font-family: var(--font-display);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(156,122,60,0.4);
+    }
+    .footer-neulab-name {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      color: var(--bronze);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .footer-neulab-name:hover { opacity: 0.7; }
+    .footer-neulab-tagline {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 0.78rem;
+      color: rgba(156,122,60,0.5);
+      margin-bottom: 6px;
+    }
+    .footer-products {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+    .footer-product-link {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      color: rgba(156,122,60,0.55);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-product-link:hover { color: var(--bronze); }
+    .footer-product-sep {
+      color: rgba(156,122,60,0.25);
+      font-size: 10px;
+    }
+    .footer-copy {
+      font-family: var(--font-display);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: rgba(156,122,60,0.25);
+      text-align: center;
+    }
+    @media (max-width: 520px) {
+      .footer-inner { flex-direction: column; gap: 28px; }
+      .footer-right { text-align: left; }
+      .footer-products { justify-content: flex-start; }
+    }
+
+    /* ── LOGO ── */
+    .hero-logo-seal {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 16px 0 28px;
+    }
+    .dd-logo-hero {
+      width: clamp(128px, 24vw, 192px);
+      height: clamp(128px, 24vw, 192px);
+      object-fit: contain;
+      mix-blend-mode: lighten;
+      filter: drop-shadow(0 0 24px rgba(196,163,90,0.35));
+    }
+    .dd-logo {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+      vertical-align: middle;
+      opacity: 0.85;
+      flex-shrink: 0;
+    }
+    .dd-logo-sm {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+      vertical-align: middle;
+      opacity: 0.75;
+      flex-shrink: 0;
+    }
+    .dd-logo[src=""], .dd-logo:not([src]),
+    .dd-logo-sm[src=""], .dd-logo-sm:not([src]),
+    .dd-logo-hero[src=""], .dd-logo-hero:not([src]) {
+      display: none;
+    }
+    .hero-sigil-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    /* ── LANG TOGGLE ── */
+    .lang-toggle {
+      position: fixed;
+      top: env(safe-area-inset-top, 16px);
+      margin-top: 52px;
+      right: 16px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      background: rgba(28,21,9,0.92);
+      border: 1px solid rgba(156,122,60,0.6);
+      border-radius: 4px;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.6);
+    }
+    .lang-btn {
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      padding: 8px 14px;
+      background: none;
+      border: none;
+      color: rgba(230,210,160,0.55);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .lang-btn.active {
+      background: rgba(156,122,60,0.25);
+      color: var(--bronze);
+    }
+    .lang-sep {
+      width: 1px;
+      height: 18px;
+      background: rgba(156,122,60,0.35);
+      flex-shrink: 0;
+    }
+    /* ══════════════════════════════════════════
+       READING TABS
+    ══════════════════════════════════════════ */
+    .reading-tabs {
+      display: none;
+      width: 100%;
+      border-bottom: 1px solid rgba(156,122,60,0.2);
+      margin-bottom: 4px;
+      gap: 0;
+    }
+    .reading-tabs.visible {
+      display: flex;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 14px 8px;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(156,122,60,0.4);
+      cursor: pointer;
+      transition: color 0.25s, border-color 0.25s;
+      margin-bottom: -1px;
+    }
+    .tab-btn:hover {
+      color: rgba(156,122,60,0.7);
+    }
+    .tab-btn.active {
+      color: var(--bronze);
+      border-bottom-color: var(--bronze);
+    }
+    .tab-panel {
+      width: 100%;
+    }
+
+    /* ══════════════════════════════════════════
+       SYNTHESIS SECTION
+    ══════════════════════════════════════════ */
+    .synthesis-section { width: 100%; }
+
+    .synthesis-badge {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 20px 0 28px;
+      padding: 16px 20px;
+      border: 1px solid rgba(156,122,60,0.2);
+      background: rgba(28,21,9,0.4);
+    }
+    .synthesis-badge-icon {
+      font-size: 1.6rem;
+      opacity: 0.7;
+      flex-shrink: 0;
+    }
+    .synthesis-badge-text {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .synthesis-badge-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--temple);
+      letter-spacing: 0.03em;
+    }
+    .synthesis-badge-sub {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--bronze-dim);
+    }
+    .synthesis-body {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--vellum);
+      min-height: 80px;
+    }
+    .synthesis-loading {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .synthesis-loading .skeleton-line {
+      height: 14px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, rgba(156,122,60,0.08) 25%, rgba(156,122,60,0.15) 50%, rgba(156,122,60,0.08) 75%);
+      background-size: 200% 100%;
+      animation: skeleton-shimmer 1.5s infinite;
+    }
+    .synthesis-loading .skeleton-line:nth-child(2) { width: 90%; }
+    .synthesis-loading .skeleton-line:nth-child(3) { width: 95%; }
+    .synthesis-loading .skeleton-line:nth-child(4) { width: 80%; }
+
+    /* ══════════════════════════════════════════
+       CHINESE ZODIAC SECTION
+    ══════════════════════════════════════════ */
+    .zodiac-section {
+      width: 100%;
+    }
+    .zodiac-hero {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin: 20px 0 28px;
+      padding: 20px 24px;
+      border: 1px solid rgba(156,122,60,0.15);
+      background: rgba(28,21,9,0.35);
+    }
+    .zodiac-glyph {
+      font-size: 3rem;
+      line-height: 1;
+      opacity: 0.55;
+      flex-shrink: 0;
+    }
+    .zodiac-hero-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .zodiac-combined-sign {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--temple);
+      letter-spacing: 0.04em;
+    }
+    .zodiac-meta-row {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      color: var(--bronze-dim);
+      text-transform: uppercase;
+    }
+    .zodiac-reading {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--vellum);
+      margin-bottom: 20px;
+    }
+    .zodiac-disclaimer {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 0.72rem;
+      letter-spacing: 0.03em;
+      color: rgba(156,122,60,0.35);
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(156,122,60,0.08);
+    }
+    @media (max-width: 480px) {
+      .zodiac-hero { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .zodiac-glyph { font-size: 2.2rem; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Language toggle -->
+  <div class="lang-toggle" id="langToggle">
+    <button class="lang-btn" id="langEN" onclick="switchLang('en')">EN</button>
+    <div class="lang-sep"></div>
+    <button class="lang-btn" id="langID" onclick="switchLang('id')">ID</button>
+  </div>
+
+  <!-- Ritual overlay -->
+  <div class="ritual-overlay" id="ritualOverlay">
+    <div class="ritual-sigil">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g class="ritual-ring-outer">
+          <circle cx="100" cy="100" r="95" stroke="#9C7A3C" stroke-width="0.8"/>
+          <line x1="100" y1="5"   x2="100" y2="18"  stroke="#9C7A3C" stroke-width="1.5"/>
+          <line x1="100" y1="182" x2="100" y2="195" stroke="#9C7A3C" stroke-width="1.5"/>
+          <line x1="5"   y1="100" x2="18"  y2="100" stroke="#9C7A3C" stroke-width="1.5"/>
+          <line x1="182" y1="100" x2="195" y2="100" stroke="#9C7A3C" stroke-width="1.5"/>
+          <line x1="32"  y1="32"  x2="41"  y2="41"  stroke="#9C7A3C" stroke-width="1.5"/>
+          <line x1="159" y1="159" x2="168" y2="168" stroke="#9C7A3C" stroke-width="1.5"/>
+          <line x1="168" y1="32"  x2="159" y2="41"  stroke="#9C7A3C" stroke-width="1.5"/>
+          <line x1="32"  y1="168" x2="41"  y2="159" stroke="#9C7A3C" stroke-width="1.5"/>
+        </g>
+        <g class="ritual-ring-inner">
+          <circle cx="100" cy="100" r="70" stroke="rgba(156,122,60,0.4)" stroke-width="0.6"/>
+          <circle cx="100" cy="100" r="45" stroke="rgba(156,122,60,0.25)" stroke-width="0.6"/>
+        </g>
+        <g class="ritual-triangle-up">
+          <polygon points="100,20 172,140 28,140" stroke="rgba(156,122,60,0.5)" stroke-width="0.7" fill="none"/>
+        </g>
+        <g class="ritual-triangle-down">
+          <polygon points="100,180 28,60 172,60" stroke="rgba(156,122,60,0.5)" stroke-width="0.7" fill="none"/>
+        </g>
+        <circle cx="100" cy="100" r="3" fill="#9C7A3C"/>
+      </svg>
+      <div class="ritual-number" id="ritualNumber"></div>
+    </div>
+    <div class="ritual-bar-wrap"><div class="ritual-bar-fill"></div></div>
+    <div class="ritual-phase" id="ritualPhase"></div>
+  </div>
+
+  <!-- Top micro-banner -->
+  <div class="top-banner" id="topBanner">
+    <span id="topBannerText">From the makers of Neural Stocks, NutriScan &amp; more</span>
+    <span class="top-banner-sep">·</span>
+    <a href="https://neulab.xyz" target="_blank" rel="noopener" class="top-banner-link" id="topBannerLink">neulab.xyz ↗</a>
+  </div>
+
+  <!-- ══ LANDING PAGE ══ -->
+  <section class="landing" id="landingHero">
+
+    <!-- Background alchemical sigil -->
+    <div class="hero-sigil">
+      <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer circle -->
+        <circle cx="200" cy="200" r="190" stroke="#9C7A3C" stroke-width="0.5"/>
+        <!-- Inner circle -->
+        <circle cx="200" cy="200" r="160" stroke="#9C7A3C" stroke-width="0.5"/>
+        <!-- Middle circle -->
+        <circle cx="200" cy="200" r="110" stroke="#9C7A3C" stroke-width="0.5"/>
+        <!-- Inner small circle -->
+        <circle cx="200" cy="200" r="60" stroke="#9C7A3C" stroke-width="0.5"/>
+        <!-- 9-pointed star lines -->
+        <line x1="200" y1="10"  x2="200" y2="390" stroke="#9C7A3C" stroke-width="0.4"/>
+        <line x1="10"  y1="200" x2="390" y2="200" stroke="#9C7A3C" stroke-width="0.4"/>
+        <line x1="47"  y1="47"  x2="353" y2="353" stroke="#9C7A3C" stroke-width="0.4"/>
+        <line x1="353" y1="47"  x2="47"  y2="353" stroke="#9C7A3C" stroke-width="0.4"/>
+        <line x1="30"  y1="130" x2="370" y2="270" stroke="#9C7A3C" stroke-width="0.3"/>
+        <line x1="370" y1="130" x2="30"  y2="270" stroke="#9C7A3C" stroke-width="0.3"/>
+        <line x1="130" y1="30"  x2="270" y2="370" stroke="#9C7A3C" stroke-width="0.3"/>
+        <line x1="270" y1="30"  x2="130" y2="370" stroke="#9C7A3C" stroke-width="0.3"/>
+        <!-- Triangle -->
+        <polygon points="200,40 356,280 44,280" stroke="#9C7A3C" stroke-width="0.5" fill="none"/>
+        <!-- Inverted triangle -->
+        <polygon points="200,360 44,120 356,120" stroke="#9C7A3C" stroke-width="0.5" fill="none"/>
+        <!-- Tick marks on outer ring -->
+        <line x1="200" y1="10"  x2="200" y2="22"  stroke="#9C7A3C" stroke-width="1"/>
+        <line x1="200" y1="378" x2="200" y2="390" stroke="#9C7A3C" stroke-width="1"/>
+        <line x1="10"  y1="200" x2="22"  y2="200" stroke="#9C7A3C" stroke-width="1"/>
+        <line x1="378" y1="200" x2="390" y2="200" stroke="#9C7A3C" stroke-width="1"/>
+        <line x1="55"  y1="55"  x2="64"  y2="64"  stroke="#9C7A3C" stroke-width="1"/>
+        <line x1="336" y1="336" x2="345" y2="345" stroke="#9C7A3C" stroke-width="1"/>
+        <line x1="345" y1="55"  x2="336" y2="64"  stroke="#9C7A3C" stroke-width="1"/>
+        <line x1="55"  y1="345" x2="64"  y2="336" stroke="#9C7A3C" stroke-width="1"/>
+        <!-- Small corner marks -->
+        <circle cx="200" cy="10"  r="2" fill="#9C7A3C"/>
+        <circle cx="200" cy="390" r="2" fill="#9C7A3C"/>
+        <circle cx="10"  cy="200" r="2" fill="#9C7A3C"/>
+        <circle cx="390" cy="200" r="2" fill="#9C7A3C"/>
+      </svg>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-sigil-mark" id="heroSigilMark">
+        <span>Digit Destiny</span>
+      </div>
+
+      <div class="hero-logo-seal">
+        <img class="dd-logo-hero" src="/dd-logo-v1.svg" alt="" onerror="this.style.display='none'">
+      </div>
+
+      <h1 class="hero-headline">
+        <span id="heroHeadlineMain">The number written</span><br>
+        <em id="heroHeadlineEm">in your birth</em>
+      </h1>
+
+      <div class="hero-rule"></div>
+
+      <p class="hero-lore" id="heroLore">
+        For five thousand years, mystics and scholars have read the hidden language
+        of numbers. Every date of birth encodes a Life Path — a thread of character,
+        purpose, and fate woven into the mathematics of your arrival.
+      </p>
+
+      <p class="hero-ai-line" id="heroAiLine">Readings composed by AI. Interpreted from five thousand years of tradition.</p>
+
+      <button class="hero-cta" id="heroCta">Consult the Numbers</button>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      <div class="hero-scroll-text" id="heroScrollText">Scroll</div>
+    </div>
+  </section>
+
+  <!-- ── HOW IT WORKS ── -->
+  <section class="how-section">
+    <div class="how-eyebrow" id="howEyebrow">The Ancient Method</div>
+    <div class="how-grid">
+      <div class="how-step">
+        <div class="how-step-num">I</div>
+        <div class="how-step-title" id="howStep1Title">Enter your date of birth</div>
+        <p class="how-step-desc" id="howStep1Desc">Day, month, year. Nothing more is needed. Your birth date is the key.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">II</div>
+        <div class="how-step-title" id="howStep2Title">The number is revealed</div>
+        <p class="how-step-desc" id="howStep2Desc">Digits are reduced through the ancient method until one number remains.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">III</div>
+        <div class="how-step-title" id="howStep3Title">Your reading unfolds</div>
+        <p class="how-step-desc" id="howStep3Desc">Character, shadow, love, and work — each facet of your life path illuminated.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── AI BANNER ── -->
+  <div class="ai-banner">
+    <span class="ai-banner-mark">&#10022;</span>
+    <span id="aiBannerText">Every reading is uniquely generated by AI — not a template, not a script. Written fresh for your number.</span>
+    <span class="ai-banner-mark">&#10022;</span>
+  </div>
+
+  <!-- ── FEATURES SECTION ── -->
+  <section class="feat-section">
+    <div class="feat-eyebrow" id="featEyebrow">What You Receive</div>
+    <h2 class="feat-headline" id="featHeadline">Ancient wisdom, modern clarity</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-card-glyph">&#9670;</div>
+        <div class="feat-card-title" id="feat1Title">Your Life Path Number</div>
+        <p class="feat-card-desc" id="feat1Desc">Calculated from the precise numerological method used for centuries — not an algorithm, but a discipline.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-glyph">&#9632;</div>
+        <div class="feat-card-title" id="feat2Title">Four-Part Reading</div>
+        <p class="feat-card-desc" id="feat2Desc">Core character, hidden strengths, shadow side, and guidance for love and work — each section AI-composed for depth.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-glyph">&#9651;</div>
+        <div class="feat-card-title" id="feat3Title">Daily Insight</div>
+        <p class="feat-card-desc" id="feat3Desc">A unique reflection for your number, generated fresh every morning and delivered to Telegram if you subscribe.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-glyph">&#9711;</div>
+        <div class="feat-card-title" id="feat4Title">Compatibility Reading</div>
+        <p class="feat-card-desc" id="feat4Desc">Compare your life path with anyone — partners, friends, colleagues — and understand the dynamic between your numbers.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-glyph">&#9670;</div>
+        <div class="feat-card-title" id="feat5Title">Save Multiple Profiles</div>
+        <p class="feat-card-desc" id="feat5Desc">Store readings for yourself and those close to you. Up to five profiles, kept privately in your browser.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-glyph">&#9632;</div>
+        <div class="feat-card-title" id="feat6Title">Bahasa Indonesia</div>
+        <p class="feat-card-desc" id="feat6Desc">Semua bacaan tersedia dalam Bahasa Indonesia, terdeteksi otomatis dari perangkat Anda.</p>
+      </div>
+    </div>
+    <div class="feat-cta-wrap">
+      <button class="hero-cta" id="landingCtaBtn">Get Your Reading</button>
+    </div>
+  </section>
+
+  <!-- ══ APP SECTION ══ -->
+  <div class="app-section" id="appSection">
+    <a class="app-anchor" id="appAnchor"></a>
+
+    <div class="app-header">
+      <h2 class="app-title" id="appTitleEl">Discover Your Life Path</h2>
+      <p class="app-subtitle" id="appSubtitleEl">Enter your birth date to begin</p>
+    </div>
+
+    <div class="profiles-strip" id="profilesStrip"></div>
+
+    <main class="main">
+
+      <!-- INPUT -->
+      <section class="input-section" id="inputSection">
+        <span class="input-label" id="inputLabelEl">Your birth date</span>
+        <div class="date-row">
+          <div class="select-wrap">
+            <span class="select-sublabel" id="dayLabelEl">Day</span>
+            <select class="date-select" id="selDay" aria-label="Day of birth">
+              <option value="">—</option>
+            </select>
+          </div>
+          <div class="select-wrap">
+            <span class="select-sublabel" id="monthLabelEl">Month</span>
+            <select class="date-select" id="selMonth" aria-label="Month of birth">
+              <option value="">—</option>
+            </select>
+          </div>
+          <div class="select-wrap">
+            <span class="select-sublabel" id="yearLabelEl">Year</span>
+            <select class="date-select" id="selYear" aria-label="Year of birth">
+              <option value="">—</option>
+            </select>
+          </div>
+        </div>
+        <div class="input-error" id="inputError"></div>
+        <button class="reveal-btn" id="revealBtn" disabled>Reveal My Number</button>
+      </section>
+
+      <!-- NUMBER RESULT -->
+      <section class="number-section" id="numberSection">
+        <hr class="divider">
+        <p class="number-eyebrow" id="numberEyebrowEl">Your Life Path Number</p>
+        <div class="number-glyph-wrap">
+          <div class="number-ring" id="numberRing"></div>
+          <div class="number-ring-inner" id="numberRingInner"></div>
+          <svg class="number-ticks" id="numberTicks" viewBox="0 0 180 180">
+            <circle cx="90" cy="90" r="88" stroke="#9C7A3C" stroke-width="0.5" fill="none"/>
+            <line x1="90" y1="2"   x2="90" y2="10"  stroke="#C4A35A" stroke-width="1"/>
+            <line x1="90" y1="170" x2="90" y2="178" stroke="#C4A35A" stroke-width="1"/>
+            <line x1="2"  y1="90"  x2="10" y2="90"  stroke="#C4A35A" stroke-width="1"/>
+            <line x1="170" y1="90" x2="178" y2="90" stroke="#C4A35A" stroke-width="1"/>
+            <line x1="26"  y1="26"  x2="32" y2="32"  stroke="#9C7A3C" stroke-width="0.8"/>
+            <line x1="148" y1="148" x2="154" y2="154" stroke="#9C7A3C" stroke-width="0.8"/>
+            <line x1="154" y1="26"  x2="148" y2="32"  stroke="#9C7A3C" stroke-width="0.8"/>
+            <line x1="26"  y1="154" x2="32" y2="148" stroke="#9C7A3C" stroke-width="0.8"/>
+          </svg>
+          <div class="number-digit" id="numberDigit"></div>
+        </div>
+        <p class="number-archetype" id="numberArchetype"></p>
+        <p class="number-date-label" id="numberDateLabel"></p>
+        <button class="steps-toggle" id="stepsToggle">Show reduction steps</button>
+        <div class="steps-block" id="stepsBlock"></div>
+      </section>
+
+      <!-- TAB BAR -->
+      <div class="reading-tabs" id="readingTabs">
+        <button class="tab-btn active" id="tabLifePath" onclick="switchTab('lifepath')">
+          <span id="tabLifePathLabel">Life Path</span>
+        </button>
+        <button class="tab-btn" id="tabZodiac" onclick="switchTab('zodiac')">
+          <span id="tabZodiacLabel">Chinese Zodiac</span>
+        </button>
+        <button class="tab-btn" id="tabCombined" onclick="switchTab('combined')">
+          <span id="tabCombinedLabel">Combined</span>
+        </button>
+      </div>
+
+      <!-- TAB: LIFE PATH -->
+      <div class="tab-panel" id="panelLifePath">
+        <section class="readings-section" id="readingsSection">
+          <hr class="divider">
+        </section>
+      </div>
+
+      <!-- TAB: CHINESE ZODIAC -->
+      <div class="tab-panel" id="panelZodiac" style="display:none;">
+        <section class="zodiac-section" id="zodiacSection">
+          <hr class="divider">
+          <div class="section-label" id="zodiacSectionLabel">Your Chinese Zodiac</div>
+          <p class="app-subtitle" id="zodiacSubtitleEl" style="margin-bottom:0;"></p>
+          <div class="zodiac-hero">
+            <div class="zodiac-glyph" id="zodiacGlyph"></div>
+            <div class="zodiac-hero-text">
+              <div class="zodiac-combined-sign" id="zodiacCombinedSign"></div>
+              <div class="zodiac-meta-row" id="zodiacMetaRow"></div>
+            </div>
+          </div>
+          <div class="zodiac-reading" id="zodiacReading"></div>
+          <div class="zodiac-disclaimer" id="zodiacDisclaimer"></div>
+        </section>
+      </div>
+
+      <!-- TAB: COMBINED PORTRAIT -->
+      <div class="tab-panel" id="panelCombined" style="display:none;">
+        <section class="synthesis-section" id="synthesisSection">
+          <hr class="divider">
+          <div class="section-label" id="synthesisSectionLabel">Your Combined Profile</div>
+          <p class="app-subtitle" id="synthesisSubtitleEl" style="margin-bottom:0;"></p>
+          <div class="synthesis-badge" id="synthesisBadge"></div>
+          <div class="synthesis-body" id="synthesisBody"></div>
+        </section>
+      </div>
+
+      <!-- ACTION ROW -->
+      <div class="action-row" id="actionRow">
+        <button class="action-btn primary" id="btnSave">Save Profile</button>
+        <button class="action-btn" id="btnShare">Share</button>
+        <button class="action-btn" id="btnCompat">Compatibility</button>
+        <div class="action-confirm" id="shareConfirm">&#10022; Copied to clipboard</div>
+      </div>
+
+      <!-- SAVE PANEL -->
+      <div class="save-panel" id="savePanel">
+        <div class="save-panel-label" id="savePanelLabelEl">Name this profile</div>
+        <div class="save-row">
+          <input class="save-input" id="saveLabel" type="text" maxlength="20" placeholder="e.g. Me, Mum, Alex" value="Me">
+          <button class="save-confirm-btn" id="saveConfirmBtn">Save</button>
+        </div>
+        <div class="save-limit-note" id="saveLimitNote">You have 5 saved profiles. Delete one before saving a new one.</div>
+      </div>
+
+      <!-- DAILY INSIGHT -->
+      <section class="daily-section" id="dailySection">
+        <hr class="divider">
+        <div class="section-label" id="dailySectionLabel">Today's Insight</div>
+        <div class="daily-panel">
+          <div class="daily-date-label" id="dailyDateLabel"></div>
+          <div class="daily-text" id="dailyText">
+            <div class="reading-skeleton">
+              <div class="skeleton-line"></div>
+              <div class="skeleton-line"></div>
+              <div class="skeleton-line"></div>
+            </div>
+          </div>
+        </div>
+        <a class="telegram-cta" id="telegramCta" href="#" target="_blank" rel="noopener">
+          <svg class="telegram-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.04 9.607c-.148.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.16 14.26l-2.95-.924c-.642-.2-.654-.642.136-.953l11.528-4.445c.536-.194 1.004.13.688.31z"/>
+          </svg>
+          Receive daily insights on Telegram
+        </a>
+      </section>
+
+      <!-- COMPATIBILITY -->
+      <section class="compat-section" id="compatSection">
+        <hr class="divider">
+        <div class="section-label" id="compatSectionLabel">Compatibility Reading</div>
+        <div class="compat-form">
+          <span class="input-label" id="compatDateLabelEl" style="margin-bottom:16px;">Second birth date</span>
+          <div class="compat-date-row">
+            <div class="select-wrap">
+              <span class="select-sublabel">Day</span>
+              <select class="date-select" id="cSelDay" aria-label="Second person day of birth">
+                <option value="">—</option>
+              </select>
+            </div>
+            <div class="select-wrap">
+              <span class="select-sublabel">Month</span>
+              <select class="date-select" id="cSelMonth" aria-label="Second person month of birth">
+                <option value="">—</option>
+              </select>
+            </div>
+            <div class="select-wrap">
+              <span class="select-sublabel">Year</span>
+              <select class="date-select" id="cSelYear" aria-label="Second person year of birth">
+                <option value="">—</option>
+              </select>
+            </div>
+            <button class="compat-submit-btn" id="compatSubmitBtn" disabled>Compare</button>
+          </div>
+          <div class="input-error" id="compatError"></div>
+        </div>
+        <div class="compat-result" id="compatResult">
+          <div class="compat-score-label">Compatibility</div>
+          <div class="compat-score-row">
+            <div class="compat-score-number" id="compatScoreNum"></div>
+            <div class="compat-bar-wrap">
+              <div class="compat-bar-fill" id="compatBarFill" style="width:0%"></div>
+            </div>
+          </div>
+          <div class="compat-text" id="compatText"></div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-divider"></div>
+      <div class="footer-inner">
+        <div class="footer-left">
+          <div class="footer-wordmark">
+            <img class="dd-logo-sm" src="/dd-logo-v1.svg" alt="" onerror="this.style.display='none'">
+            Digit Destiny
+          </div>
+          <div class="footer-note" id="footerNoteEl">Readings are for reflection, not prediction.</div>
+        </div>
+        <div class="footer-right">
+          <div class="footer-neulab-label" id="footerNeulabLabel">A product by</div>
+          <a href="https://neulab.xyz" target="_blank" rel="noopener" class="footer-neulab-name">Neulab Inc</a>
+          <div class="footer-neulab-tagline" id="footerNeulabTagline">Building AI products for everyday life</div>
+          <div class="footer-products">
+            <a href="https://stock.neulab.xyz" target="_blank" rel="noopener" class="footer-product-link">Neural Stocks</a>
+            <span class="footer-product-sep">·</span>
+            <a href="https://nutriscan.web.id" target="_blank" rel="noopener" class="footer-product-link">NutriScan</a>
+            <span class="footer-product-sep">·</span>
+            <a href="https://racketfit.uk" target="_blank" rel="noopener" class="footer-product-link">RacketFit</a>
+            <span class="footer-product-sep">·</span>
+            <a href="https://neulab.xyz" target="_blank" rel="noopener" class="footer-product-link" id="footerMoreLink">More ↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copy">© 2026 Neulab Inc</div>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ── CONSTANTS ──
+    var API_BASE = 'https://digit-destiny-api.neuralstocks-dev.workers.dev';
+    var APP_URL  = 'https://digitdestiny.neulab.xyz';
+    var TELEGRAM_BOT = 'DigitDestinyBot';
+    var MAX_PROFILES = 5;
+    var STORAGE_KEY = 'digit_destiny_profiles';
+
+    // ── LANGUAGE DETECTION ──
+    var lang = 'en';
+    try {
+      var stored = localStorage.getItem('dd_lang');
+      if (stored === 'en' || stored === 'id') {
+        lang = stored;
+      } else {
+        var navLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+        if (navLang === 'id' || navLang.indexOf('id-') === 0 || navLang.indexOf('in') === 0) {
+          lang = 'id';
+        }
+      }
+    } catch(e) {
+      try {
+        var navLang2 = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+        if (navLang2 === 'id' || navLang2.indexOf('id-') === 0) lang = 'id';
+      } catch(e2) {}
+    }
+
+    // ── TRANSLATIONS ──
+    var T = {
+      en: {
+        heroEyebrow: 'Digit Destiny',
+        heroHeadline: 'The number written',
+        heroHeadlineEm: 'in your birth',
+        heroLore: 'For five thousand years, mystics and scholars have read the hidden language of numbers. Every date of birth encodes a Life Path — a thread of character, purpose, and fate woven into the mathematics of your arrival.',
+        heroCta: 'Consult the Numbers',
+        heroAiLine: 'Readings composed by AI. Interpreted from five thousand years of tradition.',
+        aiBannerText: 'Every reading is uniquely generated by AI — not a template, not a script. Written fresh for your number.',
+        heroScroll: 'Scroll',
+        howEyebrow: 'The Ancient Method',
+        howStep1Title: 'Enter your date of birth',
+        howStep1Desc: 'Day, month, year. Nothing more is needed. Your birth date is the key.',
+        howStep2Title: 'The number is revealed',
+        howStep2Desc: 'Digits are reduced through the ancient method until one number remains.',
+        howStep3Title: 'Your reading unfolds',
+        howStep3Desc: 'Character, shadow, love, and work — each facet of your life path illuminated.',
+        featEyebrow: 'What You Receive',
+        featHeadline: 'Ancient wisdom, modern clarity',
+        feat1Title: 'Your Life Path Number',
+        feat1Desc: 'Calculated from the precise numerological method used for centuries — not an algorithm, but a discipline.',
+        feat2Title: 'Four-Part Reading',
+        feat2Desc: 'Core character, hidden strengths, shadow side, and guidance for love and work — each section AI-composed for depth.',
+        feat3Title: 'Daily Insight',
+        feat3Desc: 'A unique reflection for your number, generated fresh every morning and delivered to Telegram if you subscribe.',
+        feat4Title: 'Compatibility Reading',
+        feat4Desc: 'Compare your life path with anyone — partners, friends, colleagues — and understand the dynamic between your numbers.',
+        feat5Title: 'Save Multiple Profiles',
+        feat5Desc: 'Store readings for yourself and those close to you. Up to five profiles, kept privately in your browser.',
+        feat6Title: 'Bahasa Indonesia',
+        feat6Desc: 'Semua bacaan tersedia dalam Bahasa Indonesia, terdeteksi otomatis dari perangkat Anda.',
+        landingCta: 'Get Your Reading',
+        appTitle: 'Discover Your Life Path',
+        appSubtitle: 'Enter your birth date to begin',
+        inputLabel: 'Your birth date',
+        dayLabel: 'Day',
+        monthLabel: 'Month',
+        yearLabel: 'Year',
+        revealBtn: 'Reveal My Number',
+        revealLoading: 'Reading the numbers...',
+        numberEyebrow: 'Your Life Path Number',
+        stepsShow: 'Show reduction steps',
+        stepsHide: 'Hide reduction steps',
+        readingLabels: {
+          core: 'Your Core Reading',
+          strengths: 'Your Strengths',
+          shadow: 'Shadow Side',
+          love_work: 'Love & Work'
+        },
+        btnSave: 'Save Profile',
+        btnShare: 'Share',
+        btnCompat: 'Compatibility',
+        shareConfirm: 'Copied to clipboard',
+        savePanelLabel: 'Name this profile',
+        savePlaceholder: 'e.g. Me, Mum, Alex',
+        saveBtn: 'Save',
+        saveLimitNote: 'You have 5 saved profiles. Delete one before saving a new one.',
+        dailyLabel: "Today's Insight",
+        telegramCta: 'Receive daily insights on Telegram',
+        compatLabel: 'Compatibility Reading',
+        compatDateLabel: 'Second birth date',
+        compatSubmitBtn: 'Compare',
+        fallbackTag: 'Timeless wisdom',
+        profileAdd: '+ New',
+        footerNote: 'Readings are for reflection, not prediction.',
+        footerNeulabLabel: 'A product by',
+        footerNeulabTagline: 'Building AI products for everyday life',
+        footerMoreLink: 'More ↗',
+        topBannerText: 'From the makers of Neural Stocks, NutriScan & more',
+        topBannerLink: 'neulab.xyz ↗',
+        errComplete: 'Please select a complete birth date.',
+        errNoExist: 'That date does not exist for the selected month.',
+        errFuture: 'Please enter a past date.',
+        errGeneral: 'Something went wrong. Please try again.',
+        errConn: 'Connection issue — please retry.',
+        toastSaved: 'Profile saved — ',
+        toastNoReading: 'Reading not yet loaded — try again in a moment.',
+        toastCopyFail: 'Copy failed — try manually selecting the text.',
+        shareText: 'My Life Path Number is {n} — {arch}.\n\n"{first}"\n\nI\'m also a {zodiac}.\n\nDiscover yours at ' + APP_URL,
+        zodiacTitle: 'Your Chinese Zodiac',
+        zodiacSubtitle: 'An additional layer of personality from your birth year',
+        zodiacAnimalLabel: 'Animal',
+        zodiacElementLabel: 'Element',
+        zodiacDisclaimer: 'Based on birth year only. Does not adjust for Lunar New Year.',
+        tabLifePath: 'Life Path',
+        tabZodiac: 'Chinese Zodiac',
+        tabCombined: 'Combined',
+        synthesisTitle: 'Your Combined Profile',
+        synthesisSubtitle: 'Life Path and Chinese Zodiac woven into one portrait',
+        synthesisLoading: 'Weaving your portrait...',
+        months: ['January','February','March','April','May','June','July','August','September','October','November','December']
+      },
+      id: {
+        heroEyebrow: 'Digit Destiny',
+        heroHeadline: 'Angka yang tertulis',
+        heroHeadlineEm: 'dalam kelahiranmu',
+        heroLore: 'Selama lima ribu tahun, para mistikus dan cendekiawan membaca bahasa tersembunyi angka. Setiap tanggal lahir menyimpan Jalur Hidup — benang karakter, tujuan, dan takdir yang terjalin dalam matematika kedatanganmu.',
+        heroCta: 'Konsultasi Angka',
+        heroAiLine: 'Bacaan disusun oleh AI. Ditafsirkan dari lima ribu tahun tradisi.',
+        aiBannerText: 'Setiap bacaan dibuat unik oleh AI — bukan template, bukan skrip. Ditulis segar untuk angkamu.',
+        heroScroll: 'Gulir',
+        howEyebrow: 'Metode Kuno',
+        howStep1Title: 'Masukkan tanggal lahirmu',
+        howStep1Desc: 'Hari, bulan, tahun. Tidak ada yang lain dibutuhkan. Tanggal lahirmu adalah kuncinya.',
+        howStep2Title: 'Angkamu terungkap',
+        howStep2Desc: 'Digit direduksi melalui metode kuno hingga tersisa satu angka.',
+        howStep3Title: 'Bacaanmu terbuka',
+        howStep3Desc: 'Karakter, sisi gelap, cinta, dan pekerjaan — setiap sisi jalur hidupmu diterangi.',
+        featEyebrow: 'Apa yang Kamu Dapatkan',
+        featHeadline: 'Kebijaksanaan kuno, kejelasan modern',
+        feat1Title: 'Angka Jalur Hidupmu',
+        feat1Desc: 'Dihitung dari metode numerologi tepat yang digunakan berabad-abad — bukan algoritma, melainkan disiplin.',
+        feat2Title: 'Bacaan Empat Bagian',
+        feat2Desc: 'Karakter inti, kekuatan tersembunyi, sisi gelap, dan panduan cinta dan pekerjaan — setiap bagian disusun AI untuk kedalaman.',
+        feat3Title: 'Wawasan Harian',
+        feat3Desc: 'Refleksi unik untuk angkamu, dibuat segar setiap pagi dan dikirim ke Telegram jika kamu berlangganan.',
+        feat4Title: 'Bacaan Kompatibilitas',
+        feat4Desc: 'Bandingkan jalur hidupmu dengan siapa pun — pasangan, teman, kolega — dan pahami dinamika antara angka kalian.',
+        feat5Title: 'Simpan Beberapa Profil',
+        feat5Desc: 'Simpan bacaan untukmu dan orang-orang terdekat. Hingga lima profil, tersimpan privat di browsermu.',
+        feat6Title: 'Bahasa Indonesia',
+        feat6Desc: 'Semua bacaan tersedia dalam Bahasa Indonesia, terdeteksi otomatis dari perangkat Anda.',
+        landingCta: 'Dapatkan Bacaanmu',
+        appTitle: 'Temukan Jalur Hidupmu',
+        appSubtitle: 'Masukkan tanggal lahir untuk memulai',
+        inputLabel: 'Tanggal lahirmu',
+        dayLabel: 'Hari',
+        monthLabel: 'Bulan',
+        yearLabel: 'Tahun',
+        revealBtn: 'Ungkap Angkaku',
+        revealLoading: 'Membaca angka-angka...',
+        numberEyebrow: 'Angka Jalur Hidupmu',
+        stepsShow: 'Tampilkan langkah reduksi',
+        stepsHide: 'Sembunyikan langkah reduksi',
+        readingLabels: {
+          core: 'Bacaan Inti',
+          strengths: 'Kekuatanmu',
+          shadow: 'Sisi Gelap',
+          love_work: 'Cinta & Pekerjaan'
+        },
+        btnSave: 'Simpan Profil',
+        btnShare: 'Bagikan',
+        btnCompat: 'Kompatibilitas',
+        shareConfirm: 'Disalin ke clipboard',
+        savePanelLabel: 'Beri nama profil ini',
+        savePlaceholder: 'cth. Aku, Ibu, Budi',
+        saveBtn: 'Simpan',
+        saveLimitNote: 'Kamu sudah punya 5 profil. Hapus satu sebelum menyimpan yang baru.',
+        dailyLabel: 'Wawasan Hari Ini',
+        telegramCta: 'Terima wawasan harian di Telegram',
+        compatLabel: 'Bacaan Kompatibilitas',
+        compatDateLabel: 'Tanggal lahir kedua',
+        compatSubmitBtn: 'Bandingkan',
+        fallbackTag: 'Kebijaksanaan abadi',
+        profileAdd: '+ Baru',
+        footerNote: 'Bacaan untuk refleksi, bukan ramalan.',
+        footerNeulabLabel: 'Produk dari',
+        footerNeulabTagline: 'Membangun produk AI untuk kehidupan sehari-hari',
+        footerMoreLink: 'Lainnya ↗',
+        topBannerText: 'Dari pembuat Neural Stocks, NutriScan & lainnya',
+        topBannerLink: 'neulab.xyz ↗',
+        errComplete: 'Pilih tanggal lahir lengkap.',
+        errNoExist: 'Tanggal itu tidak ada untuk bulan yang dipilih.',
+        errFuture: 'Masukkan tanggal di masa lalu.',
+        errGeneral: 'Terjadi kesalahan. Coba lagi.',
+        errConn: 'Masalah koneksi — coba lagi.',
+        toastSaved: 'Profil disimpan — ',
+        toastNoReading: 'Bacaan belum dimuat — coba lagi sebentar.',
+        toastCopyFail: 'Gagal menyalin — coba pilih teks secara manual.',
+        shareText: 'Angka Jalur Hidup saya adalah {n} — {arch}.\n\n"{first}"\n\nSaya juga {zodiac}.\n\nTemukan milikmu di ' + APP_URL,
+        zodiacTitle: 'Zodiak Tionghoa Anda',
+        zodiacSubtitle: 'Lapisan kepribadian tambahan dari tahun lahir Anda',
+        zodiacAnimalLabel: 'Hewan',
+        zodiacElementLabel: 'Elemen',
+        zodiacDisclaimer: 'Berdasarkan tahun lahir saja. Tidak menyesuaikan Tahun Baru Imlek.',
+        tabLifePath: 'Jalur Hidup',
+        tabZodiac: 'Zodiak Tionghoa',
+        tabCombined: 'Gabungan',
+        synthesisTitle: 'Profil Gabunganmu',
+        synthesisSubtitle: 'Jalur Hidup dan Zodiak Tionghoa dirangkai dalam satu potret',
+        synthesisLoading: 'Merangkai potretmu...',
+        months: ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember']
+      }
+    };
+
+    var S = T[lang];
+
+    var ARCHETYPES_EN = {
+      1: 'The Leader',     2: 'The Peacemaker', 3: 'The Creator',
+      4: 'The Builder',    5: 'The Explorer',   6: 'The Nurturer',
+      7: 'The Seeker',     8: 'The Achiever',   9: 'The Humanitarian'
+    };
+    var ARCHETYPES_ID = {
+      1: 'Sang Pemimpin',  2: 'Sang Pendamai',  3: 'Sang Pencipta',
+      4: 'Sang Pembangun', 5: 'Sang Penjelajah',6: 'Sang Pengasuh',
+      7: 'Sang Pencari',   8: 'Sang Pencapai',  9: 'Sang Humanis'
+    };
+    var ARCHETYPES = lang === 'id' ? ARCHETYPES_ID : ARCHETYPES_EN;
+
+    var MONTHS_DAYS = [31,28,31,30,31,30,31,31,30,31,30,31];
+
+    var READING_LABELS = S.readingLabels;
+
+    var READING_ORDER = ['core', 'strengths', 'shadow', 'love_work'];
+
+    // ══════════════════════════════════════════
+    // CHINESE ZODIAC DATA
+    // ══════════════════════════════════════════
+
+    var ZODIAC_ANIMAL_KEYS = ['Rat','Ox','Tiger','Rabbit','Dragon','Snake','Horse','Goat','Monkey','Rooster','Dog','Pig'];
+
+    var ZODIAC_ELEMENT_KEYS = ['Wood','Fire','Earth','Metal','Water'];
+
+    var ZODIAC_GLYPHS = {
+      Rat:'🐀', Ox:'🐂', Tiger:'🐅', Rabbit:'🐇', Dragon:'🐉', Snake:'🐍',
+      Horse:'🐴', Goat:'🐑', Monkey:'🐒', Rooster:'🐓', Dog:'🐕', Pig:'🐖'
+    };
+
+    var ZODIAC_ANIMAL_NAMES_ID = {
+      Rat:'Tikus', Ox:'Kerbau', Tiger:'Macan', Rabbit:'Kelinci', Dragon:'Naga',
+      Snake:'Ular', Horse:'Kuda', Goat:'Kambing', Monkey:'Monyet',
+      Rooster:'Ayam Jantan', Dog:'Anjing', Pig:'Babi'
+    };
+
+    var ZODIAC_ELEMENT_NAMES_ID = {
+      Wood:'Kayu', Fire:'Api', Earth:'Tanah', Metal:'Logam', Water:'Air'
+    };
+
+    // 60 pre-authored prose readings — one per combined sign, EN + ID
+    // Each ~80-100 words covering personality, behavior, strengths, shadow woven together
+    var ZODIAC_READINGS = {
+      'Wood Rat':    { en: 'The Wood Rat carries a rare blend of cleverness and warmth. Where other Rats can be guarded, Wood softens your edges — you build networks with genuine affection and long-term thinking. Ideas flow naturally from you, and you tend to draw people into projects they didn\'t know they needed. The shadow side is overcommitment: you plant more seeds than you can water, and indecision creeps in when all options feel equally promising. Your greatest asset is your ability to grow alongside others without losing your sharpness.', id: 'Tikus Kayu membawa perpaduan langka antara kecerdasan dan kehangatan. Di mana Tikus lain bisa bersikap tertutup, Kayu melembutkan sisimu — kamu membangun jaringan dengan kasih yang tulus dan pemikiran jangka panjang. Ide mengalir secara alami darimu, dan kamu cenderung menarik orang ke dalam proyek yang tidak mereka tahu mereka butuhkan. Sisi bayangnya adalah terlalu berkomitmen: kamu menanam lebih banyak benih daripada yang bisa kamu siram. Asetmu terbesar adalah kemampuan untuk tumbuh bersama orang lain tanpa kehilangan ketajamanmu.' },
+      'Fire Rat':    { en: 'The Fire Rat moves through the world like a current — quick, perceptive, and quietly magnetic. Where other Rats observe and wait, Fire pushes you toward the front of the room. You read people fast and act before others have finished thinking. This boldness is your greatest gift and your sharpest edge: you can burn bridges with the same speed you build them. Socially agile and confident under pressure, you shine brightest when the stakes are real. Guard against impulsiveness and the tendency to treat every moment as a performance.', id: 'Tikus Api bergerak di dunia seperti arus — cepat, tajam, dan diam-diam magnetis. Di mana Tikus lain mengamati dan menunggu, Api mendorongmu ke depan ruangan. Kamu membaca orang dengan cepat dan bertindak sebelum orang lain selesai berpikir. Keberanian ini adalah anugerah terbesarmu dan sisi tajammu: kamu bisa membakar jembatan dengan kecepatan yang sama seperti kamu membangunnya. Lincah secara sosial dan percaya diri di bawah tekanan, kamu paling bersinar ketika taruhannya nyata.' },
+      'Earth Rat':   { en: 'The Earth Rat is the most grounded of its kind — practical, perceptive, and quietly ambitious. You possess the Rat\'s natural sharpness without the restlessness that often accompanies it. Stability matters to you: you build steadily, invest carefully, and earn trust through consistency rather than charm. The shadow is a tendency toward excessive caution — you can miss opportunities by waiting for certainty that never fully arrives. You work best in environments where your reliability is seen as a strength, not a limitation.', id: 'Tikus Tanah adalah yang paling membumi dari jenisnya — praktis, tajam, dan diam-diam ambisius. Kamu memiliki ketajaman alami Tikus tanpa kegelisahan yang sering menyertainya. Stabilitas penting bagimu: kamu membangun dengan mantap, berinvestasi dengan hati-hati, dan mendapatkan kepercayaan melalui konsistensi daripada pesona. Sisi bayangnya adalah kecenderungan ke arah kehati-hatian yang berlebihan — kamu bisa melewatkan peluang dengan menunggu kepastian yang tidak pernah sepenuhnya datang.' },
+      'Metal Rat':   { en: 'The Metal Rat is driven, disciplined, and harder to read than most. Metal sharpens the Rat\'s natural intelligence into something close to precision — you think in systems, hold high standards, and rarely let sentiment cloud your judgment. People respect you before they know you well, which suits you fine. The shadow is emotional distance: you can be so focused on what works that you forget to tend to what matters. Ambition without warmth eventually isolates. Let people in more than feels necessary — it will serve you.', id: 'Tikus Logam didorong, disiplin, dan lebih sulit dibaca daripada kebanyakan. Logam mengasah kecerdasan alami Tikus menjadi sesuatu yang mendekati presisi — kamu berpikir dalam sistem, memegang standar tinggi, dan jarang membiarkan sentimen mengaburkan penilaianmu. Orang menghormatimu sebelum mereka mengenalmu dengan baik. Sisi bayangnya adalah jarak emosional: kamu bisa begitu fokus pada apa yang berhasil sehingga kamu lupa merawat apa yang penting.' },
+      'Water Rat':   { en: 'The Water Rat is the most intuitive and fluid of its sign — perceptive, diplomatic, and deeply attuned to the undercurrents others miss. You move through social environments with rare ease, sensing what people need before they ask. Water deepens the Rat\'s natural cleverness into genuine wisdom, but also brings a tendency toward passivity and emotional absorption. You can take on others\' moods as if they were your own. The key is learning when to flow and when to hold your ground — you are more resilient than you allow yourself to feel.', id: 'Tikus Air adalah yang paling intuitif dan fleksibel dari tandanya — tajam, diplomatis, dan sangat selaras dengan arus bawah yang dilewatkan orang lain. Kamu bergerak melalui lingkungan sosial dengan kemudahan yang langka, merasakan apa yang dibutuhkan orang sebelum mereka bertanya. Air memperdalam kecerdasan alami Tikus menjadi kebijaksanaan sejati, tetapi juga membawa kecenderungan ke arah pasivitas. Kuncinya adalah belajar kapan harus mengalir dan kapan harus bertahan.' },
+
+      'Wood Ox':     { en: 'The Wood Ox brings a rare warmth to a sign known for its reserve. You have the Ox\'s unshakeable reliability, but Wood adds generosity and a quiet idealism that makes you a natural protector of people and projects you believe in. You build slowly and honestly, and rarely abandon what you start. The challenge is overextension — Wood makes you more likely than other Oxen to say yes when you should rest. Your stubbornness, usually an asset, can become a trap when you refuse to adapt to changed circumstances. Trust is your currency; guard it carefully.', id: 'Kerbau Kayu membawa kehangatan langka pada tanda yang dikenal dengan sikapnya yang tertahan. Kamu memiliki keandalan tak tergoyahkan Kerbau, tetapi Kayu menambahkan kemurahan hati dan idealisme yang tenang yang menjadikanmu pelindung alami orang dan proyek yang kamu percayai. Kamu membangun dengan perlahan dan jujur. Tantangannya adalah terlalu berkomitmen — Kayu membuatmu lebih cenderung berkata ya ketika kamu seharusnya beristirahat.' },
+      'Fire Ox':     { en: 'The Fire Ox is the most driven and outwardly confident of its sign. Where most Oxen work quietly from behind, Fire brings you into the open — you lead with conviction, demand excellence, and inspire through sheer determination. The challenge is that Fire amplifies the Ox\'s natural stubbornness into something that can read as inflexibility or severity. You are rarely wrong about what needs to be done, but sometimes wrong about how it must be done. Learning to share the reins without losing your standards is your life\'s central tension.', id: 'Kerbau Api adalah yang paling bersemangat dan percaya diri dari tandanya. Di mana kebanyakan Kerbau bekerja dengan tenang dari belakang, Api membawamu ke depan — kamu memimpin dengan keyakinan, menuntut keunggulan, dan menginspirasi melalui tekad murni. Tantangannya adalah bahwa Api memperkuat kekerasan kepala alami Kerbau menjadi sesuatu yang bisa terbaca sebagai ketidakfleksibelan. Belajar berbagi kendali tanpa kehilangan standarmu adalah ketegangan utama hidupmu.' },
+      'Earth Ox':    { en: 'The Earth Ox is the truest expression of its sign — patient, grounded, and immovably dependable. You are the kind of person others unconsciously lean on, not because you seek it, but because you are simply there. Earth deepens the Ox\'s steadiness into something close to permanence. The shadow is heaviness: an Earth Ox can carry enormous weight without complaint until, suddenly, they cannot carry any more. Learning to ask for help before you need it desperately is not weakness — for you, it is the hardest and most necessary practice.', id: 'Kerbau Tanah adalah ekspresi paling sejati dari tandanya — sabar, membumi, dan sangat dapat diandalkan. Kamu adalah jenis orang yang orang lain secara tidak sadar bersandar padanya, bukan karena kamu mencarinya, tetapi karena kamu benar-benar ada. Tanah memperdalam keteguhan Kerbau menjadi sesuatu yang mendekati permanensi. Sisi bayangnya adalah beratnya beban: belajar meminta bantuan sebelum kamu sangat membutuhkannya adalah latihan yang paling sulit dan paling perlu bagimu.' },
+      'Metal Ox':    { en: 'The Metal Ox is formidable — principled, precise, and willing to endure what others will not. Metal intensifies every Ox quality: discipline becomes rigor, reliability becomes exactness, patience becomes iron will. You hold yourself to standards that can feel impossible to others, and you rarely forgive yourself for falling short. The greatest risk is not failure but rigidity — the inability to bend when bending would actually serve you better. Your determination is one of the rarest qualities in the world. The art is knowing when to put it down.', id: 'Kerbau Logam tangguh — berprinsip, presisi, dan bersedia bertahan dari apa yang orang lain tidak mau. Logam mengintensifkan setiap kualitas Kerbau: disiplin menjadi ketelitian, keandalan menjadi ketepatan, kesabaran menjadi kemauan besi. Risiko terbesar bukanlah kegagalan tetapi kekakuan. Tekadmu adalah salah satu kualitas paling langka di dunia. Seninya adalah mengetahui kapan harus meletakkannya.' },
+      'Water Ox':    { en: 'The Water Ox carries the quiet depth of a river — steady on the surface, powerful beneath. Water softens the Ox\'s characteristic rigidity, giving you an emotional intelligence rare in your sign. You read situations accurately and respond with a measured grace that others find deeply reassuring. The shadow is inertia: Water can make you too comfortable with how things are, too reluctant to disturb a peace that may actually need disturbing. Your wisdom is real. Let it move, not just hold.', id: 'Kerbau Air membawa kedalaman tenang sungai — stabil di permukaan, kuat di bawahnya. Air melembutkan kekakuan khas Kerbau, memberikan kecerdasan emosional yang langka di tandamu. Kamu membaca situasi dengan akurat dan merespons dengan keanggunan terukur yang orang lain temukan sangat meyakinkan. Sisi bayangnya adalah inersia: Air bisa membuatmu terlalu nyaman dengan keadaan saat ini.' },
+
+      'Wood Tiger':  { en: 'The Wood Tiger is bold, generous, and more collaborative than its sign usually allows. Wood tempers the Tiger\'s fire into something warmer — you lead through inspiration rather than dominance, and you genuinely want others to rise alongside you. Idealism runs deep in you; you believe things can be better and you act on that belief with energy that borders on recklessness. The shadow is overreach: Wood makes you more ambitious than disciplined, and Tigers already struggle with follow-through. Channel your vision into fewer, deeper commitments.', id: 'Macan Kayu berani, murah hati, dan lebih kolaboratif dari yang biasanya diizinkan tandanya. Kayu meredakan api Macan menjadi sesuatu yang lebih hangat — kamu memimpin melalui inspirasi daripada dominasi. Idealisme mengalir dalam dirimu; kamu percaya hal-hal bisa lebih baik dan kamu bertindak atas keyakinan itu dengan energi yang mendekati kecerobohan. Sisi bayangnya adalah terlalu ambisius daripada disiplin.' },
+      'Fire Tiger':  { en: 'The Fire Tiger burns the brightest and the hottest. Double fire means double intensity — you are magnetic, fearless, and capable of extraordinary things when focused. The room changes when you enter it. People are drawn to your confidence and often remain for the warmth underneath it. The challenge is that Fire Tiger energy can consume itself: impulsiveness, ego, and a need to always be the protagonist can exhaust both you and the people who love you. Your passion is a gift. Your discipline around it determines whether it builds something or burns it down.', id: 'Macan Api membakar paling terang dan paling panas. Api ganda berarti intensitas ganda — kamu magnetis, tak kenal takut, dan mampu melakukan hal-hal luar biasa ketika fokus. Ruangan berubah saat kamu masuk. Tantangannya adalah bahwa energi Macan Api bisa mengonsumsi dirinya sendiri: impulsivitas dan kebutuhan untuk selalu menjadi protagonis bisa menguras kamu dan orang-orang yang mencintaimu.' },
+      'Earth Tiger':  { en: 'The Earth Tiger is the most measured and reliable of its kind — still bold and charismatic, but grounded in a way most Tigers are not. Earth slows you down enough to finish what you start, to think before you leap, to build something that lasts. You lead with authority that comes from competence rather than bravado. The shadow is that Earth\'s conservatism can muffle the Tiger\'s natural fire until you feel restless and unfulfilled. You need meaningful challenge to stay alive. Without it, you become heavy where you should be electric.', id: 'Macan Tanah adalah yang paling terukur dan dapat diandalkan dari jenisnya — masih berani dan karismatik, tetapi membumi dengan cara yang kebanyakan Macan tidak. Tanah memperlambatmu cukup untuk menyelesaikan apa yang kamu mulai. Kamu memimpin dengan otoritas yang datang dari kompetensi daripada keberanian. Sisi bayangnya adalah konservatisme Tanah bisa meredam api alami Macan sampai kamu merasa gelisah.' },
+      'Metal Tiger':  { en: 'The Metal Tiger is the most intense and uncompromising of its sign. Metal sharpens every Tiger quality to a point — your courage becomes conviction, your confidence becomes command, your passion becomes a force that can reshape environments around you. You set your sights and move toward them with a ferocity that is genuinely rare. The shadow is inflexibility and severity: Metal Tigers can be hard to be close to, demanding standards of others that they themselves barely meet. Soften without weakening. That is your work.', id: 'Macan Logam adalah yang paling intens dan tidak berkompromi dari tandanya. Logam mengasah setiap kualitas Macan menjadi titik — keberanianmu menjadi keyakinan, kepercayaan dirimu menjadi komando. Kamu menetapkan pandanganmu dan bergerak ke arahnya dengan keganasan yang benar-benar langka. Sisi bayangnya adalah ketidakfleksibelan: Macan Logam bisa sulit untuk didekat, menuntut standar dari orang lain yang hampir tidak mereka penuhi sendiri.' },
+      'Water Tiger':  { en: 'The Water Tiger is the most intuitive and emotionally intelligent of its sign. Water quiets the Tiger\'s roar enough to let you listen — you observe before you act, sense undercurrents others miss, and move with a fluid grace that makes you surprisingly hard to predict. You are still a Tiger: brave, charismatic, and capable of bold moves when the moment calls for it. The shadow is moodiness and a tendency toward passivity when the emotional environment feels complex. Trust your instincts more than your doubts.', id: 'Macan Air adalah yang paling intuitif dan cerdas secara emosional dari tandanya. Air menenangkan auman Macan cukup untuk membiarkanmu mendengarkan — kamu mengamati sebelum bertindak, merasakan arus bawah yang dilewatkan orang lain. Kamu masih Macan: berani, karismatik, dan mampu melakukan langkah berani ketika momennya memanggil. Sisi bayangnya adalah moodiness dan kecenderungan ke arah pasivitas ketika lingkungan emosional terasa kompleks.' },
+
+      'Wood Rabbit':  { en: 'The Wood Rabbit is the gentlest and most creatively gifted of its sign. Wood expands the Rabbit\'s natural grace into something more expressive — you have an aesthetic sense that borders on artistic genius and a social warmth that draws people to you effortlessly. Cooperation and harmony are not just preferences but deep needs. The shadow is over-extension and difficulty saying no: Wood makes you more likely to give beyond your capacity, leaving you depleted and quietly resentful. Protect your energy as carefully as you protect your peace.', id: 'Kelinci Kayu adalah yang paling lembut dan paling berbakat secara kreatif dari tandanya. Kayu memperluas keanggunan alami Kelinci menjadi sesuatu yang lebih ekspresif — kamu memiliki rasa estetika yang mendekati kejeniusan artistik. Kerjasama dan harmoni bukan hanya preferensi tetapi kebutuhan mendalam. Sisi bayangnya adalah kesulitan berkata tidak: Kayu membuatmu lebih cenderung memberi melebihi kapasitasmu.' },
+      'Fire Rabbit':  { en: 'The Fire Rabbit is more assertive and charismatic than its sign usually produces — still graceful and peace-loving, but with a warmth and social boldness that can fill a room. Fire gives you a confidence in your own voice that most Rabbits take years to find, if they find it at all. The shadow is that Fire can make you impulsive in relationships and prone to overreaction when your peace is disturbed. Your instinct is always toward harmony; the growth edge is learning that some conflicts are necessary, even healthy.', id: 'Kelinci Api lebih asertif dan karismatik dari yang biasanya dihasilkan tandanya — masih anggun dan mencintai kedamaian, tetapi dengan kehangatan dan keberanian sosial yang bisa mengisi ruangan. Api memberimu kepercayaan diri dalam suaramu sendiri yang kebanyakan Kelinci butuhkan bertahun-tahun untuk menemukan. Sisi bayangnya adalah impulsivitas dalam hubungan dan kecenderungan bereaksi berlebihan ketika kedamaianmu terganggu.' },
+      'Earth Rabbit': { en: 'The Earth Rabbit is the most stable and practically-minded of its sign — diplomatic, careful, and quietly effective. You build security around you through patient, consistent effort, and you earn trust so naturally that people often don\'t notice how deliberately you cultivate it. Earth grounds the Rabbit\'s natural sensitivity without eliminating it, giving you an emotional intelligence that is both felt and useful. The shadow is excessive caution: an Earth Rabbit can become so focused on maintaining safety that no new territory ever gets explored.', id: 'Kelinci Tanah adalah yang paling stabil dan berorientasi praktis dari tandanya — diplomatis, hati-hati, dan diam-diam efektif. Kamu membangun keamanan di sekitarmu melalui upaya yang sabar dan konsisten. Tanah membumikan kepekaan alami Kelinci tanpa menghilangkannya. Sisi bayangnya adalah kehati-hatian berlebihan: Kelinci Tanah bisa menjadi begitu fokus pada menjaga keamanan sehingga tidak ada wilayah baru yang pernah dijelajahi.' },
+      'Metal Rabbit': { en: 'The Metal Rabbit carries a quiet strength that surprises those who assume softness. You have the Rabbit\'s elegance and diplomacy, but Metal adds a spine of iron beneath it — you hold your positions more firmly than you let on, and you pursue your goals with a persistence that others often underestimate. The shadow is emotional withdrawal: Metal can make you detached and withholding, creating distance where closeness is actually wanted. You are more resilient than you appear. Let that be known, not just felt.', id: 'Kelinci Logam membawa kekuatan tenang yang mengejutkan mereka yang mengasumsikan kelemahan. Kamu memiliki keanggunan dan diplomasi Kelinci, tetapi Logam menambahkan tulang punggung besi di bawahnya. Sisi bayangnya adalah penarikan emosional: Logam dapat membuat kamu tidak terikat dan menahan diri, menciptakan jarak di mana kedekatan sebenarnya diinginkan.' },
+      'Water Rabbit': { en: 'The Water Rabbit is the most sensitive and perceptive of its sign — attuned to emotional nuance at a level that can feel almost psychic. You sense what is unspoken in a room and respond with a care that people find profoundly comforting. Water deepens the Rabbit\'s natural empathy into something that is both a gift and a burden: you absorb the feelings of those around you without always being able to set them down again. Boundaries are not your nature — but they are your practice. Build them with the same grace you give everything else.', id: 'Kelinci Air adalah yang paling sensitif dan perseptif dari tandanya — selaras dengan nuansa emosional pada tingkat yang bisa terasa hampir seperti psikis. Kamu merasakan apa yang tidak terucapkan di sebuah ruangan. Air memperdalam empati alami Kelinci menjadi sesuatu yang sekaligus hadiah dan beban: kamu menyerap perasaan orang-orang di sekitarmu. Batasan bukanlah sifatmu — tetapi itu adalah praktikmu.' },
+
+      'Wood Dragon':  { en: 'The Wood Dragon is visionary, generous, and more collaborative than the Dragon name might suggest. Wood softens the Dragon\'s legendary ego into something warmer — you want to build things that outlast you, and you want others to be part of that story. Your creativity and ambition are formidable, but they are in service of something larger than personal glory. The shadow is overextension: Wood Dragons take on too much, inspire too many people, and then struggle to execute everything they\'ve promised. Learn to say no to good things in service of great ones.', id: 'Naga Kayu visioner, murah hati, dan lebih kolaboratif dari yang mungkin disarankan nama Naga. Kayu melembutkan ego legendaris Naga menjadi sesuatu yang lebih hangat — kamu ingin membangun hal-hal yang bertahan melampaui kamu. Kreativitas dan ambisimu tangguh, tetapi dalam melayani sesuatu yang lebih besar dari kejayaan pribadi. Sisi bayangnya adalah terlalu berkomitmen: belajar berkata tidak pada hal-hal baik demi hal-hal yang luar biasa.' },
+      'Fire Dragon':  { en: 'The Fire Dragon is the most powerful and intense combination in the entire zodiac. Double fire means your presence is impossible to ignore — you radiate confidence, vision, and a force of will that can genuinely move people and circumstances. The world responds to you, and you know it. The shadow is equally powerful: arrogance, impatience, and a need for recognition that can push away the very people who most want to support you. You are built for extraordinary things. The question is always whether your character can match your capability.', id: 'Naga Api adalah kombinasi paling kuat dan paling intens dalam seluruh zodiak. Api ganda berarti kehadiranmu tidak bisa diabaikan — kamu memancarkan kepercayaan diri, visi, dan kemauan yang benar-benar bisa menggerakkan orang dan keadaan. Sisi bayangnya sama kuatnya: kesombongan, ketidaksabaran, dan kebutuhan akan pengakuan yang bisa mendorong pergi orang-orang yang paling ingin mendukungmu.' },
+      'Earth Dragon': { en: 'The Earth Dragon is the most grounded and practical of its kind — still charismatic and ambitious, but tempered by a realism that most Dragons lack. You set big goals and then actually make plans for them. Earth gives you follow-through, patience, and the ability to build structures that last. The shadow is that Earth can dim the Dragon\'s natural fire until you feel more constrained than capable. You need room to think at scale. When the environment is too small for your vision, don\'t shrink — expand it.', id: 'Naga Tanah adalah yang paling membumi dan praktis dari jenisnya — masih karismatik dan ambisius, tetapi diimbangi oleh realisme yang tidak dimiliki kebanyakan Naga. Kamu menetapkan tujuan besar dan kemudian benar-benar membuat rencana untuk itu. Tanah memberimu tindak lanjut, kesabaran, dan kemampuan untuk membangun struktur yang bertahan.' },
+      'Metal Dragon': { en: 'The Metal Dragon is relentless — disciplined, determined, and operating with a clarity of purpose that can feel almost frightening in its consistency. You hold high standards for yourself and everyone around you, and you pursue your goals with a precision that leaves little room for ambiguity. The shadow is rigidity and emotional distance: Metal Dragons can become so focused on the objective that they lose sight of the people involved. Your strength is extraordinary. Make sure the people who matter know they are more important than the outcome.', id: 'Naga Logam tak henti-hentinya — disiplin, bertekad, dan beroperasi dengan kejelasan tujuan yang bisa terasa hampir menakutkan dalam konsistensinya. Kamu menetapkan standar tinggi untuk dirimu sendiri dan semua orang di sekitarmu. Sisi bayangnya adalah kekakuan dan jarak emosional: Naga Logam bisa menjadi begitu fokus pada tujuan sehingga mereka kehilangan pandangan tentang orang-orang yang terlibat.' },
+      'Water Dragon': { en: 'The Water Dragon is the wisest and most emotionally intelligent of its sign — visionary like all Dragons, but with a depth of perception and interpersonal sensitivity that sets you apart. Water makes you more willing to listen than most Dragons ever are, and that quality alone puts you ahead. You inspire people not just through boldness but through genuine understanding. The shadow is a tendency toward self-doubt that can feel at odds with the Dragon identity — you carry more uncertainty than you let on. Trust your vision even when it can\'t be fully explained yet.', id: 'Naga Air adalah yang paling bijak dan cerdas secara emosional dari tandanya — visioner seperti semua Naga, tetapi dengan kedalaman persepsi dan sensitivitas interpersonal yang membedakanmu. Air membuatmu lebih bersedia mendengarkan dari kebanyakan Naga. Sisi bayangnya adalah kecenderungan menuju keraguan diri yang bisa terasa bertentangan dengan identitas Naga — kamu membawa lebih banyak ketidakpastian dari yang kamu biarkan terlihat.' },
+
+      'Wood Snake':   { en: 'The Wood Snake is the most expressive and socially attuned of its sign. Where most Snakes keep to themselves, Wood draws you outward — you have a quiet charisma and an ability to make others feel genuinely seen. Your intelligence is intuitive rather than analytical, and you navigate complex social environments with an ease that others find admirable. The shadow is overextension and a tendency to scatter your considerable depth across too many directions. Focus is your most powerful tool. When you commit fully to something, very little can stop you.', id: 'Ular Kayu adalah yang paling ekspresif dan selaras secara sosial dari tandanya. Di mana kebanyakan Ular menyendiri, Kayu menarikmu ke luar. Kecerdasanmu intuitif daripada analitis, dan kamu menavigasi lingkungan sosial yang kompleks dengan kemudahan yang dikagumi orang lain. Sisi bayangnya adalah kecenderungan untuk menyebarkan kedalaman yang cukup besar ke terlalu banyak arah. Fokus adalah alatmu yang paling kuat.' },
+      'Fire Snake':   { en: 'The Fire Snake is magnetic, intense, and the most outwardly confident of its kind. Fire brings your naturally private nature into the light — you have a presence that commands attention without seeking it, and a charisma that is all the more powerful for being unhurried. You know what you want and you move toward it with a patience that can look, from the outside, like certainty. The shadow is intensity that tips into control: Fire Snakes can be possessive, jealous, and slow to forgive. Your depth deserves relationships large enough to hold it.', id: 'Ular Api magnetis, intens, dan paling percaya diri dari jenisnya. Api membawa sifatmu yang secara alami tertutup ke dalam cahaya — kamu memiliki kehadiran yang menarik perhatian tanpa mencarinya. Kamu tahu apa yang kamu inginkan dan bergerak ke arahnya dengan kesabaran yang bisa terlihat seperti kepastian. Sisi bayangnya adalah intensitas yang berubah menjadi kontrol: Ular Api bisa posesif dan lambat memaafkan.' },
+      'Earth Snake':  { en: 'The Earth Snake is practical, patient, and deeply perceptive — the kind of person who understands a situation completely before they say a single word about it. Earth grounds the Snake\'s natural wisdom into something useful and actionable. You accumulate quietly: knowledge, resources, influence, trust. The shadow is that Earth Snake energy can become too cautious, too slow, too attached to security at the expense of growth. Your instincts are excellent. Acting on them sooner — before the perfect moment — is where your next level lives.', id: 'Ular Tanah praktis, sabar, dan sangat perseptif — jenis orang yang memahami situasi sepenuhnya sebelum mereka mengucapkan sepatah kata pun tentangnya. Tanah membumikan kebijaksanaan alami Ular menjadi sesuatu yang berguna dan dapat ditindaklanjuti. Kamu mengumpulkan dengan tenang: pengetahuan, sumber daya, pengaruh, kepercayaan. Sisi bayangnya adalah menjadi terlalu berhati-hati.' },
+      'Metal Snake':  { en: 'The Metal Snake is the most determined and exacting of its sign — private, perceptive, and operating with a discipline that looks effortless but is anything but. You hold your inner world carefully, revealing only what serves you, and you pursue your goals with a combination of patience and will that rarely fails. The shadow is emotional inaccessibility: Metal Snakes are admired more than they are known, and this can become a kind of loneliness over time. Your depth is extraordinary. Find the people worth showing it to.', id: 'Ular Logam adalah yang paling bertekad dan tepat dari tandanya — tertutup, perseptif, dan beroperasi dengan disiplin yang terlihat mudah tetapi tidak. Kamu memegang dunia batinmu dengan hati-hati, hanya mengungkapkan apa yang melayanimu. Sisi bayangnya adalah ketidakaksesan emosional: Ular Logam lebih dikagumi daripada dikenal, dan ini bisa menjadi semacam kesepian seiring waktu.' },
+      'Water Snake':  { en: 'The Water Snake is the deepest and most emotionally complex of its sign — intuitive, sensitive, and possessed of a wisdom that seems to come from somewhere beyond ordinary experience. You read people with uncanny accuracy and navigate emotional landscapes that would overwhelm most. Water makes the Snake\'s natural introspection even deeper, which is both a gift and a weight. The shadow is a tendency to disappear inside yourself, to process rather than act, to feel rather than speak. Your insight is valuable. The world needs to hear it from you directly.', id: 'Ular Air adalah yang paling dalam dan paling kompleks secara emosional dari tandanya — intuitif, sensitif, dan memiliki kebijaksanaan yang tampaknya datang dari suatu tempat di luar pengalaman biasa. Kamu membaca orang dengan akurasi yang mengagumkan. Sisi bayangnya adalah kecenderungan untuk menghilang ke dalam dirimu sendiri, untuk memproses daripada bertindak.' },
+
+      'Wood Horse':   { en: 'The Wood Horse is the most cooperative and creatively alive of its sign. Wood gives the Horse\'s restless energy a direction — you are still free-spirited and socially magnetic, but with an idealism and a collaborative warmth that makes you genuinely inspiring to others. You generate ideas the way most people breathe, and you have the charisma to get others excited about them. The shadow is inconsistency: Wood Horse energy spreads wide but not always deep. Your passion is real; your follow-through needs cultivation. The projects you finish change things.', id: 'Kuda Kayu adalah yang paling kooperatif dan hidup secara kreatif dari tandanya. Kayu memberi energi gelisah Kuda arah — kamu masih berjiwa bebas dan magnetis secara sosial, tetapi dengan idealisme dan kehangatan kolaboratif. Kamu menghasilkan ide seperti kebanyakan orang bernapas. Sisi bayangnya adalah inkonsistensi: energi Kuda Kayu menyebar lebar tetapi tidak selalu dalam.' },
+      'Fire Horse':   { en: 'The Fire Horse is one of the most vivid and electric combinations in the zodiac — free, passionate, and almost impossible to contain. You live at full intensity, love deeply, pursue boldly, and leave an impression everywhere you go. People remember you. The shadow is that Fire Horse energy burns so bright it can be exhausting — for you and for others. Relationships, commitments, and routines all struggle to hold you. The challenge of your life is not freedom, which you have naturally, but depth — learning to stay long enough to build something lasting.', id: 'Kuda Api adalah salah satu kombinasi paling hidup dan elektrik dalam zodiak — bebas, penuh semangat, dan hampir tidak mungkin untuk dikekang. Kamu hidup dengan intensitas penuh, mencintai dengan dalam, mengejar dengan berani. Sisi bayangnya adalah energi Kuda Api membakar begitu terang sehingga bisa melelahkan. Tantangan hidupmu bukan kebebasan — tetapi kedalaman: belajar untuk bertahan cukup lama untuk membangun sesuatu yang abadi.' },
+      'Earth Horse':  { en: 'The Earth Horse is grounded and reliable in ways that horses rarely are — you have the sign\'s natural charisma and love of movement, but Earth brings you back, keeps you responsible, and gives your energy a structure it can actually build on. You are practical without being dull, adventurous without being reckless. The shadow is restlessness that Earth tries but cannot fully tame: you can feel trapped in stability, even when you built it yourself. You need regular change and challenge to feel alive. Build that into your life by design.', id: 'Kuda Tanah membumi dan dapat diandalkan dengan cara yang jarang dimiliki Kuda — kamu memiliki karisma alami tanda dan cinta gerakan, tetapi Tanah membawamu kembali. Kamu praktis tanpa membosankan, petualang tanpa ceroboh. Sisi bayangnya adalah kegelisahan yang Tanah coba tetapi tidak bisa sepenuhnya dijinakkan: kamu bisa merasa terjebak dalam stabilitas.' },
+      'Metal Horse':  { en: 'The Metal Horse is the most determined and single-minded of its sign — you have the Horse\'s natural freedom and speed, but Metal gives you a focus and ambition that drives it somewhere specific. You work hard, hold high standards, and pursue your goals with a discipline that surprises people who expect all Horses to be scattered. The shadow is rigidity and a fierce independence that can make intimacy difficult: Metal Horses resist being told what to do or who to be, sometimes to their own detriment. Strength and softness are not opposites.', id: 'Kuda Logam adalah yang paling bertekad dan terfokus dari tandanya — kamu memiliki kebebasan dan kecepatan alami Kuda, tetapi Logam memberimu fokus dan ambisi yang mendorongnya ke suatu tempat yang spesifik. Kamu bekerja keras dan memegang standar tinggi. Sisi bayangnya adalah kekakuan dan kemandirian yang sengit yang bisa membuat keintiman menjadi sulit.' },
+      'Water Horse':  { en: 'The Water Horse is the most intuitive and emotionally perceptive of its sign — still free-spirited and socially gifted, but with a sensitivity and depth that other Horses rarely show. You adapt to new environments with remarkable ease and read the emotional temperature of a room before you\'ve crossed the threshold. The shadow is inconsistency at a deeper level: Water makes your feelings shift like tides, and people can find it hard to know where they stand with you. Groundedness is your practice. Find your still water and return to it often.', id: 'Kuda Air adalah yang paling intuitif dan perseptif secara emosional dari tandanya — masih berjiwa bebas dan berbakat secara sosial, tetapi dengan kepekaan dan kedalaman yang jarang ditunjukkan Kuda lain. Kamu beradaptasi dengan lingkungan baru dengan kemudahan yang luar biasa. Sisi bayangnya adalah perasaanmu bergeser seperti pasang surut, dan orang-orang bisa merasa sulit untuk mengetahui di mana mereka berdiri denganmu.' },
+
+      'Wood Goat':    { en: 'The Wood Goat is creative, compassionate, and quietly visionary. Wood amplifies the Goat\'s natural gentleness into something generative — you see beauty in things others overlook, and you have the patience to bring it into form. Artistic sensibility runs deep in you, as does a desire for environments where people are genuinely cared for. The shadow is a difficulty asserting yourself: Wood Goats give freely and ask for little, which can breed quiet resentment over time. Your kindness is a strength; learning to ask for what you need is the next one.', id: 'Kambing Kayu kreatif, berbelas kasih, dan diam-diam visioner. Kayu memperkuat kelembutan alami Kambing menjadi sesuatu yang generatif — kamu melihat keindahan dalam hal-hal yang dilewatkan orang lain. Kepekaan artistik mengalir dalam dirimu. Sisi bayangnya adalah kesulitan menegaskan diri: Kambing Kayu memberi dengan bebas dan meminta sedikit, yang bisa menimbulkan kebencian yang tenang seiring waktu.' },
+      'Fire Goat':    { en: 'The Fire Goat is warmer and more assertive than its sign usually allows — creative and compassionate like all Goats, but with a social energy and expressiveness that draws people in. Fire gives you the courage to share your inner world, and what you share tends to move people. You feel things deeply and you\'re not afraid to show it. The shadow is sensitivity that tips into volatility: Fire Goats can react strongly to perceived criticism or rejection, taking things personally in ways that can disrupt the harmony you otherwise work so hard to maintain.', id: 'Kambing Api lebih hangat dan lebih asertif dari yang biasanya diizinkan tandanya — kreatif dan berbelas kasih seperti semua Kambing, tetapi dengan energi sosial dan ekspresi yang menarik orang. Api memberimu keberanian untuk berbagi dunia batinmu. Sisi bayangnya adalah kepekaan yang berubah menjadi volatilitas: Kambing Api bisa bereaksi keras terhadap kritik yang dirasakan.' },
+      'Earth Goat':   { en: 'The Earth Goat is the most practical and stable of its sign — still gentle and artistically inclined, but grounded in a way that gives your creativity a container. You build carefully, care deeply, and create environments of warmth and beauty that people want to return to. Earth helps you turn your Goat sensibility into something lasting and real. The shadow is that security can become your master: Earth Goats can become so attached to comfort and routine that genuine growth — which requires risk — gets quietly avoided. Beauty and safety are not the same.', id: 'Kambing Tanah adalah yang paling praktis dan stabil dari tandanya — masih lembut dan condong secara artistik, tetapi membumi dengan cara yang memberi kreativitasmu wadah. Kamu membangun dengan hati-hati, peduli dengan dalam. Sisi bayangnya adalah keamanan bisa menjadi tuanmu: Kambing Tanah bisa menjadi begitu terikat pada kenyamanan dan rutinitas sehingga pertumbuhan sejati dihindari dengan tenang.' },
+      'Metal Goat':   { en: 'The Metal Goat carries a quiet resilience that surprises those who expect softness. You have the Goat\'s genuine empathy and artistic sensibility, but Metal gives you a backbone and a persistence that is hard to shake. You hold your vision through difficulty, work carefully toward your goals, and show up consistently in ways that earn deep trust over time. The shadow is emotional withdrawal and perfectionism that can make you hard on yourself and, eventually, on others. Your sensitivity is not weakness. Neither is your need for beauty. Both are worth protecting.', id: 'Kambing Logam membawa ketangguhan tenang yang mengejutkan mereka yang mengharapkan kelembutan. Kamu memiliki empati tulus dan kepekaan artistik Kambing, tetapi Logam memberimu tulang punggung dan ketekunan yang sulit digoyahkan. Sisi bayangnya adalah penarikan emosional dan perfeksionisme yang bisa membuatmu keras pada dirimu sendiri.' },
+      'Water Goat':   { en: 'The Water Goat is the most sensitive and emotionally fluid of its sign — deeply empathetic, artistically gifted, and attuned to the feelings of those around you with an accuracy that can feel almost unbearable. You absorb the emotional environment completely. Water deepens the Goat\'s already substantial compassion into something profound, but also makes it harder to distinguish your feelings from others\'. The shadow is emotional overwhelm and a tendency toward pessimism when the world feels too heavy. Create beauty deliberately. It is your most powerful form of self-care.', id: 'Kambing Air adalah yang paling sensitif dan paling fleksibel secara emosional dari tandanya — sangat empatik, berbakat secara artistik, dan selaras dengan perasaan orang-orang di sekitarmu dengan akurasi yang hampir terasa tak tertahankan. Sisi bayangnya adalah kewalahan emosional dan kecenderungan ke arah pesimisme ketika dunia terasa terlalu berat. Ciptakan keindahan dengan sengaja. Itu adalah bentuk perawatan diri yang paling kuat.' },
+
+      'Wood Monkey':  { en: 'The Wood Monkey is inventive, sociable, and more collaborative than its sign usually allows. Wood adds an idealism and warmth to the Monkey\'s natural cleverness — you use your intelligence to lift rather than outmaneuver, and you genuinely enjoy building things with people rather than just impressing them. Creative and curious, you are drawn to ideas at the edge of what\'s known. The shadow is that Wood Monkey energy can scatter: too many projects, too many fascinations, not enough follow-through. You are more powerful when you go deep into fewer things.', id: 'Monyet Kayu inventif, mudah bergaul, dan lebih kolaboratif dari yang biasanya diizinkan tandanya. Kayu menambahkan idealisme dan kehangatan pada kecerdasan alami Monyet. Kamu kreatif dan penasaran, tertarik pada ide-ide di tepi apa yang diketahui. Sisi bayangnya adalah energi Monyet Kayu bisa menyebar: terlalu banyak proyek, terlalu banyak ketertarikan, tidak cukup tindak lanjut.' },
+      'Fire Monkey':  { en: 'The Fire Monkey is dazzling — quick, creative, audacious, and impossible to ignore. Fire amplifies the Monkey\'s natural wit and energy into something larger than life. You thrive in fast-moving environments, love the spotlight, and have a talent for seeing opportunities that others miss and acting on them before the window closes. The shadow is that Fire Monkey energy can tip into manipulation and a restless need for stimulation that makes depth and consistency difficult. The most impressive version of you is the one that can also be still.', id: 'Monyet Api memukau — cepat, kreatif, berani, dan tidak mungkin diabaikan. Api memperkuat kecerdasan alami Monyet menjadi sesuatu yang lebih besar dari kehidupan. Kamu berkembang di lingkungan yang bergerak cepat. Sisi bayangnya adalah energi Monyet Api bisa berubah menjadi manipulasi dan kebutuhan gelisah akan stimulasi yang membuat kedalaman dan konsistensi menjadi sulit.' },
+      'Earth Monkey': { en: 'The Earth Monkey is the most reliable and practical of its kind — still witty and perceptive, but with a groundedness that makes you someone others can actually count on. Earth tempers the Monkey\'s restlessness into a more focused and productive energy. You are clever in ways that build things rather than just demonstrate themselves, and people trust you in ways they might not trust a more mercurial Monkey. The shadow is that Earth can make you risk-averse in a sign that needs movement and novelty. Stay curious. It keeps you alive.', id: 'Monyet Tanah adalah yang paling dapat diandalkan dan praktis dari jenisnya — masih cerdas dan perseptif, tetapi dengan kebumian yang membuat kamu seseorang yang orang lain benar-benar bisa andalkan. Tanah meredam kegelisahan Monyet menjadi energi yang lebih terfokus dan produktif. Sisi bayangnya adalah Tanah bisa membuatmu menghindari risiko.' },
+      'Metal Monkey': { en: 'The Metal Monkey is the most driven and strategically minded of its sign — combining the Monkey\'s natural intelligence with Metal\'s discipline and ambition into a combination that is genuinely formidable. You think several moves ahead, pursue your goals with focus, and have a capacity for hard work that surprises people who only see your playful surface. The shadow is that Metal sharpens the Monkey\'s competitive nature into something that can become ruthless. Your intelligence is extraordinary; your integrity is what makes it matter.', id: 'Monyet Logam adalah yang paling bersemangat dan strategis dari tandanya — menggabungkan kecerdasan alami Monyet dengan disiplin dan ambisi Logam menjadi kombinasi yang benar-benar tangguh. Kamu berpikir beberapa langkah ke depan. Sisi bayangnya adalah Logam mengasah sifat kompetitif Monyet menjadi sesuatu yang bisa menjadi kejam. Kecerdasanmu luar biasa; integritasmu adalah apa yang membuatnya bermakna.' },
+      'Water Monkey': { en: 'The Water Monkey is the most intuitive and emotionally aware of its sign — still clever and adaptable, but with a depth of feeling and social perception that goes well beyond the sign\'s usual surface-level charm. You read people and situations with remarkable accuracy and move through complex environments with ease. Water makes you more willing to listen than most Monkeys, which is itself a kind of superpower. The shadow is moodiness and a tendency to use your emotional intelligence manipulatively when you feel threatened. Your perception is a gift worth using with care.', id: 'Monyet Air adalah yang paling intuitif dan sadar secara emosional dari tandanya — masih cerdas dan mudah beradaptasi, tetapi dengan kedalaman perasaan dan persepsi sosial yang jauh melampaui pesona permukaan tanda yang biasa. Kamu membaca orang dan situasi dengan akurasi yang luar biasa. Sisi bayangnya adalah moodiness dan kecenderungan menggunakan kecerdasan emosionalmu secara manipulatif ketika kamu merasa terancam.' },
+
+      'Wood Rooster': { en: 'The Wood Rooster is the warmest and most cooperative of its sign — still observant, precise, and confident, but with a generosity and openness that makes you genuinely pleasant to work and live with. Wood softens the Rooster\'s tendency toward criticism into something more constructive: you notice what could be better and you actually help make it so. The shadow is overcommitment and a tendency to take on too many responsibilities, then feeling frustrated when others don\'t meet the same standards. You cannot do it all, even though you nearly can.', id: 'Ayam Jantan Kayu adalah yang paling hangat dan paling kooperatif dari tandanya — masih observatif, presisi, dan percaya diri, tetapi dengan kemurahan hati dan keterbukaan. Kayu melembutkan kecenderungan Ayam Jantan ke arah kritik menjadi sesuatu yang lebih konstruktif. Sisi bayangnya adalah terlalu berkomitmen dan merasa frustrasi ketika orang lain tidak memenuhi standar yang sama.' },
+      'Fire Rooster': { en: 'The Fire Rooster is the boldest and most outwardly dynamic of its sign — confident, expressive, and willing to say what others only think. Fire amplifies the Rooster\'s natural self-assurance into a charisma that can command rooms and inspire movements. You have strong opinions and you\'re not afraid of opposition. The shadow is that Fire Rooster energy can tip into arrogance and a need to always be right that strains relationships. Your directness is one of your greatest assets. The art is delivering it with enough warmth that people can actually receive it.', id: 'Ayam Jantan Api adalah yang paling berani dan paling dinamis dari tandanya — percaya diri, ekspresif, dan bersedia mengatakan apa yang hanya dipikirkan orang lain. Api memperkuat kepercayaan diri alami Ayam Jantan menjadi karisma yang bisa memerintah ruangan. Sisi bayangnya adalah energi Ayam Jantan Api bisa berubah menjadi kesombongan dan kebutuhan untuk selalu benar.' },
+      'Earth Rooster': { en: 'The Earth Rooster is the most grounded and methodical of its sign — precise, responsible, and deeply committed to doing things correctly. You bring order to chaos with an almost effortless efficiency, and you take your responsibilities seriously in a way that earns genuine respect. Earth steadies the Rooster\'s perfectionism into something productive rather than punishing. The shadow is a conservatism that can resist necessary change and a tendency to measure everything, including relationships, against exacting standards. Some things deserve to be felt rather than assessed.', id: 'Ayam Jantan Tanah adalah yang paling membumi dan metodis dari tandanya — presisi, bertanggung jawab, dan sangat berkomitmen untuk melakukan hal-hal dengan benar. Kamu membawa ketertiban pada kekacauan dengan efisiensi yang hampir mudah. Sisi bayangnya adalah konservatisme yang bisa menolak perubahan yang diperlukan dan kecenderungan untuk mengukur segalanya, termasuk hubungan, terhadap standar yang tepat.' },
+      'Metal Rooster': { en: 'The Metal Rooster is the most exacting and driven of its kind — disciplined, principled, and operating with a precision that makes you exceptional at almost anything you commit to. You have an eye for detail that borders on the surgical, and you hold yourself to standards that most people wouldn\'t dare set. The shadow is that Metal amplifies the Rooster\'s critical nature to a point that can become harsh and unforgiving — toward yourself above all, but also toward others. Your standards are a feature. Make sure they serve you rather than imprison you.', id: 'Ayam Jantan Logam adalah yang paling tepat dan bersemangat dari jenisnya — disiplin, berprinsip, dan beroperasi dengan presisi yang membuat kamu luar biasa di hampir semua yang kamu komitmenkan. Sisi bayangnya adalah Logam memperkuat sifat kritis Ayam Jantan ke titik yang bisa menjadi keras dan tidak memaafkan — terutama terhadap dirimu sendiri.' },
+      'Water Rooster': { en: 'The Water Rooster is the most perceptive and emotionally intelligent of its sign — still precise and observant, but with a sensitivity and diplomatic grace that makes you far easier to be around than the Rooster name might suggest. Water gives you the ability to read a room accurately and respond to what\'s actually needed rather than what you expected. The shadow is indecision: Water can blur the Rooster\'s characteristic clarity into something more hesitant, and your tendency to see all sides can make it hard to commit to one. Clarity is your foundation. Return to it.', id: 'Ayam Jantan Air adalah yang paling perseptif dan cerdas secara emosional dari tandanya — masih presisi dan observatif, tetapi dengan kepekaan dan keanggunan diplomatis. Air memberimu kemampuan untuk membaca ruangan dengan akurat. Sisi bayangnya adalah keragu-raguan: Air bisa mengaburkan kejelasan khas Ayam Jantan menjadi sesuatu yang lebih ragu-ragu.' },
+
+      'Wood Dog':     { en: 'The Wood Dog is loyal, idealistic, and genuinely good-hearted — a natural protector of people and causes that deserve protecting. Wood expands the Dog\'s already substantial sense of justice into something actively generous: you don\'t just stand for what\'s right, you try to build it. Cooperative and warm, you bring out the best in people and create environments where honesty feels safe. The shadow is overextension and a difficulty letting go of causes or relationships that have run their course. Not everything you protect needs to be kept. Some things need to be released.', id: 'Anjing Kayu setia, idealis, dan benar-benar berjiwa baik — pelindung alami orang dan tujuan yang layak dilindungi. Kayu memperluas rasa keadilan Anjing yang sudah substansial menjadi sesuatu yang secara aktif murah hati. Sisi bayangnya adalah terlalu berkomitmen dan kesulitan melepaskan hubungan yang telah berjalan habis.' },
+      'Fire Dog':     { en: 'The Fire Dog is passionate, courageous, and more outwardly charismatic than most Dogs allow themselves to be. Fire gives you the confidence to act on your convictions rather than just hold them — you lead, you speak up, and you inspire others through the clarity of what you believe. The shadow is that Fire Dog energy can turn loyalty into intensity and protectiveness into possessiveness. You feel things fully and you act on what you feel, which is both your power and your risk. Channel your passion through your principles, not around them.', id: 'Anjing Api penuh semangat, berani, dan lebih karismatik secara lahiriah dari yang kebanyakan Anjing izinkan pada diri mereka sendiri. Api memberimu kepercayaan diri untuk bertindak atas keyakinanmu. Sisi bayangnya adalah energi Anjing Api bisa mengubah kesetiaan menjadi intensitas dan sifat protektif menjadi posesif.' },
+      'Earth Dog':    { en: 'The Earth Dog is the truest and most dependable expression of its sign — loyal, honest, and steady in a way that makes you the person everyone unconsciously turns to when things go wrong. You carry a quiet moral authority that comes not from declaration but from the consistent, daily choices you make. Earth grounds the Dog\'s emotional sensitivity into something reliable and enduring. The shadow is anxiety: Earth Dogs can carry the weight of what could go wrong long before it does, wearing themselves down with a vigilance that the situation rarely requires. Not every risk is a threat.', id: 'Anjing Tanah adalah ekspresi paling sejati dan paling dapat diandalkan dari tandanya — setia, jujur, dan stabil dengan cara yang membuat kamu orang yang semua orang secara tidak sadar berpaling ketika ada yang salah. Tanah membumikan kepekaan emosional Anjing menjadi sesuatu yang dapat diandalkan. Sisi bayangnya adalah kecemasan: Anjing Tanah dapat membawa berat apa yang bisa salah jauh sebelum itu terjadi.' },
+      'Metal Dog':    { en: 'The Metal Dog is the most principled and uncompromising of its kind — loyal to the point of fierce, honest to the point of blunt, and possessed of a moral clarity that makes you both admired and occasionally difficult to live with. You hold your values like load-bearing walls: you can negotiate many things, but not those. Metal sharpens the Dog\'s justice into something that can feel like judgment. The shadow is rigidity and a tendency to see the world in terms of who has earned your trust and who has not. Most people fall somewhere in the middle.', id: 'Anjing Logam adalah yang paling berprinsip dan tidak berkompromi dari jenisnya — setia sampai ganas, jujur sampai blunt, dan memiliki kejelasan moral yang membuatmu dikagumi dan terkadang sulit untuk hidup bersama. Metal mengasah keadilan Anjing menjadi sesuatu yang bisa terasa seperti penilaian.' },
+      'Water Dog':    { en: 'The Water Dog is the most emotionally perceptive and flexible of its sign — loyal and principled like all Dogs, but with an openness and sensitivity that makes you more willing to understand than to judge. You read people\'s motivations accurately and respond with a compassion that is both genuine and wise. Water gives you the ability to adapt without losing your core — you can meet people where they are without forgetting who you are. The shadow is anxiety and a tendency to absorb others\' distress as your own. You cannot carry everyone. Choose deliberately.', id: 'Anjing Air adalah yang paling perseptif secara emosional dan fleksibel dari tandanya — setia dan berprinsip seperti semua Anjing, tetapi dengan keterbukaan dan kepekaan yang membuatmu lebih bersedia untuk memahami daripada menghakimi. Sisi bayangnya adalah kecemasan dan kecenderungan untuk menyerap kesedihan orang lain sebagai milikmu sendiri.' },
+
+      'Wood Pig':     { en: 'The Wood Pig is the most sociable and generously spirited of its sign — warm, trusting, and possessed of a genuine delight in other people that is rare and magnetic. Wood expands the Pig\'s natural warmth into something actively outward: you build communities, create gatherings, and make everyone around you feel welcome. Idealistic and kind, you believe in people and they tend to rise to meet your belief. The shadow is naivety and overextension: Wood Pigs give freely and assume the best, which makes them vulnerable to those who do not return the same care.', id: 'Babi Kayu adalah yang paling mudah bergaul dan berjiwa murah hati dari tandanya — hangat, percaya, dan memiliki kesenangan tulus dalam orang lain yang langka dan magnetis. Kayu memperluas kehangatan alami Babi menjadi sesuatu yang aktif keluar. Sisi bayangnya adalah naivitas dan terlalu berkomitmen: Babi Kayu memberi dengan bebas dan mengasumsikan yang terbaik, yang membuat mereka rentan.' },
+      'Fire Pig':     { en: 'The Fire Pig is the most passionate and courageous of its sign — warm-hearted and generous like all Pigs, but with a boldness and social energy that makes you hard to overlook. You pursue what you love with a wholehearted enthusiasm that is genuinely infectious, and you draw people into your orbit through sheer warmth. The shadow is that Fire amplifies the Pig\'s tendency toward indulgence: you can overcommit, overspend emotionally, and over-invest in situations that don\'t reciprocate. Your heart is your greatest asset. Protect it without closing it.', id: 'Babi Api adalah yang paling penuh semangat dan berani dari tandanya — hangat dan murah hati seperti semua Babi, tetapi dengan keberanian dan energi sosial yang membuatmu sulit diabaikan. Kamu mengejar apa yang kamu cintai dengan antusiasme yang tulus menular. Sisi bayangnya adalah Api memperkuat kecenderungan Babi ke arah kemewahan: kamu bisa terlalu berkomitmen secara emosional.' },
+      'Earth Pig':    { en: 'The Earth Pig is the most grounded and practically generous of its sign — kind, patient, and steady in a way that makes you a natural anchor for the people around you. Earth gives the Pig\'s warmth a structure: you don\'t just care for people emotionally, you show up in practical, tangible ways that make their lives better. The shadow is a difficulty with change and a tendency to over-rely on comfort and routine to manage life\'s uncertainties. Your security is real and earned. It does not need to become a boundary around everything new.', id: 'Babi Tanah adalah yang paling membumi dan murah hati secara praktis dari tandanya — baik, sabar, dan stabil dengan cara yang menjadikanmu jangkar alami bagi orang-orang di sekitarmu. Tanah memberi kehangatan Babi struktur. Sisi bayangnya adalah kesulitan dengan perubahan dan kecenderungan untuk terlalu mengandalkan kenyamanan dan rutinitas.' },
+      'Metal Pig':    { en: 'The Metal Pig carries a quiet strength beneath its warmth — sincere and generous at heart, but with a discipline and ambition that sets you apart from the sign\'s more easygoing expressions. Metal gives you the follow-through to actually deliver on your considerable kindness, and an inner standard that keeps you honest even when no one is watching. The shadow is stubbornness: Metal Pigs can hold positions long after they\'ve served their purpose, and can be surprisingly unforgiving when their trust is broken. Your integrity is everything. Hold it and extend it.', id: 'Babi Logam membawa kekuatan tenang di balik kehangatan — tulus dan murah hati di hati, tetapi dengan disiplin dan ambisi yang membedakanmu dari ekspresi tanda yang lebih santai. Logam memberimu tindak lanjut untuk benar-benar memenuhi kebaikanmu yang cukup besar. Sisi bayangnya adalah kekerasan kepala: Babi Logam bisa mempertahankan posisi jauh setelah tujuannya terpenuhi.' },
+      'Water Pig':    { en: 'The Water Pig is the deepest and most emotionally intuitive of its sign — kind and generous like all Pigs, but with a perceptiveness and sensitivity that makes your compassion feel genuinely wise rather than merely nice. You read people with accuracy and respond to what they actually need, not what they say they need. Water deepens the Pig\'s natural empathy into something almost profound. The shadow is passivity and a tendency to absorb others\' emotions so completely that you lose track of your own. You are allowed to want things. You are allowed to ask for them.', id: 'Babi Air adalah yang paling dalam dan paling intuitif secara emosional dari tandanya — baik dan murah hati seperti semua Babi, tetapi dengan ketajaman dan kepekaan yang membuat belas kasihmu terasa benar-benar bijaksana. Air memperdalam empati alami Babi menjadi sesuatu yang hampir mendalam. Sisi bayangnya adalah pasivitas dan kecenderungan untuk menyerap emosi orang lain begitu sepenuhnya sehingga kamu kehilangan jejak milikmu sendiri.' }
+    };
+
+    // ── ZODIAC CALCULATION ──
+    function mod(n, m) {
+      return ((n % m) + m) % m;
+    }
+
+    function getZodiacAnimal(year) {
+      var idx = mod(year - 2020, 12);
+      return ZODIAC_ANIMAL_KEYS[idx];
+    }
+
+    function getZodiacElement(year) {
+      var stemIdx = mod(year - 1984, 10);
+      var elementIdx = Math.floor(stemIdx / 2);
+      return ZODIAC_ELEMENT_KEYS[elementIdx];
+    }
+
+    function getZodiacProfile(year) {
+      var animal   = getZodiacAnimal(year);
+      var element  = getZodiacElement(year);
+      var key      = element + ' ' + animal;
+      var reading  = ZODIAC_READINGS[key] || null;
+      return { animal: animal, element: element, key: key, reading: reading };
+    }
+
+    // ── ZODIAC RENDER ──
+    var zodiacSection  = document.getElementById('zodiacSection');
+    var readingTabs    = document.getElementById('readingTabs');
+    var panelLifePath  = document.getElementById('panelLifePath');
+    var panelZodiac    = document.getElementById('panelZodiac');
+    var panelCombined  = document.getElementById('panelCombined');
+    var tabLifePath    = document.getElementById('tabLifePath');
+    var tabZodiacBtn   = document.getElementById('tabZodiac');
+    var tabCombinedBtn = document.getElementById('tabCombined');
+
+    var synthesisLoaded = false;
+
+    // ── TAB SWITCHER ──
+    // To add a new system (e.g. Western Zodiac):
+    // 1. Add a new tab-btn and tab-panel in HTML
+    // 2. Add a case here
+    function switchTab(name) {
+      panelLifePath.style.display  = 'none';
+      panelZodiac.style.display    = 'none';
+      panelCombined.style.display  = 'none';
+      tabLifePath.classList.remove('active');
+      tabZodiacBtn.classList.remove('active');
+      tabCombinedBtn.classList.remove('active');
+
+      if (name === 'lifepath') {
+        panelLifePath.style.display = '';
+        tabLifePath.classList.add('active');
+      } else if (name === 'zodiac') {
+        panelZodiac.style.display = '';
+        tabZodiacBtn.classList.add('active');
+      } else if (name === 'combined') {
+        panelCombined.style.display = '';
+        tabCombinedBtn.classList.add('active');
+        if (!synthesisLoaded) {
+          fetchSynthesis();
+        }
+      }
+    }
+
+    // ── SYNTHESIS FETCH ──
+    function fetchSynthesis() {
+      if (!state.number || !state.birthDate) return;
+
+      var yr = parseInt(state.birthDate.split('-')[0], 10);
+      var zp = getZodiacProfile(yr);
+
+      // Populate badge
+      document.getElementById('synthesisSectionLabel').textContent = S.synthesisTitle;
+      document.getElementById('synthesisSubtitleEl').textContent   = S.synthesisSubtitle;
+
+      var isID = lang === 'id';
+      var animalDisplay  = isID ? (ZODIAC_ANIMAL_NAMES_ID[zp.animal] || zp.animal) : zp.animal;
+      var elementDisplay = isID ? (ZODIAC_ELEMENT_NAMES_ID[zp.element] || zp.element) : zp.element;
+      var combinedDisplay = elementDisplay + ' ' + animalDisplay;
+      var archetypeDisplay = ARCHETYPES[state.number];
+
+      var badge = document.getElementById('synthesisBadge');
+      badge.innerHTML = '';
+      var iconEl = document.createElement('div');
+      iconEl.className = 'synthesis-badge-icon';
+      iconEl.textContent = ZODIAC_GLYPHS[zp.animal] || '';
+      var textEl = document.createElement('div');
+      textEl.className = 'synthesis-badge-text';
+      var titleEl = document.createElement('div');
+      titleEl.className = 'synthesis-badge-title';
+      titleEl.textContent = 'Life Path ' + state.number + '  ·  ' + combinedDisplay;
+      var subEl = document.createElement('div');
+      subEl.className = 'synthesis-badge-sub';
+      subEl.textContent = archetypeDisplay;
+      textEl.appendChild(titleEl);
+      textEl.appendChild(subEl);
+      badge.appendChild(iconEl);
+      badge.appendChild(textEl);
+
+      // Show skeleton loading
+      var body = document.getElementById('synthesisBody');
+      body.innerHTML = '';
+      var skel = document.createElement('div');
+      skel.className = 'synthesis-loading';
+      for (var i = 0; i < 4; i++) {
+        var line = document.createElement('div');
+        line.className = 'skeleton-line';
+        skel.appendChild(line);
+      }
+      body.appendChild(skel);
+
+      fetch(API_BASE + '/api/synthesis', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          lifepath:   state.number,
+          zodiac_key: zp.key,
+          lang:       lang
+        })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        body.innerHTML = '';
+        var p = document.createElement('p');
+        p.textContent = data.text;
+        body.appendChild(p);
+        if (data.fallback) {
+          var tag = document.createElement('div');
+          tag.className = 'fallback-tag';
+          tag.textContent = S.fallbackTag;
+          body.appendChild(tag);
+        }
+        synthesisLoaded = true;
+      })
+      .catch(function() {
+        body.innerHTML = '';
+        var p = document.createElement('p');
+        p.textContent = isID
+          ? 'Gagal memuat potret gabungan. Coba lagi.'
+          : 'Could not load combined portrait. Please try again.';
+        body.appendChild(p);
+      });
+    }
+
+    function renderZodiacSection(year) {
+      var yr = parseInt(year, 10);
+      if (!yr || yr < 1900 || yr > 2100) { resetZodiacSection(); return; }
+
+      var profile  = getZodiacProfile(yr);
+      var isID     = lang === 'id';
+
+      var animalDisplay  = isID ? (ZODIAC_ANIMAL_NAMES_ID[profile.animal] || profile.animal) : profile.animal;
+      var elementDisplay = isID ? (ZODIAC_ELEMENT_NAMES_ID[profile.element] || profile.element) : profile.element;
+      var combinedDisplay = elementDisplay + ' ' + animalDisplay;
+      var glyph = ZODIAC_GLYPHS[profile.animal] || '';
+
+      document.getElementById('zodiacSectionLabel').textContent = S.zodiacTitle;
+      document.getElementById('zodiacSubtitleEl').textContent   = S.zodiacSubtitle;
+      document.getElementById('zodiacGlyph').textContent        = glyph;
+      document.getElementById('zodiacCombinedSign').textContent = combinedDisplay;
+      document.getElementById('zodiacMetaRow').textContent      =
+        S.zodiacAnimalLabel + ': ' + animalDisplay + '  ·  ' +
+        S.zodiacElementLabel + ': ' + elementDisplay + '  ·  ' + yr;
+      document.getElementById('zodiacDisclaimer').textContent   = S.zodiacDisclaimer;
+
+      var readingEl = document.getElementById('zodiacReading');
+      if (profile.reading) {
+        readingEl.textContent = isID ? profile.reading.id : profile.reading.en;
+      } else {
+        readingEl.textContent = isID
+          ? 'Pembacaan untuk ' + combinedDisplay + ' sedang disiapkan.'
+          : 'Reading for ' + combinedDisplay + ' coming soon.';
+      }
+
+      // Show tabs, default to life path tab
+      synthesisLoaded = false;
+      readingTabs.classList.add('visible');
+      switchTab('lifepath');
+    }
+
+    function resetZodiacSection() {
+      synthesisLoaded = false;
+      document.getElementById('synthesisBody').innerHTML = '';
+      document.getElementById('synthesisBadge').innerHTML = '';
+      readingTabs.classList.remove('visible');
+      switchTab('lifepath');
+    }
+
+    // ── STATE ──
+    var state = {
+      number: null,
+      archetype: null,
+      birthDate: null,
+      readings: {},
+      readingsLoaded: 0,
+      profiles: [],
+      currentProfileId: null
+    };
+
+    // ── ELEMENT REFS ──
+    var selDay        = document.getElementById('selDay');
+    var selMonth      = document.getElementById('selMonth');
+    var selYear       = document.getElementById('selYear');
+    var inputError    = document.getElementById('inputError');
+    var revealBtn     = document.getElementById('revealBtn');
+    var numberSection = document.getElementById('numberSection');
+    var numberRing    = document.getElementById('numberRing');
+    var numberRingInner = document.getElementById('numberRingInner');
+    var numberTicks   = document.getElementById('numberTicks');
+    var numberDigit   = document.getElementById('numberDigit');
+    var numberArchetype = document.getElementById('numberArchetype');
+    var numberDateLabel = document.getElementById('numberDateLabel');
+    var stepsToggle   = document.getElementById('stepsToggle');
+    var stepsBlock    = document.getElementById('stepsBlock');
+    var readingsSection = document.getElementById('readingsSection');
+    var actionRow     = document.getElementById('actionRow');
+    var btnSave       = document.getElementById('btnSave');
+    var btnShare      = document.getElementById('btnShare');
+    var btnCompat     = document.getElementById('btnCompat');
+    var shareConfirm  = document.getElementById('shareConfirm');
+    var savePanel     = document.getElementById('savePanel');
+    var saveLabel     = document.getElementById('saveLabel');
+    var saveConfirmBtn  = document.getElementById('saveConfirmBtn');
+    var saveLimitNote   = document.getElementById('saveLimitNote');
+    var dailySection    = document.getElementById('dailySection');
+    var dailyDateLabel  = document.getElementById('dailyDateLabel');
+    var dailyText       = document.getElementById('dailyText');
+    var telegramCta     = document.getElementById('telegramCta');
+    var compatSection   = document.getElementById('compatSection');
+    var cSelDay     = document.getElementById('cSelDay');
+    var cSelMonth   = document.getElementById('cSelMonth');
+    var cSelYear    = document.getElementById('cSelYear');
+    var compatSubmitBtn = document.getElementById('compatSubmitBtn');
+    var compatError     = document.getElementById('compatError');
+    var compatResult    = document.getElementById('compatResult');
+    var compatScoreNum  = document.getElementById('compatScoreNum');
+    var compatBarFill   = document.getElementById('compatBarFill');
+    var compatText      = document.getElementById('compatText');
+    var profilesStrip   = document.getElementById('profilesStrip');
+    var toastEl         = document.getElementById('toast');
+    var appSection      = document.getElementById('appSection');
+
+    // ── INIT ──
+    function init() {
+      // Apply language to document
+      document.documentElement.lang = lang;
+
+      // Translate static DOM strings
+      document.getElementById('heroCta').textContent = S.heroCta;
+      document.getElementById('heroAiLine').textContent = S.heroAiLine;
+      document.getElementById('aiBannerText').textContent = S.aiBannerText;
+      document.getElementById('heroScrollText').textContent = S.heroScroll;
+      document.getElementById('howEyebrow').textContent = S.howEyebrow;
+      document.getElementById('howStep1Title').textContent = S.howStep1Title;
+      document.getElementById('howStep1Desc').textContent = S.howStep1Desc;
+      document.getElementById('howStep2Title').textContent = S.howStep2Title;
+      document.getElementById('howStep2Desc').textContent = S.howStep2Desc;
+      document.getElementById('howStep3Title').textContent = S.howStep3Title;
+      document.getElementById('howStep3Desc').textContent = S.howStep3Desc;
+      document.getElementById('heroHeadlineMain').textContent = S.heroHeadline;
+      document.getElementById('heroHeadlineEm').textContent = S.heroHeadlineEm;
+      document.getElementById('heroLore').textContent = S.heroLore;
+      var sigilSpan = document.getElementById('heroSigilMark').querySelector('span');
+      if (sigilSpan) sigilSpan.textContent = S.heroEyebrow;
+      document.getElementById('featEyebrow').textContent = S.featEyebrow;
+      document.getElementById('featHeadline').textContent = S.featHeadline;
+      document.getElementById('feat1Title').textContent = S.feat1Title;
+      document.getElementById('feat1Desc').textContent = S.feat1Desc;
+      document.getElementById('feat2Title').textContent = S.feat2Title;
+      document.getElementById('feat2Desc').textContent = S.feat2Desc;
+      document.getElementById('feat3Title').textContent = S.feat3Title;
+      document.getElementById('feat3Desc').textContent = S.feat3Desc;
+      document.getElementById('feat4Title').textContent = S.feat4Title;
+      document.getElementById('feat4Desc').textContent = S.feat4Desc;
+      document.getElementById('feat5Title').textContent = S.feat5Title;
+      document.getElementById('feat5Desc').textContent = S.feat5Desc;
+      document.getElementById('feat6Title').textContent = S.feat6Title;
+      document.getElementById('feat6Desc').textContent = S.feat6Desc;
+      document.getElementById('landingCtaBtn').textContent = S.landingCta;
+      document.getElementById('appTitleEl').textContent = S.appTitle;
+      document.getElementById('appSubtitleEl').textContent = S.appSubtitle;
+      document.getElementById('inputLabelEl').textContent = S.inputLabel;
+      document.getElementById('dayLabelEl').textContent = S.dayLabel;
+      document.getElementById('monthLabelEl').textContent = S.monthLabel;
+      document.getElementById('yearLabelEl').textContent = S.yearLabel;
+      document.getElementById('revealBtn').textContent = S.revealBtn;
+      document.getElementById('numberEyebrowEl').textContent = S.numberEyebrow;
+      document.getElementById('stepsToggle').textContent = S.stepsShow;
+      document.getElementById('btnSave').textContent = S.btnSave;
+      document.getElementById('btnShare').textContent = S.btnShare;
+      document.getElementById('btnCompat').textContent = S.btnCompat;
+      document.getElementById('shareConfirm').innerHTML = '<span>&#10022;</span> ' + S.shareConfirm;
+      document.getElementById('savePanelLabelEl').textContent = S.savePanelLabel;
+      document.getElementById('saveLabel').placeholder = S.savePlaceholder;
+      document.getElementById('saveConfirmBtn').textContent = S.saveBtn;
+      document.getElementById('saveLimitNote').textContent = S.saveLimitNote;
+      document.getElementById('dailySectionLabel').textContent = S.dailyLabel;
+      document.getElementById('telegramCta').childNodes[1].textContent = ' ' + S.telegramCta;
+      document.getElementById('compatSectionLabel').textContent = S.compatLabel;
+      document.getElementById('compatDateLabelEl').textContent = S.compatDateLabel;
+      document.getElementById('compatSubmitBtn').textContent = S.compatSubmitBtn;
+      document.getElementById('footerNoteEl').textContent = S.footerNote;      document.getElementById('footerNeulabLabel').textContent = S.footerNeulabLabel;
+      document.getElementById('footerNeulabTagline').textContent = S.footerNeulabTagline;
+      document.getElementById('footerMoreLink').textContent = S.footerMoreLink;
+      document.getElementById('tabLifePathLabel').textContent  = S.tabLifePath;
+      document.getElementById('tabZodiacLabel').textContent    = S.tabZodiac;
+      document.getElementById('tabCombinedLabel').textContent  = S.tabCombined;
+      document.getElementById('topBannerText').textContent = S.topBannerText;
+      document.getElementById('topBannerLink').textContent = S.topBannerLink;
+
+      // Populate month selects with translated month names
+      var monthSelects = [document.getElementById('selMonth'), document.getElementById('cSelMonth')];
+      for (var ms = 0; ms < monthSelects.length; ms++) {
+        var sel = monthSelects[ms];
+        while (sel.options.length > 1) sel.remove(1);
+        for (var mi = 0; mi < S.months.length; mi++) {
+          var opt = document.createElement('option');
+          opt.value = mi + 1;
+          opt.textContent = S.months[mi];
+          sel.appendChild(opt);
+        }
+      }
+
+      populateDays(selDay, 31);
+      populateYears(selYear);
+      populateDays(cSelDay, 31);
+      populateYears(cSelYear);
+      loadProfiles();
+      renderProfilesStrip();
+
+      selDay.addEventListener('change', onDateChange);
+      selMonth.addEventListener('change', onMonthChange);
+      selYear.addEventListener('change', onDateChange);
+
+      cSelDay.addEventListener('change', onCompatDateChange);
+      cSelMonth.addEventListener('change', onCompatMonthChange);
+      cSelYear.addEventListener('change', onCompatDateChange);
+
+      revealBtn.addEventListener('click', onReveal);
+      stepsToggle.addEventListener('click', onStepsToggle);
+
+      btnSave.addEventListener('click', onSaveClick);
+      btnShare.addEventListener('click', onShare);
+      btnCompat.addEventListener('click', onCompatToggle);
+      saveConfirmBtn.addEventListener('click', onSaveConfirm);
+      compatSubmitBtn.addEventListener('click', onCompatSubmit);
+
+      document.getElementById('heroCta').addEventListener('click', function() {
+        appSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      document.getElementById('landingCtaBtn').addEventListener('click', function() {
+        appSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    // ── POPULATE DROPDOWNS ──
+    function populateDays(sel, max) {
+      while (sel.options.length > 1) sel.remove(1);
+      for (var i = 1; i <= max; i++) {
+        var opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = i < 10 ? '0' + i : '' + i;
+        sel.appendChild(opt);
+      }
+    }
+
+    function populateYears(sel) {
+      var now = new Date().getFullYear();
+      for (var y = now; y >= 1900; y--) {
+        var opt = document.createElement('option');
+        opt.value = y;
+        opt.textContent = y;
+        sel.appendChild(opt);
+      }
+    }
+
+    function isLeapYear(y) {
+      return (y % 4 === 0 && y % 100 !== 0) || (y % 400 === 0);
+    }
+
+    function maxDaysInMonth(month, year) {
+      if (!month) return 31;
+      var m = parseInt(month, 10);
+      if (m === 2) return (year && isLeapYear(parseInt(year, 10))) ? 29 : 28;
+      return MONTHS_DAYS[m - 1];
+    }
+
+    function constrainDays(daySel, monthSel, yearSel) {
+      var currentDay = daySel.value;
+      var max = maxDaysInMonth(monthSel.value, yearSel.value);
+      populateDays(daySel, max);
+      if (currentDay && parseInt(currentDay, 10) <= max) {
+        daySel.value = currentDay;
+      }
+    }
+
+    function onMonthChange() {
+      constrainDays(selDay, selMonth, selYear);
+      onDateChange();
+    }
+
+    function onCompatMonthChange() {
+      constrainDays(cSelDay, cSelMonth, cSelYear);
+      onCompatDateChange();
+    }
+
+    function onDateChange() {
+      var filled = selDay.value && selMonth.value && selYear.value;
+      revealBtn.disabled = !filled;
+      if (selDay.value) selDay.classList.add('has-value'); else selDay.classList.remove('has-value');
+      if (selMonth.value) selMonth.classList.add('has-value'); else selMonth.classList.remove('has-value');
+      if (selYear.value) selYear.classList.add('has-value'); else selYear.classList.remove('has-value');
+      hideError(inputError);
+    }
+
+    function onCompatDateChange() {
+      var filled = cSelDay.value && cSelMonth.value && cSelYear.value;
+      compatSubmitBtn.disabled = !filled;
+      if (cSelDay.value) cSelDay.classList.add('has-value'); else cSelDay.classList.remove('has-value');
+      if (cSelMonth.value) cSelMonth.classList.add('has-value'); else cSelMonth.classList.remove('has-value');
+      if (cSelYear.value) cSelYear.classList.add('has-value'); else cSelYear.classList.remove('has-value');
+    }
+
+    // ── VALIDATION ──
+    function buildISODate(day, month, year) {
+      var mm = month < 10 ? '0' + month : '' + month;
+      var dd = day < 10 ? '0' + day : '' + day;
+      return year + '-' + mm + '-' + dd;
+    }
+
+    function validateDate(day, month, year, errorEl) {
+      if (!day || !month || !year) {
+        showError(errorEl, S.errComplete);
+        return false;
+      }
+      var d = parseInt(day, 10);
+      var m = parseInt(month, 10);
+      var y = parseInt(year, 10);
+      var max = maxDaysInMonth(m, y);
+      if (d > max) {
+        showError(errorEl, S.errNoExist);
+        return false;
+      }
+      var today = new Date();
+      var entered = new Date(y, m - 1, d);
+      if (entered > today) {
+        showError(errorEl, S.errFuture);
+        return false;
+      }
+      return true;
+    }
+
+    function showError(el, msg) { el.textContent = msg; el.classList.add('visible'); }
+    function hideError(el) { el.classList.remove('visible'); }
+
+    // ── RITUAL OVERLAY ──
+    var ritualOverlay = document.getElementById('ritualOverlay');
+    var ritualPhase   = document.getElementById('ritualPhase');
+    var ritualNumber  = document.getElementById('ritualNumber');
+
+    function showRitual(number, onComplete) {
+      var phases = lang === 'id'
+        ? ['Membaca tanggal lahir...', 'Menelusuri pola kuno...', 'Menghitung jalur hidup...', 'Angkamu terungkap']
+        : ['Reading the birth date...', 'Tracing the ancient pattern...', 'Calculating the life path...', 'Your number is revealed'];
+
+      ritualPhase.textContent = '';
+      ritualPhase.classList.remove('visible');
+      ritualNumber.textContent = '';
+      ritualNumber.style.animation = 'none';
+      ritualOverlay.classList.remove('fade-out');
+      ritualOverlay.classList.add('active');
+
+      // Phase 1 — 0.2s
+      setTimeout(function() {
+        ritualPhase.textContent = phases[0];
+        ritualPhase.classList.add('visible');
+      }, 200);
+
+      // Phase 2 — 1.5s
+      setTimeout(function() {
+        ritualPhase.classList.remove('visible');
+        setTimeout(function() {
+          ritualPhase.textContent = '';
+          ritualPhase.textContent = phases[1];
+          ritualPhase.classList.add('visible');
+        }, 600);
+      }, 1500);
+
+      // Phase 3 — 2.8s
+      setTimeout(function() {
+        ritualPhase.classList.remove('visible');
+        setTimeout(function() {
+          ritualPhase.textContent = '';
+          ritualPhase.textContent = phases[2];
+          ritualPhase.classList.add('visible');
+        }, 600);
+      }, 2800);
+
+      // Phase 4 + number flash — 4.1s
+      setTimeout(function() {
+        ritualPhase.classList.remove('visible');
+        setTimeout(function() {
+          ritualPhase.textContent = '';
+          ritualPhase.textContent = phases[3];
+          ritualPhase.classList.add('visible');
+          ritualNumber.textContent = number;
+          ritualNumber.style.animation = '';
+          void ritualNumber.offsetWidth;
+          ritualNumber.style.animation = 'ritual-number-appear 0.6s ease forwards';
+        }, 600);
+      }, 4100);
+
+      // Fade out and complete — 5.4s
+      setTimeout(function() {
+        ritualOverlay.classList.add('fade-out');
+        setTimeout(function() {
+          ritualOverlay.classList.remove('active');
+          ritualOverlay.classList.remove('fade-out');
+          onComplete();
+        }, 600);
+      }, 5400);
+    }
+
+    // ── REVEAL ──
+    function onReveal() {
+      var day   = parseInt(selDay.value, 10);
+      var month = parseInt(selMonth.value, 10);
+      var year  = parseInt(selYear.value, 10);
+
+      if (!validateDate(day, month, year, inputError)) return;
+
+      var isoDate = buildISODate(day, month, year);
+      revealBtn.disabled = true;
+      revealBtn.classList.add('loading');
+      revealBtn.textContent = S.revealLoading;
+
+      fetch(API_BASE + '/api/calculate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ birth_date: isoDate })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (data.error) {
+          showError(inputError, S.errGeneral);
+          revealBtn.disabled = false;
+          revealBtn.classList.remove('loading');
+          revealBtn.textContent = S.revealBtn;
+          return;
+        }
+
+        // API response ready — now play ritual THEN show result
+        showRitual(data.number, function() {
+          state.number    = data.number;
+          state.archetype = data.archetype || ARCHETYPES[data.number];
+          state.birthDate = isoDate;
+          state.readings  = {};
+          state.readingsLoaded = 0;
+
+          revealBtn.classList.remove('loading');
+          revealBtn.textContent = S.revealBtn;
+
+          renderNumberSection(data);
+          renderReadingsSection();
+          renderZodiacSection(year);
+          fetchDailyInsight();
+          setupTelegramLink();
+
+          dailySection.classList.add('visible');
+          compatSection.classList.remove('visible');
+          savePanel.classList.remove('visible');
+          shareConfirm.classList.remove('visible');
+
+          numberSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      })
+      .catch(function() {
+        showError(inputError, S.errConn);
+        revealBtn.disabled = false;
+        revealBtn.classList.remove('loading');
+        revealBtn.textContent = S.revealBtn;
+      });
+    }
+
+    // ── NUMBER SECTION ──
+    function renderNumberSection(data) {
+      numberDigit.textContent = data.number;
+      numberArchetype.textContent = data.archetype || ARCHETYPES[data.number];
+
+      var parts = data.birth_date.split('-');
+      numberDateLabel.textContent = parseInt(parts[2], 10) + ' ' +
+        S.months[parseInt(parts[1], 10) - 1] + ' ' + parts[0];
+
+      renderSteps(data.steps);
+      numberSection.classList.add('visible');
+
+      numberRing.classList.remove('revealed');
+      numberRingInner.classList.remove('revealed');
+      numberTicks.classList.remove('revealed');
+      numberDigit.classList.remove('revealed');
+
+      setTimeout(function() {
+        numberRing.classList.add('revealed');
+        numberDigit.classList.add('revealed');
+        numberRingInner.classList.add('revealed');
+        numberTicks.classList.add('revealed');
+      }, 80);
+    }
+
+    function renderSteps(steps) {
+      stepsBlock.replaceChildren();
+      if (!steps || steps.length === 0) return;
+      for (var i = 0; i < steps.length; i++) {
+        var div = document.createElement('div');
+        div.className = i === steps.length - 1 ? 'step-line step-line-final' : 'step-line';
+        div.textContent = steps[i];
+        stepsBlock.appendChild(div);
+      }
+    }
+
+    function onStepsToggle() {
+      var open = stepsBlock.classList.toggle('open');
+      stepsToggle.textContent = open ? S.stepsHide : S.stepsShow;
+    }
+
+    // ── READINGS ──
+    function renderReadingsSection() {
+      readingsSection.replaceChildren();
+
+      var hr = document.createElement('hr');
+      hr.className = 'divider';
+      readingsSection.appendChild(hr);
+
+      for (var i = 0; i < READING_ORDER.length; i++) {
+        var type = READING_ORDER[i];
+        var panel = buildReadingPanel(type);
+        readingsSection.appendChild(panel);
+        fetchReading(type);
+      }
+
+      readingsSection.classList.add('visible');
+      actionRow.classList.remove('visible');
+    }
+
+    function buildReadingPanel(type) {
+      var panel = document.createElement('div');
+      panel.className = 'reading-panel';
+      panel.id = 'panel-' + type;
+
+      var dot = document.createElement('div');
+      dot.className = 'reading-panel-dot';
+
+      var label = document.createElement('div');
+      label.className = 'reading-panel-label';
+      label.textContent = READING_LABELS[type];
+
+      var textEl = document.createElement('div');
+      textEl.className = 'reading-panel-text';
+      textEl.id = 'reading-text-' + type;
+
+      var skel = document.createElement('div');
+      skel.className = 'reading-skeleton';
+      for (var i = 0; i < 3; i++) {
+        var line = document.createElement('div');
+        line.className = 'skeleton-line';
+        skel.appendChild(line);
+      }
+      textEl.appendChild(skel);
+
+      panel.appendChild(dot);
+      panel.appendChild(label);
+      panel.appendChild(textEl);
+      return panel;
+    }
+
+    function fetchReading(type) {
+      fetch(API_BASE + '/api/reading', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ number: state.number, type: type, lang: lang })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        populateReadingPanel(type, data.text, data.fallback);
+        state.readings[type] = data.text;
+        state.readingsLoaded++;
+        if (state.readingsLoaded === READING_ORDER.length) {
+          actionRow.classList.add('visible');
+        }
+      })
+      .catch(function() {
+        populateReadingPanel(type, getFallbackReading(type, state.number), true);
+        state.readings[type] = getFallbackReading(type, state.number);
+        state.readingsLoaded++;
+        if (state.readingsLoaded === READING_ORDER.length) {
+          actionRow.classList.add('visible');
+        }
+      });
+    }
+
+    function populateReadingPanel(type, text, isFallback) {
+      var textEl = document.getElementById('reading-text-' + type);
+      var panel  = document.getElementById('panel-' + type);
+      if (!textEl || !panel) return;
+
+      textEl.replaceChildren();
+      var p = document.createElement('p');
+      p.textContent = text;
+      textEl.appendChild(p);
+
+      if (isFallback) {
+        var tag = document.createElement('div');
+        tag.className = 'fallback-tag';
+        tag.textContent = S.fallbackTag;
+        textEl.appendChild(tag);
+      }
+
+      panel.classList.add('loaded');
+    }
+
+    // ── DAILY INSIGHT ──
+    function fetchDailyInsight() {
+      var today = getTodayISO();
+      var parts = today.split('-');
+      dailyDateLabel.textContent = 'Life Path ' + state.number + '  ·  ' +
+        S.months[parseInt(parts[1], 10) - 1] + ' ' + parseInt(parts[2], 10);
+
+      dailyText.replaceChildren();
+      var skel = document.createElement('div');
+      skel.className = 'reading-skeleton';
+      for (var i = 0; i < 3; i++) {
+        var line = document.createElement('div');
+        line.className = 'skeleton-line';
+        skel.appendChild(line);
+      }
+      dailyText.appendChild(skel);
+
+      fetch(API_BASE + '/api/daily/' + state.number + '?lang=' + lang)
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        dailyText.replaceChildren();
+        var p = document.createElement('p');
+        p.textContent = data.text;
+        dailyText.appendChild(p);
+        if (data.fallback) {
+          var tag = document.createElement('div');
+          tag.className = 'fallback-tag';
+          tag.textContent = S.fallbackTag;
+          dailyText.appendChild(tag);
+        }
+      })
+      .catch(function() {
+        dailyText.replaceChildren();
+        var p = document.createElement('p');
+        p.textContent = getFallbackDaily(state.number);
+        dailyText.appendChild(p);
+      });
+    }
+
+    function setupTelegramLink() {
+      telegramCta.href = 'https://t.me/' + TELEGRAM_BOT + '?start=' + state.birthDate;
+    }
+
+    function getTodayISO() {
+      var d = new Date();
+      var mm = d.getMonth() + 1;
+      var dd = d.getDate();
+      return d.getFullYear() + '-' +
+        (mm < 10 ? '0' + mm : mm) + '-' +
+        (dd < 10 ? '0' + dd : dd);
+    }
+
+    // ── SAVE ──
+    function onSaveClick() {
+      if (savePanel.classList.contains('visible')) {
+        savePanel.classList.remove('visible');
+        return;
+      }
+      saveLimitNote.classList.remove('visible');
+      savePanel.classList.add('visible');
+      saveLabel.focus();
+    }
+
+    function onSaveConfirm() {
+      var label = saveLabel.value.trim() || 'Me';
+      if (state.profiles.length >= MAX_PROFILES) {
+        saveLimitNote.classList.add('visible');
+        return;
+      }
+      var profile = {
+        id: crypto.randomUUID(),
+        label: label.substring(0, 20),
+        birth_date: state.birthDate,
+        number: state.number,
+        archetype: state.archetype,
+        created_at: new Date().toISOString()
+      };
+      state.profiles.push(profile);
+      state.currentProfileId = profile.id;
+      persistProfiles();
+      renderProfilesStrip();
+      savePanel.classList.remove('visible');
+      showToast(S.toastSaved + label);
+    }
+
+    // ── PROFILES ──
+    function loadProfiles() {
+      try {
+        var raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        var parsed = JSON.parse(raw);
+        if (parsed && parsed.version === 1 && Array.isArray(parsed.profiles)) {
+          state.profiles = parsed.profiles;
+        }
+      } catch (e) { state.profiles = []; }
+    }
+
+    function persistProfiles() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          version: 1,
+          profiles: state.profiles
+        }));
+      } catch (e) {}
+    }
+
+    function renderProfilesStrip() {
+      profilesStrip.replaceChildren();
+      if (state.profiles.length === 0) {
+        profilesStrip.classList.remove('visible');
+        return;
+      }
+      profilesStrip.classList.add('visible');
+
+      for (var i = 0; i < state.profiles.length; i++) {
+        (function(profile) {
+          var chip = document.createElement('button');
+          chip.className = 'profile-chip' +
+            (profile.id === state.currentProfileId ? ' active' : '');
+          chip.textContent = profile.label + ' ✦' + profile.number;
+          chip.addEventListener('click', function() { loadProfile(profile); });
+          profilesStrip.appendChild(chip);
+        })(state.profiles[i]);
+      }
+
+      if (state.profiles.length < MAX_PROFILES) {
+        var addBtn = document.createElement('button');
+        addBtn.className = 'profile-chip-add';
+        addBtn.textContent = S.profileAdd;
+        addBtn.addEventListener('click', function() { resetToInput(); });
+        profilesStrip.appendChild(addBtn);
+      }
+    }
+
+    function loadProfile(profile) {
+      state.number    = profile.number;
+      state.archetype = profile.archetype;
+      state.birthDate = profile.birth_date;
+      state.currentProfileId = profile.id;
+      state.readings  = {};
+      state.readingsLoaded = 0;
+
+      var parts = profile.birth_date.split('-');
+      selYear.value  = parts[0];
+      selMonth.value = parseInt(parts[1], 10);
+      constrainDays(selDay, selMonth, selYear);
+      selDay.value   = parseInt(parts[2], 10);
+
+      var fakeData = {
+        number: profile.number,
+        archetype: profile.archetype,
+        birth_date: profile.birth_date,
+        steps: []
+      };
+
+      renderNumberSection(fakeData);
+      renderReadingsSection();
+      var profileYear = parseInt(profile.birth_date.split('-')[0], 10);
+      renderZodiacSection(profileYear);
+      fetchDailyInsight();
+      setupTelegramLink();
+
+      dailySection.classList.add('visible');
+      compatSection.classList.remove('visible');
+      savePanel.classList.remove('visible');
+      renderProfilesStrip();
+    }
+
+    function resetToInput() {
+      state.currentProfileId = null;
+      selDay.value = '';
+      selMonth.value = '';
+      selYear.value = '';
+      selDay.classList.remove('has-value');
+      selMonth.classList.remove('has-value');
+      selYear.classList.remove('has-value');
+      revealBtn.disabled = true;
+      numberSection.classList.remove('visible');
+      readingsSection.classList.remove('visible');
+      resetZodiacSection();
+      actionRow.classList.remove('visible');
+      dailySection.classList.remove('visible');
+      compatSection.classList.remove('visible');
+      savePanel.classList.remove('visible');
+      renderProfilesStrip();
+    }
+
+    // ── SHARE ──
+    function onShare() {
+      if (!state.readings.core) {
+        showToast(S.toastNoReading);
+        return;
+      }
+      var firstSentence = state.readings.core.split('.')[0] + '.';
+      var zodiacSign = '';
+      if (state.birthDate) {
+        var yr = parseInt(state.birthDate.split('-')[0], 10);
+        var zp = getZodiacProfile(yr);
+        var isID = lang === 'id';
+        var animalDisplay  = isID ? (ZODIAC_ANIMAL_NAMES_ID[zp.animal] || zp.animal) : zp.animal;
+        var elementDisplay = isID ? (ZODIAC_ELEMENT_NAMES_ID[zp.element] || zp.element) : zp.element;
+        zodiacSign = elementDisplay + ' ' + animalDisplay;
+      }
+      var text = S.shareText
+        .replace('{n}', state.number)
+        .replace('{arch}', state.archetype)
+        .replace('{first}', firstSentence)
+        .replace('{zodiac}', zodiacSign);
+
+      if (navigator.share) {
+        navigator.share({ text: text }).catch(function() {});
+      } else {
+        navigator.clipboard.writeText(text).then(function() {
+          shareConfirm.classList.add('visible');
+          setTimeout(function() { shareConfirm.classList.remove('visible'); }, 2500);
+        }).catch(function() {
+          showToast(S.toastCopyFail);
+        });
+      }
+    }
+
+    // ── COMPATIBILITY ──
+    function onCompatToggle() {
+      var visible = compatSection.classList.toggle('visible');
+      if (visible) {
+        compatResult.classList.remove('visible');
+        compatSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function onCompatSubmit() {
+      var day   = parseInt(cSelDay.value, 10);
+      var month = parseInt(cSelMonth.value, 10);
+      var year  = parseInt(cSelYear.value, 10);
+
+      if (!validateDate(day, month, year, compatError)) return;
+
+      var isoDate = buildISODate(day, month, year);
+      compatSubmitBtn.disabled = true;
+      compatSubmitBtn.textContent = '...';
+
+      fetch(API_BASE + '/api/calculate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ birth_date: isoDate })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(calcData) {
+        if (calcData.error) throw new Error('calc failed');
+        return fetch(API_BASE + '/api/compatibility', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ number_a: state.number, number_b: calcData.number, lang: lang })
+        });
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        compatSubmitBtn.disabled = false;
+        compatSubmitBtn.textContent = S.compatSubmitBtn;
+        renderCompatResult(data);
+      })
+      .catch(function() {
+        compatSubmitBtn.disabled = false;
+        compatSubmitBtn.textContent = S.compatSubmitBtn;
+        showError(compatError, S.errConn);
+      });
+    }
+
+    function renderCompatResult(data) {
+      var score = data.score || 50;
+      compatScoreNum.textContent = score + '/100';
+      compatBarFill.style.width = '0%';
+      compatResult.classList.add('visible');
+
+      setTimeout(function() { compatBarFill.style.width = score + '%'; }, 80);
+
+      compatText.replaceChildren();
+      var p = document.createElement('p');
+      p.textContent = data.text;
+      compatText.appendChild(p);
+
+      if (data.fallback) {
+        var tag = document.createElement('div');
+        tag.className = 'fallback-tag';
+        tag.textContent = S.fallbackTag;
+        compatText.appendChild(tag);
+      }
+    }
+
+    // ── TOAST ──
+    function showToast(msg) {
+      toastEl.textContent = msg;
+      toastEl.classList.add('visible');
+      setTimeout(function() { toastEl.classList.remove('visible'); }, 2800);
+    }
+
+    // ── STATIC FALLBACKS ──
+    function getFallbackReading(type, number) {
+      var fallbacks = {
+        core: {
+          1: 'You carry the energy of the pioneer. Independent and driven, you chart your own course where others wait for permission. Your challenge is learning that strength does not always mean solitude.',
+          2: 'Yours is the energy of harmony. You feel what others cannot name, and your presence steadies those around you. Your challenge is believing your own needs matter as much as theirs.',
+          3: 'You were born to create. Words, colour, sound — you shape the world through expression. Your challenge is finishing what your enthusiasm begins.',
+          4: 'You are the foundation others build upon. Reliable, precise, devoted to craft — your work outlasts you. Your challenge is releasing control of what cannot be perfected.',
+          5: 'Change is your element. You arrived restless and curious, drawn to every horizon. Your challenge is learning that freedom and depth are not opposites.',
+          6: 'You are the caretaker. Love flows naturally from you toward home, family, and those who struggle. Your challenge is learning that caring for yourself is not selfishness.',
+          7: 'You are the seeker behind the seeker. Questions drive you further than answers satisfy you. Your challenge is trusting that not everything must be understood to be true.',
+          8: 'Power and material mastery are your lessons. You understand systems, resources, and what it takes to build something lasting. Your challenge is remembering that legacy is also built in quiet moments.',
+          9: 'You carry the weight of the whole. Compassion, wisdom, and the long view are your gifts. Your challenge is releasing what is finished without grief.'
+        },
+        strengths: {
+          1:'Your decisiveness and courage are rare. You act when others hesitate.',
+          2:'Your empathy and diplomacy create safety. People trust you instinctively.',
+          3:'Your creativity and communication open doors others cannot find.',
+          4:'Your discipline and reliability make you indispensable.',
+          5:'Your adaptability and curiosity mean you thrive where others flounder.',
+          6:'Your devotion and warmth make those around you feel genuinely seen.',
+          7:'Your analytical depth reveals what others overlook.',
+          8:'Your ambition and strategic mind turn vision into structure.',
+          9:'Your wisdom and generosity elevate every room you enter.'
+        },
+        shadow: {
+          1:'Stubbornness and pride can isolate you when you need support most.',
+          2:'Codependency and indecision can leave you invisible in your own life.',
+          3:'Scattered focus and superficiality can prevent your gifts from landing.',
+          4:'Rigidity and overwork can close you off from joy and spontaneity.',
+          5:'Restlessness and avoidance can prevent deep roots from forming.',
+          6:'Martyrdom and over-giving can breed quiet resentment over time.',
+          7:'Withdrawal and overthinking can keep you from the life you analyse.',
+          8:'Ruthlessness and materialism can cost you the relationships that matter.',
+          9:'Idealism and self-sacrifice can leave you depleted and overlooked.'
+        },
+        love_work: {
+          1:'In love you need a partner who matches your independence. At work you excel when given autonomy and responsibility.',
+          2:'In love you give generously, sometimes too much. At work you are the collaborator who makes teams function.',
+          3:'In love you need stimulation and playfulness. At work you belong in roles where communication is the product.',
+          4:'In love you show devotion through action, not words. At work your reliability earns trust that others struggle to build.',
+          5:'In love you need freedom and variety. At work you thrive in roles that keep you moving and discovering.',
+          6:'In love you are devoted and protective. At work you are drawn to roles that involve care, teaching, or service.',
+          7:'In love you need space to think. At work you belong in research, analysis, or any field that rewards depth.',
+          8:'In love you are loyal but demand respect. At work you are built for leadership and long-term strategy.',
+          9:'In love you are generous and romantic. At work you are drawn to humanitarian fields and meaningful causes.'
+        }
+      };
+      var section = fallbacks[type];
+      if (!section) return 'Your reading is being prepared.';
+      return section[number] || 'Your reading is being prepared.';
+    }
+
+    function getFallbackDaily(number) {
+      var insights = {
+        1:'Lead with intention today. One decisive action carries more weight than ten deliberate ones.',
+        2:'Listen before you speak today. The answer you are seeking may already be in the room.',
+        3:'Create something today, even something small. Your best thinking lives in making.',
+        4:'Slow down and do one thing well today. Quality over completion.',
+        5:'Say yes to something unexpected today. The detour may be the point.',
+        6:'Let someone care for you today. Receiving is also a form of love.',
+        7:'Spend time alone with a question today. Do not rush the answer.',
+        8:'Look at your long-term direction today. Small corrections now prevent large corrections later.',
+        9:'Release something today that no longer belongs to you. Space is not emptiness.'
+      };
+      return insights[number] || 'Today carries energy for reflection and intention.';
+    }
+
+    // ── LANG SWITCH ──
+    function switchLang(newLang) {
+      if (newLang === lang) return;
+      try { localStorage.setItem('dd_lang', newLang); } catch(e) {}
+      window.location.reload();
+    }
+
+    // ── START ──
+    // Set active toggle button
+    document.getElementById('langEN').className = 'lang-btn' + (lang === 'en' ? ' active' : '');
+    document.getElementById('langID').className = 'lang-btn' + (lang === 'id' ? ' active' : '');
+
+    init();
+  </script>
+</body>
+</html>
