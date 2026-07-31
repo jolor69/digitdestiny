@@ -3769,12 +3769,29 @@
       window.location.reload();
     }
 
+    // ── HERO HEADLINE ROTATION ──
+    // Static T[lang] defaults are already rendered by init(); this silently
+    // upgrades them to today's rotating variant. On failure, the static
+    // default set by init() simply stays as-is.
+    function fetchHeroContent() {
+      fetch(API_BASE + '/api/hero?lang=' + lang)
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (!data || !data.main || !data.em || !data.lore) return;
+        document.getElementById('heroHeadlineMain').textContent = data.main;
+        document.getElementById('heroHeadlineEm').textContent = data.em;
+        document.getElementById('heroLore').textContent = data.lore;
+      })
+      .catch(function() {});
+    }
+
     // ── START ──
     // Set active toggle button
     document.getElementById('langEN').className = 'lang-btn' + (lang === 'en' ? ' active' : '');
     document.getElementById('langID').className = 'lang-btn' + (lang === 'id' ? ' active' : '');
 
     init();
+    fetchHeroContent();
   </script>
 </body>
 </html>

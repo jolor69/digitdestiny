@@ -1,7 +1,7 @@
 // Digit Destiny — Cloudflare Worker
 // Routes: /api/calculate  /api/reading  /api/compatibility  /api/daily/:number
-//         /api/telegram/webhook  /api/warm
-// Cron:   daily insight push via scheduled handler
+//         /api/telegram/webhook  /api/warm  /api/hero
+// Cron:   0 1 * * * daily insight push, 0 0 * * * hero rotation cursor
 // Cache:  v2 keys — bump to v3 when prompts change next time
 
 var APP_DOMAIN = 'https://digitdestiny.neulab.xyz';
@@ -279,6 +279,89 @@ function getFallback(type, number) {
   var section = FALLBACKS[type];
   if (!section) return 'Your reading is being prepared.';
   return section[number] || 'Your reading is being prepared.';
+}
+
+// ── HERO HEADLINE ROTATION (fixed 30-day cycle) ──
+var HERO_VARIANT_COUNT = 30;
+
+var HERO_FALLBACK = {
+  en: {
+    main: 'The number written',
+    em: 'in your birth',
+    lore: 'For five thousand years, mystics and scholars have read the hidden language of numbers. Every date of birth encodes a Life Path — a thread of character, purpose, and fate woven into the mathematics of your arrival.'
+  },
+  id: {
+    main: 'Angka yang tertulis',
+    em: 'dalam kelahiranmu',
+    lore: 'Selama lima ribu tahun, para mistikus dan cendekiawan membaca bahasa tersembunyi angka. Setiap tanggal lahir menyimpan Jalur Hidup — benang karakter, tujuan, dan takdir yang terjalin dalam matematika kedatanganmu.'
+  }
+};
+
+var HERO_ANGLES = [
+  'ancient scrolls and forgotten libraries',
+  'stars and constellations',
+  'fingerprints and the uniqueness of arrival',
+  'rivers of time',
+  'woven threads and tapestries of fate',
+  'geometry and sacred mathematics',
+  'old maps and hidden paths',
+  'candlelight and quiet ritual',
+  'the turning of seasons',
+  'echoes passed through generations'
+];
+
+function buildHeroPrompt(lang, idx) {
+  var isID = lang === 'id';
+  var angle = HERO_ANGLES[idx % HERO_ANGLES.length];
+
+  var system = isID
+    ? 'Kamu adalah penulis merek untuk aplikasi numerologi mewah bernama Digit Destiny. Tulis HANYA dalam format tiga baris yang diminta. DILARANG KERAS menggunakan tanda bintang, tanda pagar, atau format markdown apapun.'
+    : 'You are the brand copywriter for a luxury numerology app called Digit Destiny. Write ONLY in the exact three-line format requested. NEVER use asterisks, hashtags, or any markdown formatting.';
+
+  var user = isID
+    ? 'Tulis ulang judul utama beranda dalam nada mistik yang hangat dan elegan, terinspirasi tema: ' + angle + '. Balas PERSIS dalam tiga baris ini, tanpa teks lain:\nMAIN: <baris judul utama, 3-6 kata>\nEM: <baris kedua yang ditekankan, 3-6 kata>\nLORE: <satu paragraf 40-70 kata tentang kebijaksanaan numerologi kuno, nada hangat dan personal>'
+    : 'Rewrite the homepage hero headline in a warm, elegant, mystical tone, inspired by the theme: ' + angle + '. Reply in EXACTLY this three-line format, no other text:\nMAIN: <main headline line, 3-6 words>\nEM: <emphasized second line, 3-6 words>\nLORE: <one paragraph, 40-70 words, about ancient numerological wisdom, warm and personal tone>';
+
+  return { system: system, user: user };
+}
+
+function validateHeroLine(text) {
+  if (!text || text.length < 2 || text.length > 60) return false;
+  var forbidden = ['<', '>', 'http', 'undefined', 'null'];
+  for (var i = 0; i < forbidden.length; i++) {
+    if (text.indexOf(forbidden[i]) !== -1) return false;
+  }
+  return true;
+}
+
+function parseHeroResponse(text) {
+  if (!text) return null;
+  var mainMatch = text.match(/^MAIN:\s*(.+)$/im);
+  var emMatch   = text.match(/^EM:\s*(.+)$/im);
+  var loreMatch = text.match(/^LORE:\s*([\s\S]+)$/im);
+
+  if (!mainMatch || !emMatch || !loreMatch) return null;
+
+  var main = mainMatch[1].trim();
+  var em   = emMatch[1].trim();
+  var lore = loreMatch[1].trim();
+
+  if (!validateHeroLine(main)) return null;
+  if (!validateHeroLine(em)) return null;
+  if (!validateAIOutput(lore)) return null;
+
+  return { main: main, em: em, lore: lore };
+}
+
+async function generateHeroVariant(env, lang, idx) {
+  var prompt = buildHeroPrompt(lang, idx);
+  var text = await callAI(env, prompt.system, prompt.user);
+  text = stripMarkdown(text);
+  var parsed = parseHeroResponse(text);
+  if (!parsed) return false;
+
+  await kvSet(env.DIGIT_DESTINY_KV, 'v2:hero:' + lang + ':' + idx, JSON.stringify(parsed));
+  return true;
 }
 
 // ── KV HELPERS ──
@@ -635,6 +718,17 @@ async function runDailyCron(env) {
   }
 }
 
+// ── CRON: HERO HEADLINE ROTATION ──
+// Advances the fixed 30-day hero cursor by one each midnight UTC.
+// No AI calls here — the 30 variants are generated once via /api/warm?n=hero.
+async function runHeroCron(env) {
+  var cursorRaw = await kvGet(env.DIGIT_DESTINY_KV, 'v2:hero:cursor');
+  var cursor = cursorRaw ? parseInt(cursorRaw, 10) : 0;
+  if (isNaN(cursor) || cursor < 0 || cursor >= HERO_VARIANT_COUNT) cursor = 0;
+  var next = (cursor + 1) % HERO_VARIANT_COUNT;
+  await kvSet(env.DIGIT_DESTINY_KV, 'v2:hero:cursor', String(next));
+}
+
 // ── WARM CACHE ──
 // GET /api/warm?secret=X&n=1  — warms one number at a time (8 AI calls max per request)
 // Run once per number 1-9, then once with n=daily to warm today's daily insights
@@ -707,12 +801,38 @@ async function handleWarm(req, env) {
     return jsonResponse({ ok: true, number: 'daily', generated: dgen, failed: dfail, detail: results });
   }
 
+  // ?n=hero — one-time (or re-runnable) seed of the fixed 30-day hero rotation.
+  // 30 variants x 2 langs = 60 AI calls max. Re-running skips already-cached
+  // slots unless &force=1 is passed.
+  if (n === 'hero') {
+    var heroForce = url.searchParams.get('force') === '1';
+    var heroLangs = ['en', 'id'];
+    for (var hli = 0; hli < heroLangs.length; hli++) {
+      var hlang = heroLangs[hli];
+      for (var hidx = 0; hidx < HERO_VARIANT_COUNT; hidx++) {
+        var heroKey = 'v2:hero:' + hlang + ':' + hidx;
+        if (!heroForce) {
+          var heroCached = await kvGet(env.DIGIT_DESTINY_KV, heroKey);
+          if (heroCached) {
+            results.push({ key: heroKey, status: 'already_cached' });
+            continue;
+          }
+        }
+        var heroOk = await generateHeroVariant(env, hlang, hidx);
+        results.push({ key: heroKey, status: heroOk ? 'generated' : 'ai_failed' });
+      }
+    }
+    var hgen = results.filter(function(r) { return r.status === 'generated'; }).length;
+    var hfail = results.filter(function(r) { return r.status === 'ai_failed'; }).length;
+    return jsonResponse({ ok: true, number: 'hero', generated: hgen, failed: hfail, detail: results });
+  }
+
   // ?n=1..9 — warm one life path number (4 types x 2 langs = 8 AI calls max)
   var num = parseInt(n, 10);
   if (!num || num < 1 || num > 9) {
     return jsonResponse({
       ok: false,
-      error: 'Pass ?n=1 through ?n=9 to warm one number, ?n=daily for daily insights, or ?n=status to check coverage.'
+      error: 'Pass ?n=1 through ?n=9 to warm one number, ?n=daily for daily insights, ?n=hero to seed the hero rotation, or ?n=status to check coverage.'
     }, 400);
   }
 
@@ -797,6 +917,29 @@ async function handleSynthesis(req, env) {
   return jsonResponse({ text: text, fallback: false, cached: false });
 }
 
+// ── HERO HEADLINE ──
+async function handleHero(req, env) {
+  var url = new URL(req.url);
+  var lang = url.searchParams.get('lang') === 'id' ? 'id' : 'en';
+
+  var cursorRaw = await kvGet(env.DIGIT_DESTINY_KV, 'v2:hero:cursor');
+  var cursor = cursorRaw ? parseInt(cursorRaw, 10) : 0;
+  if (isNaN(cursor) || cursor < 0 || cursor >= HERO_VARIANT_COUNT) cursor = 0;
+
+  var stored = await kvGet(env.DIGIT_DESTINY_KV, 'v2:hero:' + lang + ':' + cursor);
+  if (stored) {
+    try {
+      var parsed = JSON.parse(stored);
+      return jsonResponse({ main: parsed.main, em: parsed.em, lore: parsed.lore, index: cursor, fallback: false });
+    } catch (e) {
+      // fall through to fallback
+    }
+  }
+
+  var fb = HERO_FALLBACK[lang];
+  return jsonResponse({ main: fb.main, em: fb.em, lore: fb.lore, index: cursor, fallback: true });
+}
+
 // ── MAIN HANDLER ──
 export default {
   async fetch(req, env, ctx) {
@@ -837,6 +980,10 @@ export default {
       return handleSynthesis(req, env);
     }
 
+    if (path === '/api/hero' && method === 'GET') {
+      return handleHero(req, env);
+    }
+
     return new Response(JSON.stringify({ error: true, code: 'NOT_FOUND', message: 'Route not found' }), {
       status: 404,
       headers: corsHeaders()
@@ -844,6 +991,10 @@ export default {
   },
 
   async scheduled(event, env, ctx) {
-    ctx.waitUntil(runDailyCron(env));
+    if (event.cron === '0 0 * * *') {
+      ctx.waitUntil(runHeroCron(env));
+    } else {
+      ctx.waitUntil(runDailyCron(env));
+    }
   }
 };

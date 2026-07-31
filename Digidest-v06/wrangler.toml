@@ -10,4 +10,4 @@ kv_namespaces = [
 DIGDEST_OPENROUTER_MODEL = "deepseek/deepseek-chat"
 
 [triggers]
-crons = ["0 1 * * *"]
+crons = ["0 1 * * *", "0 0 * * *"]
