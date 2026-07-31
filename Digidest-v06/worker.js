@@ -315,11 +315,11 @@ function buildHeroPrompt(lang, idx) {
   var angle = HERO_ANGLES[idx % HERO_ANGLES.length];
 
   var system = isID
-    ? 'Kamu adalah penulis merek untuk aplikasi numerologi mewah bernama Digit Destiny. Tulis HANYA dalam format tiga baris yang diminta. DILARANG KERAS menggunakan tanda bintang, tanda pagar, atau format markdown apapun.'
+    ? 'Kamu adalah penulis merek untuk aplikasi numerologi mewah bernama Digit Destiny. Tulis HANYA dalam format tiga baris yang diminta, SELURUHNYA dalam Bahasa Indonesia — termasuk judul dan paragraf, bukan hanya instruksinya. DILARANG KERAS menggunakan tanda bintang, tanda pagar, atau format markdown apapun, dan DILARANG menulis dalam Bahasa Inggris.'
     : 'You are the brand copywriter for a luxury numerology app called Digit Destiny. Write ONLY in the exact three-line format requested. NEVER use asterisks, hashtags, or any markdown formatting.';
 
   var user = isID
-    ? 'Tulis ulang judul utama beranda dalam nada mistik yang hangat dan elegan, terinspirasi tema: ' + angle + '. Balas PERSIS dalam tiga baris ini, tanpa teks lain:\nMAIN: <baris judul utama, 3-6 kata>\nEM: <baris kedua yang ditekankan, 3-6 kata>\nLORE: <satu paragraf 40-70 kata tentang kebijaksanaan numerologi kuno, nada hangat dan personal>'
+    ? 'Tulis ulang judul utama beranda dalam nada mistik yang hangat dan elegan, terinspirasi tema: ' + angle + '. Balas PERSIS dalam tiga baris ini, SELURUHNYA dalam Bahasa Indonesia (jangan gunakan Bahasa Inggris sama sekali untuk isinya), tanpa teks lain:\nMAIN: <baris judul utama dalam Bahasa Indonesia, 3-6 kata>\nEM: <baris kedua yang ditekankan dalam Bahasa Indonesia, 3-6 kata>\nLORE: <satu paragraf 40-70 kata dalam Bahasa Indonesia tentang kebijaksanaan numerologi kuno, nada hangat dan personal>'
     : 'Rewrite the homepage hero headline in a warm, elegant, mystical tone, inspired by the theme: ' + angle + '. Reply in EXACTLY this three-line format, no other text:\nMAIN: <main headline line, 3-6 words>\nEM: <emphasized second line, 3-6 words>\nLORE: <one paragraph, 40-70 words, about ancient numerological wisdom, warm and personal tone>';
 
   return { system: system, user: user };
@@ -811,7 +811,8 @@ async function handleWarm(req, env) {
     var heroBatch = parseInt(url.searchParams.get('batch'), 10);
     if (!heroBatch || heroBatch < 1) heroBatch = 10;
 
-    var heroLangs = ['en', 'id'];
+    var heroLangFilter = url.searchParams.get('lang');
+    var heroLangs = (heroLangFilter === 'en' || heroLangFilter === 'id') ? [heroLangFilter] : ['en', 'id'];
     var heroProcessed = 0;
     var heroDone = true;
 
