@@ -813,13 +813,15 @@ async function handleWarm(req, env) {
 
     var heroLangFilter = url.searchParams.get('lang');
     var heroLangs = (heroLangFilter === 'en' || heroLangFilter === 'id') ? [heroLangFilter] : ['en', 'id'];
+    var heroStart = parseInt(url.searchParams.get('start'), 10);
+    if (isNaN(heroStart) || heroStart < 0) heroStart = 0;
     var heroProcessed = 0;
     var heroDone = true;
 
     outer:
     for (var hli = 0; hli < heroLangs.length; hli++) {
       var hlang = heroLangs[hli];
-      for (var hidx = 0; hidx < HERO_VARIANT_COUNT; hidx++) {
+      for (var hidx = heroStart; hidx < HERO_VARIANT_COUNT; hidx++) {
         var heroKey = 'v2:hero:' + hlang + ':' + hidx;
         if (!heroForce) {
           var heroCached = await kvGet(env.DIGIT_DESTINY_KV, heroKey);
