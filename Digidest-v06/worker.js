@@ -801,12 +801,21 @@ async function handleWarm(req, env) {
     return jsonResponse({ ok: true, number: 'daily', generated: dgen, failed: dfail, detail: results });
   }
 
-  // ?n=hero — one-time (or re-runnable) seed of the fixed 30-day hero rotation.
-  // 30 variants x 2 langs = 60 AI calls max. Re-running skips already-cached
-  // slots unless &force=1 is passed.
+  // ?n=hero — seed the fixed 30-day hero rotation. 30 variants x 2 langs = 60
+  // slots total. Processes at most &batch= slots per call (default 10) so a
+  // single request finishes quickly instead of blocking on up to 60
+  // sequential AI calls. Re-running is safe and resumable — it skips
+  // already-cached slots (unless &force=1) and picks up where it left off.
   if (n === 'hero') {
     var heroForce = url.searchParams.get('force') === '1';
+    var heroBatch = parseInt(url.searchParams.get('batch'), 10);
+    if (!heroBatch || heroBatch < 1) heroBatch = 10;
+
     var heroLangs = ['en', 'id'];
+    var heroProcessed = 0;
+    var heroDone = true;
+
+    outer:
     for (var hli = 0; hli < heroLangs.length; hli++) {
       var hlang = heroLangs[hli];
       for (var hidx = 0; hidx < HERO_VARIANT_COUNT; hidx++) {
@@ -818,13 +827,28 @@ async function handleWarm(req, env) {
             continue;
           }
         }
+        if (heroProcessed >= heroBatch) {
+          heroDone = false;
+          break outer;
+        }
         var heroOk = await generateHeroVariant(env, hlang, hidx);
         results.push({ key: heroKey, status: heroOk ? 'generated' : 'ai_failed' });
+        heroProcessed++;
       }
     }
     var hgen = results.filter(function(r) { return r.status === 'generated'; }).length;
     var hfail = results.filter(function(r) { return r.status === 'ai_failed'; }).length;
-    return jsonResponse({ ok: true, number: 'hero', generated: hgen, failed: hfail, detail: results });
+    var halready = results.filter(function(r) { return r.status === 'already_cached'; }).length;
+    return jsonResponse({
+      ok: true,
+      number: 'hero',
+      generated: hgen,
+      already_cached: halready,
+      failed: hfail,
+      done: heroDone,
+      message: heroDone ? 'All 60 hero slots are seeded.' : 'More slots remain — re-run the same request to continue.',
+      detail: results
+    });
   }
 
   // ?n=1..9 — warm one life path number (4 types x 2 langs = 8 AI calls max)
