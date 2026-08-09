@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="How to read your Numerology results on Digit Destiny — do's, don'ts, and how to interpret Life Path, Destiny, and Soul Urge numbers.">
+  <meta name="keywords" content="numerology guide, life path number meaning, how to read numerology, numerology interpretation">
+  <title>Numerology Guide — Digit Destiny</title>
+  <link rel="icon" type="image/svg+xml" href="/dd-logo-v1.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IM+Fell+English:ital@0;1&family=Courier+Prime&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --earth: #0C0A07; --leather: #1C1509; --umber: #2A1F0E; --vellum: #E8D5A3;
+      --vellum-dim: #9A8C70; --vellum-ghost: #4A4030; --bronze: #9C7A3C; --bronze-dim: #5A4520;
+      --temple: #C4A35A; --cinnabar: #8B3A2A; --cinnabar-dim: #4A1F15; --ember: #C4622A;
+      --font-display: 'Cormorant Garamond', Georgia, serif; --font-body: 'IM Fell English', Georgia, serif; --font-mono: 'Courier Prime', 'Courier New', monospace;
+    }
+    html { background: var(--earth); color: var(--vellum); font-family: var(--font-body); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+    .page { width: 100%; max-width: 760px; padding: 48px 24px 80px; }
+    .top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+    .back-link { color: var(--bronze); text-decoration: none; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.04em; }
+    .back-link:hover { color: var(--temple); }
+    .lang-switch { display: flex; gap: 6px; }
+    .lang-btn { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.05em; background: transparent; border: 1px solid var(--vellum-ghost); color: var(--vellum-dim); padding: 4px 10px; border-radius: 3px; cursor: pointer; }
+    .lang-btn.active { border-color: var(--bronze); color: var(--temple); }
+    .page-eyebrow { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--bronze); margin-bottom: 12px; }
+    h1 { font-family: var(--font-display); font-weight: 300; font-size: clamp(2rem, 5vw, 2.8rem); color: var(--vellum); margin-bottom: 20px; }
+    h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; color: var(--temple); margin: 40px 0 14px; }
+    h3 { font-family: var(--font-display); font-weight: 400; font-size: 1.15rem; color: var(--vellum); margin: 22px 0 8px; }
+    p, li { color: var(--vellum-dim); margin-bottom: 12px; max-width: 62ch; }
+    ul { padding-left: 22px; margin-bottom: 16px; }
+    a { color: var(--bronze); }
+    .lead { font-size: 1.1rem; color: var(--vellum); max-width: 62ch; margin-bottom: 8px; }
+    .box { border: 1px solid var(--bronze-dim); background: rgba(156,122,60,0.06); padding: 20px; border-radius: 4px; margin: 16px 0; }
+    .box.dont { border-color: var(--cinnabar-dim); background: rgba(139,58,42,0.08); }
+    .box p, .box li { color: var(--vellum); margin-bottom: 6px; }
+    .box h3 { margin-top: 0; color: var(--temple); }
+    .box.dont h3 { color: var(--ember); }
+    footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--vellum-ghost); font-family: var(--font-mono); font-size: 0.8rem; color: var(--vellum-ghost); }
+    footer a { color: var(--bronze-dim); }
+    html[data-lang="en"] [data-lang-text="id"] { display: none; }
+    html[data-lang="id"] [data-lang-text="en"] { display: none; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="top-row">
+      <a class="back-link" href="/">&larr; <span data-lang-text="en">Back to Digit Destiny</span><span data-lang-text="id">Kembali ke Digit Destiny</span></a>
+      <div class="lang-switch">
+        <button class="lang-btn" id="langEN" onclick="switchLang('en')">EN</button>
+        <button class="lang-btn" id="langID" onclick="switchLang('id')">ID</button>
+      </div>
+    </div>
+
+    <div class="page-eyebrow"><span data-lang-text="en">Instruction Manual</span><span data-lang-text="id">Panduan Penggunaan</span></div>
+    <h1><span data-lang-text="en">Reading Your Numerology</span><span data-lang-text="id">Membaca Numerologimu</span></h1>
+    <p class="lead">
+      <span data-lang-text="en">Your Life Path, Destiny, and Soul Urge numbers are calculated by pure arithmetic from your birth date — no AI involved in the numbers themselves. This guide explains how to get accurate input and how to interpret what comes back.</span>
+      <span data-lang-text="id">Angka Jalur Hidup, Takdir, dan Dorongan Jiwa dihitung murni secara aritmatika dari tanggal lahirmu — tanpa AI dalam angka itu sendiri. Panduan ini menjelaskan cara memasukkan data yang akurat dan cara menafsirkan hasilnya.</span>
+    </p>
+
+    <div class="box">
+      <h3><span data-lang-text="en">Do's</span><span data-lang-text="id">Yang Boleh</span></h3>
+      <ul>
+        <li><span data-lang-text="en">Use your exact birth date as recorded (birth certificate), not an approximate or remembered date.</span><span data-lang-text="id">Gunakan tanggal lahir tepat sesuai catatan (akta lahir), bukan tanggal perkiraan atau ingatan.</span></li>
+        <li><span data-lang-text="en">Read the core, strengths, shadow, and love/work sections together — they describe one coherent character, not four separate people.</span><span data-lang-text="id">Baca bagian inti, kekuatan, sisi gelap, dan cinta/kerja secara bersamaan — semuanya menggambarkan satu karakter yang utuh, bukan empat orang berbeda.</span></li>
+        <li><span data-lang-text="en">Treat the shadow section as growth edges to notice, not a verdict.</span><span data-lang-text="id">Anggap bagian sisi gelap sebagai area pertumbuhan untuk disadari, bukan vonis.</span></li>
+        <li><span data-lang-text="en">Use compatibility readings as a conversation starter with a partner, not a scorecard.</span><span data-lang-text="id">Gunakan bacaan kecocokan sebagai pembuka percakapan dengan pasangan, bukan sebagai skor penilaian.</span></li>
+      </ul>
+    </div>
+
+    <div class="box dont">
+      <h3><span data-lang-text="en">Don'ts</span><span data-lang-text="id">Yang Tidak Boleh</span></h3>
+      <ul>
+        <li><span data-lang-text="en">Don't treat your number as a fixed personality box — it's a lens, not a diagnosis.</span><span data-lang-text="id">Jangan anggap angkamu sebagai kotak kepribadian yang kaku — ini lensa, bukan diagnosis.</span></li>
+        <li><span data-lang-text="en">Don't use a compatibility score to end or start a relationship — it's a reflection prompt, not a verdict on real people.</span><span data-lang-text="id">Jangan gunakan skor kecocokan untuk mengakhiri atau memulai hubungan — ini pemantik refleksi, bukan vonis atas orang sungguhan.</span></li>
+        <li><span data-lang-text="en">Don't use numerology for medical, legal, or major financial decisions.</span><span data-lang-text="id">Jangan gunakan numerologi untuk keputusan medis, hukum, atau keuangan besar.</span></li>
+      </ul>
+    </div>
+
+    <h2><span data-lang-text="en">How to interpret each number</span><span data-lang-text="id">Cara menafsirkan setiap angka</span></h2>
+    <h3><span data-lang-text="en">Life Path Number</span><span data-lang-text="id">Angka Jalur Hidup</span></h3>
+    <p>
+      <span data-lang-text="en">Reduced from your full birth date. Read as your core temperament and the overall direction your life tends to move in — the broadest of the three numbers.</span>
+      <span data-lang-text="id">Direduksi dari tanggal lahir lengkapmu. Dibaca sebagai temperamen inti dan arah umum hidupmu — angka paling luas dari ketiganya.</span>
+    </p>
+    <h3><span data-lang-text="en">Archetype</span><span data-lang-text="id">Arketipe</span></h3>
+    <p>
+      <span data-lang-text="en">Each Life Path number (1-9) maps to a fixed archetype label (e.g. "The Leader," "The Nurturer") — a shorthand for the number's core theme, not a separate calculation.</span>
+      <span data-lang-text="id">Setiap Angka Jalur Hidup (1-9) dipetakan ke label arketipe tetap (misalnya "Sang Pemimpin," "Sang Pengasuh") — singkatan dari tema inti angka tersebut, bukan perhitungan terpisah.</span>
+    </p>
+
+    <h2><span data-lang-text="en">The AI's role here</span><span data-lang-text="id">Peran AI di sini</span></h2>
+    <p>
+      <span data-lang-text="en">The number itself never changes based on AI — it's fixed arithmetic. Only the prose explaining what the number means is AI-written, constrained to elaborate on the archetype rather than invent new numerology. See the full breakdown on the </span><a href="/technology.html">How It Works</a><span data-lang-text="en"> page.</span>
+      <span data-lang-text="id">Angka itu sendiri tidak pernah berubah karena AI — itu aritmatika tetap. Hanya penjelasan prosa tentang makna angka tersebut yang ditulis AI, dibatasi untuk menjelaskan arketipe, bukan mengarang numerologi baru. Lihat rincian lengkap di halaman </span><a href="/technology.html">Cara Kerja</a><span data-lang-text="id">.</span>
+    </p>
+
+    <footer>
+      Digit Destiny &middot; <a href="/">Home</a> &middot; <a href="/technology.html"><span data-lang-text="en">How It Works</span><span data-lang-text="id">Cara Kerja</span></a> &middot; <a href="/support.html"><span data-lang-text="en">Support Us</span><span data-lang-text="id">Dukung Kami</span></a>
+    </footer>
+  </div>
+
+  <script>
+    (function() {
+      var saved = null;
+      try { saved = localStorage.getItem('dd_lang'); } catch (e) {}
+      var lang = saved || ((navigator.language || '').toLowerCase().indexOf('id') === 0 ? 'id' : 'en');
+      function apply(l) {
+        document.documentElement.setAttribute('data-lang', l);
+        var btnEn = document.getElementById('langEN');
+        var btnId = document.getElementById('langID');
+        if (btnEn) btnEn.className = 'lang-btn' + (l === 'en' ? ' active' : '');
+        if (btnId) btnId.className = 'lang-btn' + (l === 'id' ? ' active' : '');
+      }
+      window.switchLang = function(l) {
+        lang = l;
+        try { localStorage.setItem('dd_lang', l); } catch (e) {}
+        apply(l);
+      };
+      apply(lang);
+    })();
+  </script>
+</body>
+</html>

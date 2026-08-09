@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="How Digit Destiny works: what's deterministic calculation and what's AI-generated narrative, across Numerology, Chinese Zodiac, and Weton/Primbon Jawa.">
+  <meta name="keywords" content="digit destiny technology, how it works, AI transparency, deepseek, numerology calculation, weton calculation">
+  <title>How It Works — Digit Destiny</title>
+  <link rel="icon" type="image/svg+xml" href="/dd-logo-v1.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IM+Fell+English:ital@0;1&family=Courier+Prime&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --earth:        #0C0A07;
+      --leather:      #1C1509;
+      --umber:        #2A1F0E;
+      --vellum:       #E8D5A3;
+      --vellum-dim:   #9A8C70;
+      --vellum-ghost: #4A4030;
+      --bronze:       #9C7A3C;
+      --bronze-dim:   #5A4520;
+      --temple:       #C4A35A;
+      --cinnabar:     #8B3A2A;
+      --cinnabar-dim: #4A1F15;
+      --ember:        #C4622A;
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'IM Fell English', Georgia, serif;
+      --font-mono:    'Courier Prime', 'Courier New', monospace;
+    }
+
+    html { background: var(--earth); color: var(--vellum); font-family: var(--font-body); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+
+    .page { width: 100%; max-width: 760px; padding: 48px 24px 80px; }
+
+    .top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+    .back-link { color: var(--bronze); text-decoration: none; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.04em; }
+    .back-link:hover { color: var(--temple); }
+    .lang-switch { display: flex; gap: 6px; }
+    .lang-btn { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.05em; background: transparent; border: 1px solid var(--vellum-ghost); color: var(--vellum-dim); padding: 4px 10px; border-radius: 3px; cursor: pointer; }
+    .lang-btn.active { border-color: var(--bronze); color: var(--temple); }
+
+    .page-eyebrow { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--bronze); margin-bottom: 12px; }
+    h1 { font-family: var(--font-display); font-weight: 300; font-size: clamp(2rem, 5vw, 2.8rem); color: var(--vellum); margin-bottom: 20px; }
+    h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; color: var(--temple); margin: 40px 0 14px; }
+    p { color: var(--vellum-dim); margin-bottom: 16px; max-width: 62ch; }
+    a { color: var(--bronze); }
+
+    .lead { font-size: 1.1rem; color: var(--vellum); max-width: 62ch; margin-bottom: 8px; }
+
+    .disclaimer-box { border: 1px solid var(--bronze-dim); background: rgba(156,122,60,0.06); padding: 20px; border-radius: 4px; margin: 24px 0; }
+    .disclaimer-box p { color: var(--vellum); margin-bottom: 0; }
+
+    table { width: 100%; border-collapse: collapse; margin: 16px 0 8px; }
+    th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--vellum-ghost); vertical-align: top; font-size: 0.92rem; }
+    th { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--bronze); }
+    td { color: var(--vellum-dim); }
+    td.sub { color: var(--temple); font-weight: 600; }
+    .table-wrap { overflow-x: auto; }
+
+    .model-note { font-family: var(--font-mono); font-size: 0.85rem; color: var(--vellum-dim); background: var(--leather); border: 1px solid var(--vellum-ghost); padding: 14px 18px; border-radius: 4px; margin: 16px 0; }
+
+    footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--vellum-ghost); font-family: var(--font-mono); font-size: 0.8rem; color: var(--vellum-ghost); }
+    footer a { color: var(--bronze-dim); }
+
+    html[data-lang="en"] [data-lang-text="id"] { display: none; }
+    html[data-lang="id"] [data-lang-text="en"] { display: none; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="top-row">
+      <a class="back-link" href="/">&larr; <span data-lang-text="en">Back to Digit Destiny</span><span data-lang-text="id">Kembali ke Digit Destiny</span></a>
+      <div class="lang-switch">
+        <button class="lang-btn" id="langEN" onclick="switchLang('en')">EN</button>
+        <button class="lang-btn" id="langID" onclick="switchLang('id')">ID</button>
+      </div>
+    </div>
+
+    <div class="page-eyebrow"><span data-lang-text="en">Transparency</span><span data-lang-text="id">Transparansi</span></div>
+    <h1><span data-lang-text="en">How It Works</span><span data-lang-text="id">Cara Kerja</span></h1>
+    <p class="lead">
+      <span data-lang-text="en">Digit Destiny combines two very different kinds of content: fixed, reproducible calculations, and AI-written narrative that elaborates on those calculations. This page draws the line between them, for all three readings.</span>
+      <span data-lang-text="id">Digit Destiny menggabungkan dua jenis konten yang sangat berbeda: perhitungan tetap yang dapat direproduksi, dan narasi tulisan AI yang menjelaskan perhitungan tersebut. Halaman ini menjelaskan batasannya, untuk ketiga jenis bacaan.</span>
+    </p>
+
+    <div class="disclaimer-box">
+      <p>
+        <span data-lang-text="en">Every reading on Digit Destiny — Numerology, Chinese Zodiac, and Weton/Primbon Jawa — is offered as a cultural reflection, not a fate or prediction. Treat it as a lens for self-reflection, not a determinant of real-world decisions.</span>
+        <span data-lang-text="id">Setiap bacaan di Digit Destiny — Numerologi, Zodiak Tionghoa, dan Weton/Primbon Jawa — disajikan sebagai refleksi budaya, bukan ramalan atau takdir pasti. Jadikan ini sebagai lensa refleksi diri, bukan penentu keputusan nyata.</span>
+      </p>
+    </div>
+
+    <h2><span data-lang-text="en">Deterministic vs. AI-generated, by sub-product</span><span data-lang-text="id">Deterministik vs. buatan AI, per produk</span></h2>
+    <div class="table-wrap">
+      <table>
+        <tr>
+          <th><span data-lang-text="en">Sub-product</span><span data-lang-text="id">Produk</span></th>
+          <th><span data-lang-text="en">Deterministic (no AI)</span><span data-lang-text="id">Deterministik (tanpa AI)</span></th>
+          <th><span data-lang-text="en">AI-generated (bounded)</span><span data-lang-text="id">Buatan AI (terbatas)</span></th>
+        </tr>
+        <tr>
+          <td class="sub">Numerology</td>
+          <td>
+            <span data-lang-text="en">Life Path, Destiny, and Soul Urge numbers — pure arithmetic digit-sum reduction from your birth date.</span>
+            <span data-lang-text="id">Angka Jalur Hidup, Takdir, dan Dorongan Jiwa — reduksi jumlah digit murni dari tanggal lahirmu.</span>
+          </td>
+          <td>
+            <span data-lang-text="en">Narrative interpretation of the calculated numbers.</span>
+            <span data-lang-text="id">Interpretasi naratif dari angka yang telah dihitung.</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="sub">Chinese Zodiac</td>
+          <td>
+            <span data-lang-text="en">Year &rarr; animal &rarr; element mapping — a fixed lookup table.</span>
+            <span data-lang-text="id">Pemetaan tahun &rarr; hewan &rarr; elemen — tabel referensi tetap.</span>
+          </td>
+          <td>
+            <span data-lang-text="en">Personality and compatibility narrative text.</span>
+            <span data-lang-text="id">Teks naratif kepribadian dan kecocokan.</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="sub">Weton / Primbon Jawa</td>
+          <td>
+            <span data-lang-text="en">Weekday/pasaran/neptu calculation, wuku cycle position, jodoh compatibility category, and petungan good-day rule matching — all fixed lookup or rule tables.</span>
+            <span data-lang-text="id">Perhitungan hari/pasaran/neptu, posisi siklus wuku, kategori kecocokan jodoh, dan pencocokan aturan petungan hari baik — semuanya tabel referensi atau aturan tetap.</span>
+          </td>
+          <td>
+            <span data-lang-text="en">Character reflection, compatibility narrative, and good-day guidance narrative — elaborates on a fixed reference table of category meanings, never invents new claims.</span>
+            <span data-lang-text="id">Refleksi karakter, narasi kecocokan, dan panduan hari baik — menjelaskan makna dari tabel referensi tetap, tidak pernah mengarang klaim baru.</span>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <h2><span data-lang-text="en">The model</span><span data-lang-text="id">Model AI</span></h2>
+    <p>
+      <span data-lang-text="en">Narrative text across all three sub-products is generated by </span><span data-lang-text="id">Teks naratif di ketiga produk dihasilkan oleh </span><strong>DeepSeek V4 Flash</strong><span data-lang-text="en">, accessed via OpenRouter.</span><span data-lang-text="id">, diakses melalui OpenRouter.</span>
+    </p>
+    <div class="model-note">model: deepseek/deepseek-chat &middot; provider: OpenRouter</div>
+    <p>
+      <span data-lang-text="en">Every calculation — numbers, categories, compatibility results — is deterministic and reproducible: running the same birth date through the calculator twice always returns the same number, animal, or weton. The AI only writes the explanatory narrative wrapped around a result that would be identical with or without it.</span>
+      <span data-lang-text="id">Setiap perhitungan — angka, kategori, hasil kecocokan — bersifat deterministik dan dapat direproduksi: memproses tanggal lahir yang sama dua kali akan selalu menghasilkan angka, hewan, atau weton yang sama. AI hanya menulis narasi penjelas di sekitar hasil yang akan tetap sama dengan atau tanpa AI.</span>
+    </p>
+
+    <h2><span data-lang-text="en">Why this boundary matters</span><span data-lang-text="id">Mengapa batasan ini penting</span></h2>
+    <p>
+      <span data-lang-text="en">Routing and calculation are data-driven, not invented by a language model — the same discipline used across Neulab's other tools. AI is confined to narrative elaboration on a fixed reference table, never asked to invent new numerological rules, zodiac meanings, or primbon categories. If the AI narrative fails or returns something invalid, every reading falls back to hand-written static text rather than showing nothing or an error.</span>
+      <span data-lang-text="id">Perhitungan dan penentuan rute berbasis data, bukan karangan model bahasa — disiplin yang sama diterapkan di produk Neulab lainnya. AI dibatasi hanya untuk menguraikan tabel referensi tetap, tidak pernah diminta mengarang aturan numerologi, makna zodiak, atau kategori primbon baru. Jika narasi AI gagal atau tidak valid, setiap bacaan kembali ke teks statis tertulis, bukan menampilkan kosong atau error.</span>
+    </p>
+
+    <h2><span data-lang-text="en">Learn more per system</span><span data-lang-text="id">Pelajari lebih lanjut per sistem</span></h2>
+    <p>
+      <a href="/guide-numerology.html"><span data-lang-text="en">Numerology: do's, don'ts, and how to interpret your reading &rarr;</span><span data-lang-text="id">Numerologi: yang boleh, yang tidak, dan cara membaca hasilnya &rarr;</span></a><br>
+      <a href="/guide-zodiac.html"><span data-lang-text="en">Chinese Zodiac: do's, don'ts, and how to interpret your reading &rarr;</span><span data-lang-text="id">Zodiak Tionghoa: yang boleh, yang tidak, dan cara membaca hasilnya &rarr;</span></a><br>
+      <a href="/guide-weton.html"><span data-lang-text="en">Weton / Primbon Jawa: do's, don'ts, and how to interpret your reading &rarr;</span><span data-lang-text="id">Weton / Primbon Jawa: yang boleh, yang tidak, dan cara membaca hasilnya &rarr;</span></a>
+    </p>
+
+    <footer>
+      Digit Destiny &middot; <a href="/">Home</a> &middot; <a href="/support.html"><span data-lang-text="en">Support Us</span><span data-lang-text="id">Dukung Kami</span></a>
+    </footer>
+  </div>
+
+  <script>
+    (function() {
+      var saved = null;
+      try { saved = localStorage.getItem('dd_lang'); } catch (e) {}
+      var lang = saved || ((navigator.language || '').toLowerCase().indexOf('id') === 0 ? 'id' : 'en');
+
+      function apply(l) {
+        document.documentElement.setAttribute('data-lang', l);
+        var btnEn = document.getElementById('langEN');
+        var btnId = document.getElementById('langID');
+        if (btnEn) btnEn.className = 'lang-btn' + (l === 'en' ? ' active' : '');
+        if (btnId) btnId.className = 'lang-btn' + (l === 'id' ? ' active' : '');
+      }
+
+      window.switchLang = function(l) {
+        lang = l;
+        try { localStorage.setItem('dd_lang', l); } catch (e) {}
+        apply(l);
+      };
+
+      apply(lang);
+    })();
+  </script>
+</body>
+</html>

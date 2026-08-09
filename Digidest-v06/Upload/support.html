@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Support Digit Destiny's infrastructure costs — one-time or monthly, via Stripe or PayPal.">
+  <meta name="keywords" content="digit destiny support, donate, infrastructure costs">
+  <title>Support Us — Digit Destiny</title>
+  <link rel="icon" type="image/svg+xml" href="/dd-logo-v1.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IM+Fell+English:ital@0;1&family=Courier+Prime&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --earth: #0C0A07; --leather: #1C1509; --umber: #2A1F0E; --vellum: #E8D5A3;
+      --vellum-dim: #9A8C70; --vellum-ghost: #4A4030; --bronze: #9C7A3C; --bronze-dim: #5A4520;
+      --temple: #C4A35A; --cinnabar: #8B3A2A; --cinnabar-dim: #4A1F15; --ember: #C4622A; --error: #C45A3A;
+      --font-display: 'Cormorant Garamond', Georgia, serif; --font-body: 'IM Fell English', Georgia, serif; --font-mono: 'Courier Prime', 'Courier New', monospace;
+    }
+    html { background: var(--earth); color: var(--vellum); font-family: var(--font-body); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+    .page { width: 100%; max-width: 640px; padding: 48px 24px 80px; }
+    .top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+    .back-link { color: var(--bronze); text-decoration: none; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.04em; }
+    .back-link:hover { color: var(--temple); }
+    .lang-switch { display: flex; gap: 6px; }
+    .lang-btn { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.05em; background: transparent; border: 1px solid var(--vellum-ghost); color: var(--vellum-dim); padding: 4px 10px; border-radius: 3px; cursor: pointer; }
+    .lang-btn.active { border-color: var(--bronze); color: var(--temple); }
+    .page-eyebrow { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--bronze); margin-bottom: 12px; }
+    h1 { font-family: var(--font-display); font-weight: 300; font-size: clamp(2rem, 5vw, 2.6rem); color: var(--vellum); margin-bottom: 20px; }
+    p { color: var(--vellum-dim); margin-bottom: 16px; max-width: 58ch; }
+    a { color: var(--bronze); }
+    .lead { font-size: 1.05rem; color: var(--vellum); max-width: 58ch; }
+
+    .donate-card { border: 1px solid var(--vellum-ghost); background: var(--leather); border-radius: 6px; padding: 28px; margin-top: 28px; }
+
+    .interval-toggle { display: flex; gap: 8px; margin-bottom: 20px; }
+    .interval-btn { flex: 1; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.03em; padding: 10px; border-radius: 4px; border: 1px solid var(--vellum-ghost); background: transparent; color: var(--vellum-dim); cursor: pointer; }
+    .interval-btn.active { border-color: var(--temple); color: var(--temple); background: rgba(196,163,90,0.08); }
+
+    .amount-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
+    .amount-btn { font-family: var(--font-mono); font-size: 0.95rem; padding: 12px 4px; border-radius: 4px; border: 1px solid var(--vellum-ghost); background: transparent; color: var(--vellum); cursor: pointer; }
+    .amount-btn.active { border-color: var(--bronze); background: rgba(156,122,60,0.12); color: var(--temple); }
+
+    .custom-row { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
+    .custom-row span { font-family: var(--font-mono); color: var(--vellum-dim); }
+    .custom-input { flex: 1; background: var(--earth); border: 1px solid var(--vellum-ghost); color: var(--vellum); padding: 10px 12px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.95rem; }
+    .custom-input:focus { outline: none; border-color: var(--bronze); }
+
+    .pay-btn { width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px; border-radius: 4px; border: none; cursor: pointer; font-family: var(--font-mono); font-size: 0.95rem; margin-bottom: 12px; }
+    .pay-btn.stripe { background: #635BFF; color: #fff; }
+    .pay-btn.stripe:hover { background: #524af0; }
+    .pay-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .paypal-plate { background: #fff; border-radius: 8px; padding: 4px; }
+    #paypal-button-container { min-height: 45px; }
+
+    .donate-status { font-family: var(--font-mono); font-size: 0.85rem; margin-top: 12px; }
+    .donate-status.error { color: var(--error); }
+    .donate-status.ok { color: var(--temple); }
+
+    .why-box { border: 1px solid var(--bronze-dim); background: rgba(156,122,60,0.06); padding: 20px; border-radius: 4px; margin-top: 32px; }
+    .why-box p { color: var(--vellum); margin-bottom: 0; }
+
+    footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--vellum-ghost); font-family: var(--font-mono); font-size: 0.8rem; color: var(--vellum-ghost); }
+    footer a { color: var(--bronze-dim); }
+
+    html[data-lang="en"] [data-lang-text="id"] { display: none; }
+    html[data-lang="id"] [data-lang-text="en"] { display: none; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="top-row">
+      <a class="back-link" href="/">&larr; <span data-lang-text="en">Back to Digit Destiny</span><span data-lang-text="id">Kembali ke Digit Destiny</span></a>
+      <div class="lang-switch">
+        <button class="lang-btn" id="langEN" onclick="switchLang('en')">EN</button>
+        <button class="lang-btn" id="langID" onclick="switchLang('id')">ID</button>
+      </div>
+    </div>
+
+    <div class="page-eyebrow"><span data-lang-text="en">Support</span><span data-lang-text="id">Dukungan</span></div>
+    <h1><span data-lang-text="en">Help Keep Digit Destiny Running</span><span data-lang-text="id">Bantu Digit Destiny Tetap Berjalan</span></h1>
+    <p class="lead">
+      <span data-lang-text="en">Digit Destiny is a free tool — no ads, no paywalled readings. Donations go toward the actual infrastructure costs: AI narrative generation and hosting.</span>
+      <span data-lang-text="id">Digit Destiny adalah alat gratis — tanpa iklan, tanpa bacaan berbayar. Donasi digunakan untuk biaya infrastruktur sesungguhnya: pembuatan narasi AI dan hosting.</span>
+    </p>
+
+    <div class="donate-card">
+      <div class="interval-toggle">
+        <button class="interval-btn active" id="intervalOnce" data-lang-text="en">One-time</button>
+        <button class="interval-btn" id="intervalMonth" data-lang-text="en">Monthly</button>
+      </div>
+
+      <div class="amount-grid">
+        <button class="amount-btn active" data-amount="3">$3</button>
+        <button class="amount-btn" data-amount="5">$5</button>
+        <button class="amount-btn" data-amount="10">$10</button>
+        <button class="amount-btn" data-amount="25">$25</button>
+      </div>
+
+      <div class="custom-row">
+        <span data-lang-text="en">Custom:</span><span data-lang-text="id">Kustom:</span>
+        <span>$</span>
+        <input class="custom-input" id="customAmount" type="number" min="1" step="1" placeholder="0">
+      </div>
+
+      <button class="pay-btn stripe" id="stripeBtn">
+        <svg viewBox="0 0 33 15" width="33" height="15" role="img" aria-label="Stripe" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><g fill-rule="evenodd"><path d="M32.956 7.925c0-2.313-1.12-4.138-3.261-4.138-2.15 0-3.451 1.825-3.451 4.12 0 2.719 1.535 4.092 3.74 4.092 1.075 0 1.888-.244 2.502-.587V9.605c-.614.307-1.319.497-2.213.497-.876 0-1.653-.307-1.753-1.373h4.418c0-.118.018-.588.018-.804zm-4.463-.859c0-1.02.624-1.445 1.193-1.445.55 0 1.138.424 1.138 1.445h-2.33zM22.756 3.787c-.885 0-1.454.415-1.77.704l-.118-.56H18.88v10.535l2.259-.48.009-2.556c.325.235.804.57 1.6.57 1.616 0 3.089-1.302 3.089-4.166-.01-2.62-1.5-4.047-3.08-4.047zm-.542 6.225c-.533 0-.85-.19-1.066-.425l-.009-3.352c.235-.262.56-.443 1.075-.443.822 0 1.391.922 1.391 2.105 0 1.211-.56 2.115-1.39 2.115zM18.04 2.766V.932l-2.268.479v1.843zM15.772 3.94h2.268v7.905h-2.268zM13.342 4.609l-.144-.669h-1.952v7.906h2.259V6.488c.533-.696 1.436-.57 1.716-.47V3.94c-.289-.108-1.346-.307-1.879.669zM8.825 1.98l-2.205.47-.009 7.236c0 1.337 1.003 2.322 2.34 2.322.741 0 1.283-.135 1.581-.298V9.876c-.289.117-1.716.533-1.716-.804V5.865h1.716V3.94H8.816l.009-1.96zM2.718 6.235c0-.352.289-.488.767-.488.687 0 1.554.208 2.241.578V4.202a5.958 5.958 0 0 0-2.24-.415c-1.835 0-3.054.957-3.054 2.557 0 2.493 3.433 2.096 3.433 3.17 0 .416-.361.552-.867.552-.75 0-1.708-.307-2.467-.723v2.15c.84.362 1.69.515 2.467.515 1.879 0 3.17-.93 3.17-2.548-.008-2.692-3.45-2.213-3.45-3.225z"></path></g></svg>
+        <span data-lang-text="en">Donate with Card</span><span data-lang-text="id">Donasi dengan Kartu</span>
+      </button>
+
+      <div class="paypal-plate">
+        <div id="paypal-button-container"></div>
+      </div>
+
+      <div class="donate-status" id="donateStatus"></div>
+    </div>
+
+    <div class="why-box">
+      <p>
+        <span data-lang-text="en">Every donation is optional and doesn't unlock anything extra — all readings stay free either way. Thank you for keeping this bilingual, ad-free experiment alive.</span>
+        <span data-lang-text="id">Setiap donasi bersifat opsional dan tidak membuka fitur tambahan apa pun — semua bacaan tetap gratis. Terima kasih telah menjaga eksperimen dwibahasa bebas iklan ini tetap hidup.</span>
+      </p>
+    </div>
+
+    <footer>
+      Digit Destiny &middot; <a href="/">Home</a> &middot; <a href="/technology.html"><span data-lang-text="en">How It Works</span><span data-lang-text="id">Cara Kerja</span></a>
+    </footer>
+  </div>
+
+  <script>
+    var API_BASE = 'https://digit-destiny-api.neuralstocks-dev.workers.dev';
+    // Set by Neulab ops once the new PayPal account is created — until then
+    // the PayPal button stays disabled (see initPaypal below).
+    var PAYPAL_CLIENT_ID = 'AfMqVqsGg7vPOl1e9Dw_x3KCDYOCWmfg-kBm8sx8txTAO-Y0Of1U9G2WxVXgiVu-WORCd3pw0kzY7Y8b';
+
+    var selectedAmount = 3;
+    var selectedInterval = null; // null = one-time, 'month' = recurring
+
+    (function() {
+      var saved = null;
+      try { saved = localStorage.getItem('dd_lang'); } catch (e) {}
+      var lang = saved || ((navigator.language || '').toLowerCase().indexOf('id') === 0 ? 'id' : 'en');
+      function apply(l) {
+        document.documentElement.setAttribute('data-lang', l);
+        var btnEn = document.getElementById('langEN');
+        var btnId = document.getElementById('langID');
+        if (btnEn) btnEn.className = 'lang-btn' + (l === 'en' ? ' active' : '');
+        if (btnId) btnId.className = 'lang-btn' + (l === 'id' ? ' active' : '');
+        document.getElementById('intervalOnce').textContent = l === 'id' ? 'Sekali' : 'One-time';
+        document.getElementById('intervalMonth').textContent = l === 'id' ? 'Bulanan' : 'Monthly';
+      }
+      window.switchLang = function(l) {
+        lang = l;
+        try { localStorage.setItem('dd_lang', l); } catch (e) {}
+        apply(l);
+      };
+      apply(lang);
+    })();
+
+    var amountButtons = document.querySelectorAll('.amount-btn');
+    for (var i = 0; i < amountButtons.length; i++) {
+      amountButtons[i].addEventListener('click', function() {
+        for (var j = 0; j < amountButtons.length; j++) amountButtons[j].classList.remove('active');
+        this.classList.add('active');
+        selectedAmount = parseFloat(this.getAttribute('data-amount'));
+        document.getElementById('customAmount').value = '';
+      });
+    }
+
+    document.getElementById('customAmount').addEventListener('input', function() {
+      var v = parseFloat(this.value);
+      if (v > 0) {
+        selectedAmount = v;
+        for (var j = 0; j < amountButtons.length; j++) amountButtons[j].classList.remove('active');
+      }
+    });
+
+    var intervalOnce = document.getElementById('intervalOnce');
+    var intervalMonth = document.getElementById('intervalMonth');
+    intervalOnce.addEventListener('click', function() {
+      selectedInterval = null;
+      intervalOnce.classList.add('active');
+      intervalMonth.classList.remove('active');
+    });
+    intervalMonth.addEventListener('click', function() {
+      selectedInterval = 'month';
+      intervalMonth.classList.add('active');
+      intervalOnce.classList.remove('active');
+    });
+
+    function showStatus(text, isError) {
+      var el = document.getElementById('donateStatus');
+      el.textContent = text;
+      el.className = 'donate-status ' + (isError ? 'error' : 'ok');
+    }
+
+    document.getElementById('stripeBtn').addEventListener('click', function() {
+      var btn = this;
+      if (!selectedAmount || selectedAmount < 1) {
+        showStatus('Please choose or enter an amount of at least $1.', true);
+        return;
+      }
+      btn.disabled = true;
+      fetch(API_BASE + '/api/donate/stripe/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: selectedAmount, interval: selectedInterval })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        btn.disabled = false;
+        if (data.checkout_url) {
+          window.location.href = data.checkout_url;
+        } else {
+          showStatus('Could not start checkout. Please try again.', true);
+        }
+      })
+      .catch(function() {
+        btn.disabled = false;
+        showStatus('Connection issue — please retry.', true);
+      });
+    });
+
+    function initPaypal() {
+      var container = document.getElementById('paypal-button-container');
+      if (PAYPAL_CLIENT_ID === 'REPLACE_WITH_PAYPAL_CLIENT_ID' || !window.paypal) {
+        container.innerHTML = '<div style="font-family:var(--font-mono);font-size:0.8rem;color:#666;padding:12px;">PayPal donations coming soon.</div>';
+        return;
+      }
+      paypal.Buttons({
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{ amount: { value: String(selectedAmount) } }]
+          });
+        },
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+            fetch(API_BASE + '/api/donate/paypal/log', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ order_id: data.orderID, amount: selectedAmount, interval: selectedInterval })
+            }).catch(function() {});
+            showStatus('Thank you for your donation!', false);
+          });
+        },
+        onError: function() {
+          showStatus('PayPal donation could not be completed.', true);
+        }
+      }).render('#paypal-button-container');
+    }
+
+    if (PAYPAL_CLIENT_ID !== 'REPLACE_WITH_PAYPAL_CLIENT_ID') {
+      var sdk = document.createElement('script');
+      sdk.src = 'https://www.paypal.com/sdk/js?client-id=' + PAYPAL_CLIENT_ID + '&currency=USD';
+      sdk.onload = initPaypal;
+      document.body.appendChild(sdk);
+    } else {
+      initPaypal();
+    }
+
+    if (window.location.search.indexOf('donated=1') !== -1) {
+      showStatus('Thank you for your donation!', false);
+    }
+  </script>
+</body>
+</html>

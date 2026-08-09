@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The date you were born was never random. Find out why.">
+  <meta name="description" content="The date you were born was never random. Find out why. Numerology, Chinese Zodiac, and Weton/Primbon Jawa readings — bilingual EN/ID.">
+  <meta name="keywords" content="numerology, life path number, chinese zodiac, weton, primbon jawa, neptu, pasaran, jodoh, wuku, kalender jawa, birth date meaning">
   <meta property="og:title" content="Digit Destiny — Know Your Number">
-  <meta property="og:description" content="The date you were born was never random. Find out why.">
+  <meta property="og:description" content="The date you were born was never random. Find out why. Numerology, Chinese Zodiac, and Weton/Primbon Jawa readings — bilingual EN/ID.">
   <meta property="og:image" content="https://digitdestiny.neulab.xyz/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -2094,6 +2095,11 @@
         <div class="feat-card-title" id="feat6Title">Bahasa Indonesia</div>
         <p class="feat-card-desc" id="feat6Desc">Semua bacaan tersedia dalam Bahasa Indonesia, terdeteksi otomatis dari perangkat Anda.</p>
       </div>
+      <div class="feat-card">
+        <div class="feat-card-glyph">&#9651;</div>
+        <div class="feat-card-title" id="feat7Title">Weton / Primbon Jawa</div>
+        <p class="feat-card-desc" id="feat7Desc">Discover your Javanese weton, neptu, and wuku — plus jodoh compatibility and good-day guidance, rooted in traditional primbon.</p>
+      </div>
     </div>
     <div class="feat-cta-wrap">
       <button class="hero-cta" id="landingCtaBtn">Get Your Reading</button>
@@ -2177,6 +2183,9 @@
         <button class="tab-btn" id="tabCombined" onclick="switchTab('combined')">
           <span id="tabCombinedLabel">Combined</span>
         </button>
+        <button class="tab-btn" id="tabWeton" onclick="switchTab('weton')">
+          <span id="tabWetonLabel">Weton</span>
+        </button>
       </div>
 
       <!-- TAB: LIFE PATH -->
@@ -2212,6 +2221,73 @@
           <p class="app-subtitle" id="synthesisSubtitleEl" style="margin-bottom:0;"></p>
           <div class="synthesis-badge" id="synthesisBadge"></div>
           <div class="synthesis-body" id="synthesisBody"></div>
+        </section>
+      </div>
+
+      <!-- TAB: WETON / PRIMBON -->
+      <div class="tab-panel" id="panelWeton" style="display:none;">
+        <section class="zodiac-section" id="wetonSection">
+          <hr class="divider">
+          <div class="section-label" id="wetonSectionLabel">Your Weton / Primbon Jawa</div>
+          <p class="app-subtitle" id="wetonSubtitleEl" style="margin-bottom:0;"></p>
+
+          <div class="compat-form" style="margin-top:16px;">
+            <span class="input-label" id="wetonTimeLabelEl">Birth time (optional — refines the Maghrib day boundary)</span>
+            <div class="compat-date-row">
+              <input class="save-input" type="time" id="wetonBirthTime" style="max-width:140px;">
+              <button class="compat-submit-btn" id="wetonTimeSubmitBtn">Apply</button>
+            </div>
+          </div>
+
+          <div class="zodiac-hero">
+            <div class="zodiac-glyph" id="wetonGlyph">&#9670;</div>
+            <div class="zodiac-hero-text">
+              <div class="zodiac-combined-sign" id="wetonCombinedSign"></div>
+              <div class="zodiac-meta-row" id="wetonMetaRow"></div>
+            </div>
+          </div>
+          <div class="zodiac-reading" id="wetonReading"></div>
+          <div class="zodiac-disclaimer" id="wetonDisclaimer"></div>
+          <p class="app-subtitle" id="wetonHowToLink" style="margin-top:8px;"></p>
+
+          <!-- JODOH SUB-SECTION -->
+          <hr class="divider" style="margin-top:32px;">
+          <div class="section-label" id="jodohSectionLabel">Jodoh Compatibility</div>
+          <div class="compat-form">
+            <span class="input-label" id="jodohDateLabelEl">Partner's birth date</span>
+            <div class="compat-date-row">
+              <input class="save-input" type="date" id="jodohPartnerDate">
+              <button class="compat-submit-btn" id="jodohSubmitBtn">Check Jodoh</button>
+            </div>
+            <div class="input-error" id="jodohError"></div>
+          </div>
+          <div class="compat-result" id="jodohResult">
+            <div class="compat-score-label" id="jodohCategoryLabel"></div>
+            <div class="compat-text" id="jodohText"></div>
+          </div>
+
+          <!-- PETUNGAN SUB-SECTION -->
+          <hr class="divider" style="margin-top:32px;">
+          <div class="section-label" id="petunganSectionLabel">Good-Day Guidance (Petungan)</div>
+          <div class="compat-form">
+            <span class="input-label" id="petunganEventLabelEl">Event type</span>
+            <div class="compat-date-row">
+              <select class="date-select" id="petunganEventType" style="max-width:200px;">
+                <option value="wedding">Wedding</option>
+                <option value="moving_house">Moving House</option>
+                <option value="starting_business">Starting a Business</option>
+                <option value="travel">Travel</option>
+              </select>
+              <input class="save-input" type="date" id="petunganEventDate">
+              <button class="compat-submit-btn" id="petunganSubmitBtn">Check Date</button>
+            </div>
+            <div class="input-error" id="petunganError"></div>
+          </div>
+          <div class="compat-result" id="petunganResult">
+            <div class="compat-score-label" id="petunganVerdictLabel"></div>
+            <div class="compat-text" id="petunganText"></div>
+          </div>
+          <p class="app-subtitle" id="petunganSourceNote" style="margin-top:12px;font-size:0.8em;"></p>
         </section>
       </div>
 
@@ -2307,6 +2383,17 @@
             Digit Destiny
           </div>
           <div class="footer-note" id="footerNoteEl">Readings are for reflection, not prediction.</div>
+          <div class="footer-products" style="margin-top:8px;">
+            <a href="/technology.html" class="footer-product-link" id="footerTechLink">How It Works</a>
+            <span class="footer-product-sep">·</span>
+            <a href="/guide-numerology.html" class="footer-product-link" id="footerGuideNumLink">Numerology Guide</a>
+            <span class="footer-product-sep">·</span>
+            <a href="/guide-zodiac.html" class="footer-product-link" id="footerGuideZodiacLink">Zodiac Guide</a>
+            <span class="footer-product-sep">·</span>
+            <a href="/guide-weton.html" class="footer-product-link" id="footerGuideWetonLink">Weton Guide</a>
+            <span class="footer-product-sep">·</span>
+            <a href="/support.html" class="footer-product-link" id="footerSupportLink">Support Us</a>
+          </div>
         </div>
         <div class="footer-right">
           <div class="footer-neulab-label" id="footerNeulabLabel">A product by</div>
@@ -2388,6 +2475,8 @@
         feat5Desc: 'Store readings for yourself and those close to you. Up to five profiles, kept privately in your browser.',
         feat6Title: 'Bahasa Indonesia',
         feat6Desc: 'Semua bacaan tersedia dalam Bahasa Indonesia, terdeteksi otomatis dari perangkat Anda.',
+        feat7Title: 'Weton / Primbon Jawa',
+        feat7Desc: 'Discover your Javanese weton, neptu, and wuku — plus jodoh compatibility and good-day guidance, rooted in traditional primbon.',
         landingCta: 'Get Your Reading',
         appTitle: 'Discover Your Life Path',
         appSubtitle: 'Enter your birth date to begin',
@@ -2428,6 +2517,11 @@
         footerNeulabLabel: 'A product by',
         footerNeulabTagline: 'Building AI products for everyday life',
         footerMoreLink: 'More ↗',
+        footerTechLink: 'How It Works',
+        footerGuideNumLink: 'Numerology Guide',
+        footerGuideZodiacLink: 'Zodiac Guide',
+        footerGuideWetonLink: 'Weton Guide',
+        footerSupportLink: 'Support Us',
         topBannerText: 'From the makers of Neural Stocks, NutriScan & more',
         topBannerLink: 'neulab.xyz ↗',
         errComplete: 'Please select a complete birth date.',
@@ -2450,6 +2544,24 @@
         synthesisTitle: 'Your Combined Profile',
         synthesisSubtitle: 'Life Path and Chinese Zodiac woven into one portrait',
         synthesisLoading: 'Weaving your portrait...',
+        tabWeton: 'Weton',
+        wetonTitle: 'Your Weton / Primbon Jawa',
+        wetonSubtitle: 'The Javanese weekday-and-market-cycle reading, from your birth date',
+        wetonTimeLabel: 'Birth time (optional — refines the Maghrib day boundary)',
+        wetonNeptuLabel: 'Neptu',
+        wetonWukuLabel: 'Wuku',
+        wetonMaghribShifted: 'shifted to prior day (pre-Maghrib birth time)',
+        wetonDisclaimer: 'A cultural reflection rooted in traditional primbon, not a fixed prediction. See how it works: /technology',
+        applyBtn: 'Apply',
+        jodohSectionTitle: 'Jodoh Compatibility',
+        jodohDateLabel: "Partner's birth date",
+        jodohSubmitBtn: 'Check Jodoh',
+        petunganSectionTitle: 'Good-Day Guidance (Petungan)',
+        petunganEventLabel: 'Event type',
+        petunganSubmitBtn: 'Check Date',
+        petunganGood: 'A favorable day',
+        petunganReconsider: 'A day worth reconsidering',
+        petunganSourceNote: 'Petungan guidance reflects general traditional practice and is not yet verified against a single primary text — treat it as a cultural reflection, not an authoritative rule.',
         months: ['January','February','March','April','May','June','July','August','September','October','November','December']
       },
       id: {
@@ -2482,6 +2594,8 @@
         feat5Desc: 'Simpan bacaan untukmu dan orang-orang terdekat. Hingga lima profil, tersimpan privat di browsermu.',
         feat6Title: 'Bahasa Indonesia',
         feat6Desc: 'Semua bacaan tersedia dalam Bahasa Indonesia, terdeteksi otomatis dari perangkat Anda.',
+        feat7Title: 'Weton / Primbon Jawa',
+        feat7Desc: 'Temukan weton, neptu, dan wukumu — lengkap dengan kecocokan jodoh dan panduan hari baik, berdasarkan primbon tradisional.',
         landingCta: 'Dapatkan Bacaanmu',
         appTitle: 'Temukan Jalur Hidupmu',
         appSubtitle: 'Masukkan tanggal lahir untuk memulai',
@@ -2522,6 +2636,11 @@
         footerNeulabLabel: 'Produk dari',
         footerNeulabTagline: 'Membangun produk AI untuk kehidupan sehari-hari',
         footerMoreLink: 'Lainnya ↗',
+        footerTechLink: 'Cara Kerja',
+        footerGuideNumLink: 'Panduan Numerologi',
+        footerGuideZodiacLink: 'Panduan Zodiak',
+        footerGuideWetonLink: 'Panduan Weton',
+        footerSupportLink: 'Dukung Kami',
         topBannerText: 'Dari pembuat Neural Stocks, NutriScan & lainnya',
         topBannerLink: 'neulab.xyz ↗',
         errComplete: 'Pilih tanggal lahir lengkap.',
@@ -2544,6 +2663,24 @@
         synthesisTitle: 'Profil Gabunganmu',
         synthesisSubtitle: 'Jalur Hidup dan Zodiak Tionghoa dirangkai dalam satu potret',
         synthesisLoading: 'Merangkai potretmu...',
+        tabWeton: 'Weton',
+        wetonTitle: 'Weton / Primbon Jawa Anda',
+        wetonSubtitle: 'Bacaan siklus hari-pasaran Jawa, dari tanggal lahirmu',
+        wetonTimeLabel: 'Jam lahir (opsional — menyempurnakan batas hari Maghrib)',
+        wetonNeptuLabel: 'Neptu',
+        wetonWukuLabel: 'Wuku',
+        wetonMaghribShifted: 'bergeser ke hari sebelumnya (lahir sebelum Maghrib)',
+        wetonDisclaimer: 'Refleksi budaya berdasarkan primbon tradisional, bukan ramalan pasti. Lihat cara kerjanya: /technology',
+        applyBtn: 'Terapkan',
+        jodohSectionTitle: 'Kecocokan Jodoh',
+        jodohDateLabel: 'Tanggal lahir pasangan',
+        jodohSubmitBtn: 'Cek Jodoh',
+        petunganSectionTitle: 'Panduan Hari Baik (Petungan)',
+        petunganEventLabel: 'Jenis acara',
+        petunganSubmitBtn: 'Cek Tanggal',
+        petunganGood: 'Hari yang baik',
+        petunganReconsider: 'Hari yang perlu dipertimbangkan kembali',
+        petunganSourceNote: 'Panduan petungan mencerminkan kebiasaan tradisional secara umum dan belum diverifikasi terhadap satu sumber utama tertentu — anggap ini sebagai refleksi budaya, bukan aturan otoritatif.',
         months: ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember']
       }
     };
@@ -2697,11 +2834,14 @@
     var panelLifePath  = document.getElementById('panelLifePath');
     var panelZodiac    = document.getElementById('panelZodiac');
     var panelCombined  = document.getElementById('panelCombined');
+    var panelWeton     = document.getElementById('panelWeton');
     var tabLifePath    = document.getElementById('tabLifePath');
     var tabZodiacBtn   = document.getElementById('tabZodiac');
     var tabCombinedBtn = document.getElementById('tabCombined');
+    var tabWetonBtn    = document.getElementById('tabWeton');
 
     var synthesisLoaded = false;
+    var wetonLoaded = false;
 
     // ── TAB SWITCHER ──
     // To add a new system (e.g. Western Zodiac):
@@ -2711,9 +2851,11 @@
       panelLifePath.style.display  = 'none';
       panelZodiac.style.display    = 'none';
       panelCombined.style.display  = 'none';
+      panelWeton.style.display     = 'none';
       tabLifePath.classList.remove('active');
       tabZodiacBtn.classList.remove('active');
       tabCombinedBtn.classList.remove('active');
+      tabWetonBtn.classList.remove('active');
 
       if (name === 'lifepath') {
         panelLifePath.style.display = '';
@@ -2726,6 +2868,12 @@
         tabCombinedBtn.classList.add('active');
         if (!synthesisLoaded) {
           fetchSynthesis();
+        }
+      } else if (name === 'weton') {
+        panelWeton.style.display = '';
+        tabWetonBtn.classList.add('active');
+        if (!wetonLoaded) {
+          fetchWetonReading();
         }
       }
     }
@@ -2846,16 +2994,148 @@
 
       // Show tabs, default to life path tab
       synthesisLoaded = false;
+      wetonLoaded = false;
       readingTabs.classList.add('visible');
       switchTab('lifepath');
     }
 
     function resetZodiacSection() {
       synthesisLoaded = false;
+      wetonLoaded = false;
       document.getElementById('synthesisBody').innerHTML = '';
       document.getElementById('synthesisBadge').innerHTML = '';
       readingTabs.classList.remove('visible');
       switchTab('lifepath');
+    }
+
+    // ── WETON / PRIMBON ──
+    var PETUNGAN_EVENT_LABELS_EN = { wedding: 'Wedding', moving_house: 'Moving House', starting_business: 'Starting a Business', travel: 'Travel' };
+    var PETUNGAN_EVENT_LABELS_ID = { wedding: 'Pernikahan', moving_house: 'Pindah Rumah', starting_business: 'Membuka Usaha', travel: 'Perjalanan' };
+
+    function fetchWetonReading() {
+      if (!state.birthDate) return;
+
+      document.getElementById('wetonSectionLabel').textContent = S.wetonTitle;
+      document.getElementById('wetonSubtitleEl').textContent   = S.wetonSubtitle;
+      document.getElementById('wetonTimeLabelEl').textContent  = S.wetonTimeLabel;
+      document.getElementById('wetonDisclaimer').textContent   = S.wetonDisclaimer;
+      document.getElementById('jodohSectionLabel').textContent = S.jodohSectionTitle;
+      document.getElementById('jodohDateLabelEl').textContent  = S.jodohDateLabel;
+      document.getElementById('jodohSubmitBtn').textContent    = S.jodohSubmitBtn;
+      document.getElementById('petunganSectionLabel').textContent = S.petunganSectionTitle;
+      document.getElementById('petunganEventLabelEl').textContent = S.petunganEventLabel;
+      document.getElementById('petunganSubmitBtn').textContent = S.petunganSubmitBtn;
+      document.getElementById('wetonTimeSubmitBtn').textContent = S.applyBtn;
+      document.getElementById('petunganSourceNote').textContent = S.petunganSourceNote;
+
+      var eventTypeSel = document.getElementById('petunganEventType');
+      var eventLabels = lang === 'id' ? PETUNGAN_EVENT_LABELS_ID : PETUNGAN_EVENT_LABELS_EN;
+      var opts = eventTypeSel.options;
+      for (var oi = 0; oi < opts.length; oi++) {
+        opts[oi].textContent = eventLabels[opts[oi].value] || opts[oi].value;
+      }
+
+      var readingEl = document.getElementById('wetonReading');
+      readingEl.innerHTML = '';
+      var skel = document.createElement('div');
+      skel.className = 'reading-skeleton';
+      for (var i = 0; i < 3; i++) {
+        var line = document.createElement('div');
+        line.className = 'skeleton-line';
+        skel.appendChild(line);
+      }
+      readingEl.appendChild(skel);
+
+      var birthTime = document.getElementById('wetonBirthTime').value;
+
+      fetch(API_BASE + '/api/weton/reading', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ birth_date: state.birthDate, birth_time: birthTime || null, lang: lang })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        var w = data.weton;
+        document.getElementById('wetonCombinedSign').textContent = w.weton_name;
+        document.getElementById('wetonMetaRow').textContent =
+          S.wetonNeptuLabel + ': ' + w.neptu + '  ·  ' + S.wetonWukuLabel + ': ' + w.wuku +
+          (data.weton.maghrib_shifted ? '  ·  ' + S.wetonMaghribShifted : '');
+
+        readingEl.innerHTML = '';
+        var p = document.createElement('p');
+        p.textContent = data.text;
+        readingEl.appendChild(p);
+        if (data.fallback) {
+          var tag = document.createElement('div');
+          tag.className = 'fallback-tag';
+          tag.textContent = S.fallbackTag;
+          readingEl.appendChild(tag);
+        }
+        wetonLoaded = true;
+      })
+      .catch(function() {
+        readingEl.innerHTML = '';
+        var p = document.createElement('p');
+        p.textContent = lang === 'id' ? 'Gagal memuat bacaan weton. Coba lagi.' : 'Could not load weton reading. Please try again.';
+        readingEl.appendChild(p);
+      });
+    }
+
+    function onWetonTimeSubmit() {
+      wetonLoaded = false;
+      fetchWetonReading();
+    }
+
+    function onJodohSubmit() {
+      var partnerDate = document.getElementById('jodohPartnerDate').value;
+      var errorEl = document.getElementById('jodohError');
+      errorEl.textContent = '';
+
+      if (!state.birthDate || !partnerDate) {
+        errorEl.textContent = S.errGeneral;
+        return;
+      }
+
+      fetch(API_BASE + '/api/weton/jodoh', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ birth_date_a: state.birthDate, birth_date_b: partnerDate, lang: lang })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (data.error) { errorEl.textContent = S.errGeneral; return; }
+        document.getElementById('jodohCategoryLabel').textContent = data.jodoh.category + ' (' + S.wetonNeptuLabel + ' ' + data.jodoh.combined_neptu + ')';
+        document.getElementById('jodohText').textContent = data.text;
+        document.getElementById('jodohResult').classList.add('visible');
+      })
+      .catch(function() { errorEl.textContent = S.errConn; });
+    }
+
+    function onPetunganSubmit() {
+      var eventType = document.getElementById('petunganEventType').value;
+      var eventDate = document.getElementById('petunganEventDate').value;
+      var errorEl = document.getElementById('petunganError');
+      errorEl.textContent = '';
+
+      if (!eventType || !eventDate) {
+        errorEl.textContent = S.errGeneral;
+        return;
+      }
+
+      fetch(API_BASE + '/api/weton/petungan', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ event_type: eventType, event_date: eventDate, lang: lang })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (data.error) { errorEl.textContent = S.errGeneral; return; }
+        document.getElementById('petunganVerdictLabel').textContent =
+          data.match.recommended ? S.petunganGood : S.petunganReconsider;
+        document.getElementById('petunganText').textContent = data.text;
+        document.getElementById('petunganResult').classList.add('visible');
+      })
+      .catch(function() { errorEl.textContent = S.errConn; });
     }
 
     // ── STATE ──
@@ -2947,6 +3227,8 @@
       document.getElementById('feat5Title').textContent = S.feat5Title;
       document.getElementById('feat5Desc').textContent = S.feat5Desc;
       document.getElementById('feat6Title').textContent = S.feat6Title;
+      document.getElementById('feat7Title').textContent = S.feat7Title;
+      document.getElementById('feat7Desc').textContent  = S.feat7Desc;
       document.getElementById('feat6Desc').textContent = S.feat6Desc;
       document.getElementById('landingCtaBtn').textContent = S.landingCta;
       document.getElementById('appTitleEl').textContent = S.appTitle;
@@ -2974,9 +3256,15 @@
       document.getElementById('footerNoteEl').textContent = S.footerNote;      document.getElementById('footerNeulabLabel').textContent = S.footerNeulabLabel;
       document.getElementById('footerNeulabTagline').textContent = S.footerNeulabTagline;
       document.getElementById('footerMoreLink').textContent = S.footerMoreLink;
+      document.getElementById('footerTechLink').textContent = S.footerTechLink;
+      document.getElementById('footerGuideNumLink').textContent = S.footerGuideNumLink;
+      document.getElementById('footerGuideZodiacLink').textContent = S.footerGuideZodiacLink;
+      document.getElementById('footerGuideWetonLink').textContent = S.footerGuideWetonLink;
+      document.getElementById('footerSupportLink').textContent = S.footerSupportLink;
       document.getElementById('tabLifePathLabel').textContent  = S.tabLifePath;
       document.getElementById('tabZodiacLabel').textContent    = S.tabZodiac;
       document.getElementById('tabCombinedLabel').textContent  = S.tabCombined;
+      document.getElementById('tabWetonLabel').textContent     = S.tabWeton;
       document.getElementById('topBannerText').textContent = S.topBannerText;
       document.getElementById('topBannerLink').textContent = S.topBannerLink;
 
@@ -3016,6 +3304,10 @@
       btnCompat.addEventListener('click', onCompatToggle);
       saveConfirmBtn.addEventListener('click', onSaveConfirm);
       compatSubmitBtn.addEventListener('click', onCompatSubmit);
+
+      document.getElementById('wetonTimeSubmitBtn').addEventListener('click', onWetonTimeSubmit);
+      document.getElementById('jodohSubmitBtn').addEventListener('click', onJodohSubmit);
+      document.getElementById('petunganSubmitBtn').addEventListener('click', onPetunganSubmit);
 
       document.getElementById('heroCta').addEventListener('click', function() {
         appSection.scrollIntoView({ behavior: 'smooth', block: 'start' });

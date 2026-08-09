@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="How to read your Chinese Zodiac results on Digit Destiny — do's, don'ts, and how to interpret your animal, element, and combined portrait.">
+  <meta name="keywords" content="chinese zodiac guide, zodiac animal meaning, how to read chinese zodiac, zodiac element interpretation">
+  <title>Chinese Zodiac Guide — Digit Destiny</title>
+  <link rel="icon" type="image/svg+xml" href="/dd-logo-v1.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IM+Fell+English:ital@0;1&family=Courier+Prime&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --earth: #0C0A07; --leather: #1C1509; --umber: #2A1F0E; --vellum: #E8D5A3;
+      --vellum-dim: #9A8C70; --vellum-ghost: #4A4030; --bronze: #9C7A3C; --bronze-dim: #5A4520;
+      --temple: #C4A35A; --cinnabar: #8B3A2A; --cinnabar-dim: #4A1F15; --ember: #C4622A;
+      --font-display: 'Cormorant Garamond', Georgia, serif; --font-body: 'IM Fell English', Georgia, serif; --font-mono: 'Courier Prime', 'Courier New', monospace;
+    }
+    html { background: var(--earth); color: var(--vellum); font-family: var(--font-body); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+    .page { width: 100%; max-width: 760px; padding: 48px 24px 80px; }
+    .top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+    .back-link { color: var(--bronze); text-decoration: none; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.04em; }
+    .back-link:hover { color: var(--temple); }
+    .lang-switch { display: flex; gap: 6px; }
+    .lang-btn { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.05em; background: transparent; border: 1px solid var(--vellum-ghost); color: var(--vellum-dim); padding: 4px 10px; border-radius: 3px; cursor: pointer; }
+    .lang-btn.active { border-color: var(--bronze); color: var(--temple); }
+    .page-eyebrow { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--bronze); margin-bottom: 12px; }
+    h1 { font-family: var(--font-display); font-weight: 300; font-size: clamp(2rem, 5vw, 2.8rem); color: var(--vellum); margin-bottom: 20px; }
+    h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; color: var(--temple); margin: 40px 0 14px; }
+    h3 { font-family: var(--font-display); font-weight: 400; font-size: 1.15rem; color: var(--vellum); margin: 22px 0 8px; }
+    p, li { color: var(--vellum-dim); margin-bottom: 12px; max-width: 62ch; }
+    ul { padding-left: 22px; margin-bottom: 16px; }
+    a { color: var(--bronze); }
+    .lead { font-size: 1.1rem; color: var(--vellum); max-width: 62ch; margin-bottom: 8px; }
+    .box { border: 1px solid var(--bronze-dim); background: rgba(156,122,60,0.06); padding: 20px; border-radius: 4px; margin: 16px 0; }
+    .box.dont { border-color: var(--cinnabar-dim); background: rgba(139,58,42,0.08); }
+    .box p, .box li { color: var(--vellum); margin-bottom: 6px; }
+    .box h3 { margin-top: 0; color: var(--temple); }
+    .box.dont h3 { color: var(--ember); }
+    footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--vellum-ghost); font-family: var(--font-mono); font-size: 0.8rem; color: var(--vellum-ghost); }
+    footer a { color: var(--bronze-dim); }
+    html[data-lang="en"] [data-lang-text="id"] { display: none; }
+    html[data-lang="id"] [data-lang-text="en"] { display: none; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="top-row">
+      <a class="back-link" href="/">&larr; <span data-lang-text="en">Back to Digit Destiny</span><span data-lang-text="id">Kembali ke Digit Destiny</span></a>
+      <div class="lang-switch">
+        <button class="lang-btn" id="langEN" onclick="switchLang('en')">EN</button>
+        <button class="lang-btn" id="langID" onclick="switchLang('id')">ID</button>
+      </div>
+    </div>
+
+    <div class="page-eyebrow"><span data-lang-text="en">Instruction Manual</span><span data-lang-text="id">Panduan Penggunaan</span></div>
+    <h1><span data-lang-text="en">Reading Your Chinese Zodiac</span><span data-lang-text="id">Membaca Zodiak Tionghokmu</span></h1>
+    <p class="lead">
+      <span data-lang-text="en">Your animal and element come from a fixed year-based lookup table — no AI involved in determining which animal or element you are. This guide covers accurate input and how to interpret the result.</span>
+      <span data-lang-text="id">Hewan dan elemenmu berasal dari tabel referensi tetap berdasarkan tahun — tanpa AI dalam menentukan hewan atau elemenmu. Panduan ini membahas cara memasukkan data yang akurat dan cara menafsirkan hasilnya.</span>
+    </p>
+
+    <div class="box">
+      <h3><span data-lang-text="en">Do's</span><span data-lang-text="id">Yang Boleh</span></h3>
+      <ul>
+        <li><span data-lang-text="en">Use your exact birth year — the animal/element mapping is year-based.</span><span data-lang-text="id">Gunakan tahun lahir yang tepat — pemetaan hewan/elemen berbasis tahun.</span></li>
+        <li><span data-lang-text="en">If you were born in January or early February, double-check your animal against the Lunar New Year date for your birth year — this tool maps by Gregorian year only (see Don'ts).</span><span data-lang-text="id">Jika lahir di Januari atau awal Februari, periksa kembali hewanmu terhadap tanggal Tahun Baru Imlek tahun kelahiranmu — alat ini hanya memetakan berdasarkan tahun Gregorian (lihat Yang Tidak Boleh).</span></li>
+        <li><span data-lang-text="en">Read animal and element together — the element (Wood, Fire, Earth, Metal, Water) shades how the animal's traits show up.</span><span data-lang-text="id">Baca hewan dan elemen bersamaan — elemen (Kayu, Api, Tanah, Logam, Air) mewarnai bagaimana sifat hewan tersebut muncul.</span></li>
+      </ul>
+    </div>
+
+    <div class="box dont">
+      <h3><span data-lang-text="en">Don'ts</span><span data-lang-text="id">Yang Tidak Boleh</span></h3>
+      <ul>
+        <li><span data-lang-text="en">Don't assume the animal is exact if you were born close to Lunar New Year (which shifts date each year) — this tool doesn't adjust for it, per its own disclaimer.</span><span data-lang-text="id">Jangan asumsikan hewannya pasti tepat jika lahir dekat Tahun Baru Imlek (yang tanggalnya berubah tiap tahun) — alat ini tidak menyesuaikannya, sesuai disclaimer-nya sendiri.</span></li>
+        <li><span data-lang-text="en">Don't treat the combined personality portrait as a fixed trait list — it's a narrative blend meant for reflection.</span><span data-lang-text="id">Jangan anggap potret kepribadian gabungan sebagai daftar sifat pasti — ini narasi campuran untuk refleksi.</span></li>
+      </ul>
+    </div>
+
+    <h2><span data-lang-text="en">How to interpret your result</span><span data-lang-text="id">Cara menafsirkan hasilmu</span></h2>
+    <h3><span data-lang-text="en">Animal</span><span data-lang-text="id">Hewan</span></h3>
+    <p>
+      <span data-lang-text="en">One of 12 animals in a fixed 12-year cycle, determined by your birth year. Read as your outward-facing temperament and how others tend to experience you.</span>
+      <span data-lang-text="id">Salah satu dari 12 hewan dalam siklus 12 tahun tetap, ditentukan oleh tahun lahirmu. Dibaca sebagai temperamen yang tampak keluar dan bagaimana orang lain cenderung mengalami dirimu.</span>
+    </p>
+    <h3><span data-lang-text="en">Element</span><span data-lang-text="id">Elemen</span></h3>
+    <p>
+      <span data-lang-text="en">One of 5 elements in a 10-year cycle. Read as the underlying texture or energy that flavors your animal sign.</span>
+      <span data-lang-text="id">Salah satu dari 5 elemen dalam siklus 10 tahun. Dibaca sebagai tekstur atau energi dasar yang mewarnai shio hewanmu.</span>
+    </p>
+    <h3><span data-lang-text="en">Combined Portrait</span><span data-lang-text="id">Potret Gabungan</span></h3>
+    <p>
+      <span data-lang-text="en">Weaves your Life Path Number and Chinese Zodiac together into one narrative — this section is entirely AI-composed prose, built from your two already-calculated results.</span>
+      <span data-lang-text="id">Merangkai Angka Jalur Hidup dan Zodiak Tionghokmu menjadi satu narasi — bagian ini seluruhnya prosa buatan AI, dibangun dari dua hasil yang telah dihitung sebelumnya.</span>
+    </p>
+
+    <h2><span data-lang-text="en">The AI's role here</span><span data-lang-text="id">Peran AI di sini</span></h2>
+    <p>
+      <span data-lang-text="en">Your animal and element never change based on AI — they're a fixed lookup. Most single-sign personality text is hand-written, not AI-generated; only the combined Life-Path-plus-Zodiac portrait is composed live by AI. See the full breakdown on the </span><a href="/technology.html">How It Works</a><span data-lang-text="en"> page.</span>
+      <span data-lang-text="id">Hewan dan elemenmu tidak pernah berubah karena AI — itu tabel referensi tetap. Sebagian besar teks kepribadian per-shio ditulis tangan, bukan buatan AI; hanya potret gabungan Jalur Hidup dan Zodiak yang disusun langsung oleh AI. Lihat rincian lengkap di halaman </span><a href="/technology.html">Cara Kerja</a><span data-lang-text="id">.</span>
+    </p>
+
+    <footer>
+      Digit Destiny &middot; <a href="/">Home</a> &middot; <a href="/technology.html"><span data-lang-text="en">How It Works</span><span data-lang-text="id">Cara Kerja</span></a> &middot; <a href="/support.html"><span data-lang-text="en">Support Us</span><span data-lang-text="id">Dukung Kami</span></a>
+    </footer>
+  </div>
+
+  <script>
+    (function() {
+      var saved = null;
+      try { saved = localStorage.getItem('dd_lang'); } catch (e) {}
+      var lang = saved || ((navigator.language || '').toLowerCase().indexOf('id') === 0 ? 'id' : 'en');
+      function apply(l) {
+        document.documentElement.setAttribute('data-lang', l);
+        var btnEn = document.getElementById('langEN');
+        var btnId = document.getElementById('langID');
+        if (btnEn) btnEn.className = 'lang-btn' + (l === 'en' ? ' active' : '');
+        if (btnId) btnId.className = 'lang-btn' + (l === 'id' ? ' active' : '');
+      }
+      window.switchLang = function(l) {
+        lang = l;
+        try { localStorage.setItem('dd_lang', l); } catch (e) {}
+        apply(l);
+      };
+      apply(lang);
+    })();
+  </script>
+</body>
+</html>

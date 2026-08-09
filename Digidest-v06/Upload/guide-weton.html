@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="How to read your Weton/Primbon Jawa results on Digit Destiny — do's, don'ts, and how to interpret neptu, pasaran, wuku, jodoh, and petungan.">
+  <meta name="keywords" content="weton guide, primbon guide, neptu meaning, pasaran meaning, jodoh meaning, wuku meaning, petungan guide">
+  <title>Weton / Primbon Jawa Guide — Digit Destiny</title>
+  <link rel="icon" type="image/svg+xml" href="/dd-logo-v1.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IM+Fell+English:ital@0;1&family=Courier+Prime&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --earth: #0C0A07; --leather: #1C1509; --umber: #2A1F0E; --vellum: #E8D5A3;
+      --vellum-dim: #9A8C70; --vellum-ghost: #4A4030; --bronze: #9C7A3C; --bronze-dim: #5A4520;
+      --temple: #C4A35A; --cinnabar: #8B3A2A; --cinnabar-dim: #4A1F15; --ember: #C4622A;
+      --font-display: 'Cormorant Garamond', Georgia, serif; --font-body: 'IM Fell English', Georgia, serif; --font-mono: 'Courier Prime', 'Courier New', monospace;
+    }
+    html { background: var(--earth); color: var(--vellum); font-family: var(--font-body); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+    .page { width: 100%; max-width: 760px; padding: 48px 24px 80px; }
+    .top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+    .back-link { color: var(--bronze); text-decoration: none; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.04em; }
+    .back-link:hover { color: var(--temple); }
+    .lang-switch { display: flex; gap: 6px; }
+    .lang-btn { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.05em; background: transparent; border: 1px solid var(--vellum-ghost); color: var(--vellum-dim); padding: 4px 10px; border-radius: 3px; cursor: pointer; }
+    .lang-btn.active { border-color: var(--bronze); color: var(--temple); }
+    .page-eyebrow { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--bronze); margin-bottom: 12px; }
+    h1 { font-family: var(--font-display); font-weight: 300; font-size: clamp(2rem, 5vw, 2.8rem); color: var(--vellum); margin-bottom: 20px; }
+    h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; color: var(--temple); margin: 40px 0 14px; }
+    h3 { font-family: var(--font-display); font-weight: 400; font-size: 1.15rem; color: var(--vellum); margin: 22px 0 8px; }
+    p, li { color: var(--vellum-dim); margin-bottom: 12px; max-width: 62ch; }
+    ul { padding-left: 22px; margin-bottom: 16px; }
+    a { color: var(--bronze); }
+    .lead { font-size: 1.1rem; color: var(--vellum); max-width: 62ch; margin-bottom: 8px; }
+    .box { border: 1px solid var(--bronze-dim); background: rgba(156,122,60,0.06); padding: 20px; border-radius: 4px; margin: 16px 0; }
+    .box.dont { border-color: var(--cinnabar-dim); background: rgba(139,58,42,0.08); }
+    .box p, .box li { color: var(--vellum); margin-bottom: 6px; }
+    .box h3 { margin-top: 0; color: var(--temple); }
+    .box.dont h3 { color: var(--ember); }
+    .source-note { font-family: var(--font-mono); font-size: 0.8rem; color: var(--vellum-ghost); margin-top: 4px; }
+    footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--vellum-ghost); font-family: var(--font-mono); font-size: 0.8rem; color: var(--vellum-ghost); }
+    footer a { color: var(--bronze-dim); }
+    html[data-lang="en"] [data-lang-text="id"] { display: none; }
+    html[data-lang="id"] [data-lang-text="en"] { display: none; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="top-row">
+      <a class="back-link" href="/">&larr; <span data-lang-text="en">Back to Digit Destiny</span><span data-lang-text="id">Kembali ke Digit Destiny</span></a>
+      <div class="lang-switch">
+        <button class="lang-btn" id="langEN" onclick="switchLang('en')">EN</button>
+        <button class="lang-btn" id="langID" onclick="switchLang('id')">ID</button>
+      </div>
+    </div>
+
+    <div class="page-eyebrow"><span data-lang-text="en">Instruction Manual</span><span data-lang-text="id">Panduan Penggunaan</span></div>
+    <h1><span data-lang-text="en">Reading Your Weton / Primbon Jawa</span><span data-lang-text="id">Membaca Weton / Primbon Jawamu</span></h1>
+    <p class="lead">
+      <span data-lang-text="en">Your weton, neptu, and wuku come from a fixed calendrical calculation — no AI involved in the numbers or names themselves. This guide covers accurate input (including the Maghrib boundary) and how to interpret jodoh and petungan results.</span>
+      <span data-lang-text="id">Weton, neptu, dan wukumu berasal dari perhitungan kalender tetap — tanpa AI dalam angka atau nama itu sendiri. Panduan ini membahas cara memasukkan data yang akurat (termasuk batas Maghrib) dan cara menafsirkan hasil jodoh dan petungan.</span>
+    </p>
+
+    <div class="box">
+      <h3><span data-lang-text="en">Do's</span><span data-lang-text="id">Yang Boleh</span></h3>
+      <ul>
+        <li><span data-lang-text="en">Use your exact birth date — the pasaran (5-day market cycle) position depends on the precise date.</span><span data-lang-text="id">Gunakan tanggal lahir yang tepat — posisi pasaran (siklus pasar 5 hari) bergantung pada tanggal yang presisi.</span></li>
+        <li><span data-lang-text="en">If you know your birth time and it was close to sunset, enter it — the traditional Javanese day changes at Maghrib, not midnight, and your weton may shift a day earlier as a result.</span><span data-lang-text="id">Jika kamu tahu jam lahirmu dan itu dekat waktu matahari terbenam, masukkan — hari Jawa tradisional berganti saat Maghrib, bukan tengah malam, sehingga wetonmu bisa bergeser satu hari lebih awal.</span></li>
+        <li><span data-lang-text="en">Read jodoh compatibility as one traditional lens among many you might consider about a relationship, not the deciding factor.</span><span data-lang-text="id">Baca kecocokan jodoh sebagai satu lensa tradisional di antara banyak pertimbangan hubungan, bukan faktor penentu.</span></li>
+        <li><span data-lang-text="en">Treat petungan good-day guidance as one traditional input alongside practical planning (venue availability, budgets, guest schedules).</span><span data-lang-text="id">Anggap panduan hari baik petungan sebagai satu masukan tradisional di samping perencanaan praktis (ketersediaan tempat, anggaran, jadwal tamu).</span></li>
+      </ul>
+    </div>
+
+    <div class="box dont">
+      <h3><span data-lang-text="en">Don'ts</span><span data-lang-text="id">Yang Tidak Boleh</span></h3>
+      <ul>
+        <li><span data-lang-text="en">Don't treat a "Pegat" or "Sujanan" jodoh category as a prediction that a relationship will fail — it's a traditional caution to communicate more deliberately, not a verdict.</span><span data-lang-text="id">Jangan anggap kategori jodoh "Pegat" atau "Sujanan" sebagai ramalan bahwa hubungan akan gagal — itu peringatan tradisional untuk berkomunikasi lebih hati-hati, bukan vonis.</span></li>
+        <li><span data-lang-text="en">Don't treat a "not recommended" petungan result as an absolute prohibition — it's a traditional caution to weigh, not a rule that overrides your own planning constraints.</span><span data-lang-text="id">Jangan anggap hasil petungan "tidak disarankan" sebagai larangan mutlak — itu peringatan tradisional untuk dipertimbangkan, bukan aturan yang mengalahkan kendala perencanaanmu sendiri.</span></li>
+        <li><span data-lang-text="en">Don't use weton/petungan guidance for medical, legal, or major financial decisions.</span><span data-lang-text="id">Jangan gunakan panduan weton/petungan untuk keputusan medis, hukum, atau keuangan besar.</span></li>
+      </ul>
+    </div>
+
+    <h2><span data-lang-text="en">How to interpret each term</span><span data-lang-text="id">Cara menafsirkan setiap istilah</span></h2>
+    <h3><span data-lang-text="en">Weton</span></h3>
+    <p><span data-lang-text="en">The combination of your Gregorian weekday and your pasaran day — e.g. "Friday Kliwon." One of 35 possible combinations, repeating every 35 days.</span><span data-lang-text="id">Kombinasi hari Gregorian dan hari pasaranmu — misalnya "Jumat Kliwon." Salah satu dari 35 kombinasi yang mungkin, berulang setiap 35 hari.</span></p>
+    <h3><span data-lang-text="en">Neptu</span></h3>
+    <p><span data-lang-text="en">The numeric weight of your weton — weekday value plus pasaran value. Read as the "strength" reading tradition assigns to your day.</span><span data-lang-text="id">Bobot numerik wetonmu — nilai hari ditambah nilai pasaran. Dibaca sebagai "kekuatan" yang diberikan tradisi pada harimu.</span></p>
+    <h3><span data-lang-text="en">Wuku</span></h3>
+    <p><span data-lang-text="en">Your position in the 30-week Pawukon cycle — a second, independent calendrical layer alongside weton.</span><span data-lang-text="id">Posisimu dalam siklus Pawukon 30 minggu — lapisan kalender kedua yang independen dari weton.</span></p>
+    <h3><span data-lang-text="en">Jodoh</span></h3>
+    <p><span data-lang-text="en">Combines two people's neptu into one of 8 traditional compatibility categories (Pegat, Ratu, Jodoh, Topo, Tinari, Padu, Sujanan, Pesthi).</span><span data-lang-text="id">Menggabungkan neptu dua orang menjadi salah satu dari 8 kategori kecocokan tradisional (Pegat, Ratu, Jodoh, Topo, Tinari, Padu, Sujanan, Pesthi).</span></p>
+    <h3><span data-lang-text="en">Petungan</span></h3>
+    <p><span data-lang-text="en">Traditional good-day rules matching an event type (wedding, moving house, starting a business, travel) against pasaran/weton.</span><span data-lang-text="id">Aturan hari baik tradisional yang mencocokkan jenis acara (pernikahan, pindah rumah, membuka usaha, perjalanan) dengan pasaran/weton.</span></p>
+    <p class="source-note"><span data-lang-text="en">Petungan guidance currently reflects general traditional practice and has not yet been verified against a single primary text (research into Primbon Betaljemur Adammakna found its actual method is a neptu-based calculation, not a fixed good/avoid-day list) — treat it as a cultural reflection to weigh alongside your own planning, not an authoritative rule.</span><span data-lang-text="id">Panduan petungan saat ini mencerminkan kebiasaan tradisional secara umum dan belum diverifikasi terhadap satu sumber utama tertentu (penelusuran pada Primbon Betaljemur Adammakna menemukan bahwa metode sebenarnya adalah perhitungan berbasis neptu, bukan daftar hari baik/buruk yang tetap) — anggap ini sebagai refleksi budaya untuk dipertimbangkan bersama perencanaanmu sendiri, bukan aturan otoritatif.</span></p>
+
+    <h2><span data-lang-text="en">The AI's role here</span><span data-lang-text="id">Peran AI di sini</span></h2>
+    <p>
+      <span data-lang-text="en">Your weton, neptu, wuku, jodoh category, and petungan match are never AI-generated — all fixed calculation or rule matching. Only the explanatory prose around each result is AI-written, constrained to elaborate on the fixed reference meaning rather than invent new claims. See the full breakdown on the </span><a href="/technology.html">How It Works</a><span data-lang-text="en"> page.</span>
+      <span data-lang-text="id">Weton, neptu, wuku, kategori jodoh, dan hasil petunganmu tidak pernah dihasilkan AI — semuanya perhitungan atau pencocokan aturan tetap. Hanya prosa penjelas di sekitar setiap hasil yang ditulis AI, dibatasi untuk menjelaskan makna referensi tetap, bukan mengarang klaim baru. Lihat rincian lengkap di halaman </span><a href="/technology.html">Cara Kerja</a><span data-lang-text="id">.</span>
+    </p>
+
+    <footer>
+      Digit Destiny &middot; <a href="/">Home</a> &middot; <a href="/technology.html"><span data-lang-text="en">How It Works</span><span data-lang-text="id">Cara Kerja</span></a> &middot; <a href="/support.html"><span data-lang-text="en">Support Us</span><span data-lang-text="id">Dukung Kami</span></a>
+    </footer>
+  </div>
+
+  <script>
+    (function() {
+      var saved = null;
+      try { saved = localStorage.getItem('dd_lang'); } catch (e) {}
+      var lang = saved || ((navigator.language || '').toLowerCase().indexOf('id') === 0 ? 'id' : 'en');
+      function apply(l) {
+        document.documentElement.setAttribute('data-lang', l);
+        var btnEn = document.getElementById('langEN');
+        var btnId = document.getElementById('langID');
+        if (btnEn) btnEn.className = 'lang-btn' + (l === 'en' ? ' active' : '');
+        if (btnId) btnId.className = 'lang-btn' + (l === 'id' ? ' active' : '');
+      }
+      window.switchLang = function(l) {
+        lang = l;
+        try { localStorage.setItem('dd_lang', l); } catch (e) {}
+        apply(l);
+      };
+      apply(lang);
+    })();
+  </script>
+</body>
+</html>
