@@ -100,6 +100,22 @@ function isValidDate(dateStr) {
   return true;
 }
 
+// For event dates (petungan good-day checks) rather than birth dates — these
+// are inherently often in the future (planning an upcoming wedding date),
+// so unlike isValidDate() this does not reject dates after today.
+function isValidEventDate(dateStr) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return false;
+  var parts = dateStr.split('-');
+  var y = parseInt(parts[0], 10);
+  var m = parseInt(parts[1], 10);
+  var d = parseInt(parts[2], 10);
+  if (y < 1900 || y > 2100) return false;
+  if (m < 1 || m > 12) return false;
+  var date = new Date(Date.UTC(y, m - 1, d));
+  if (date.getUTCFullYear() !== y || date.getUTCMonth() + 1 !== m || date.getUTCDate() !== d) return false;
+  return true;
+}
+
 // ── WETON / PRIMBON CALC ──
 // Deterministic only — zero AI. Date -> weekday -> pasaran -> neptu -> weton
 // name -> wuku position -> jodoh category -> petungan rule match.
@@ -682,14 +698,14 @@ var HERO_VARIANT_COUNT = 30;
 
 var HERO_FALLBACK = {
   en: {
-    main: 'The number written',
+    main: 'The pattern written',
     em: 'in your birth',
-    lore: 'For five thousand years, mystics and scholars have read the hidden language of numbers. Every date of birth encodes a Life Path — a thread of character, purpose, and fate woven into the mathematics of your arrival.'
+    lore: 'For five thousand years, seekers have turned to the patterns hidden in a life\'s beginning — read through number, symbol, and sign. Your birth carries its own quiet architecture of meaning, waiting to be traced.'
   },
   id: {
-    main: 'Angka yang tertulis',
+    main: 'Pola yang tertulis',
     em: 'dalam kelahiranmu',
-    lore: 'Selama lima ribu tahun, para mistikus dan cendekiawan membaca bahasa tersembunyi angka. Setiap tanggal lahir menyimpan Jalur Hidup — benang karakter, tujuan, dan takdir yang terjalin dalam matematika kedatanganmu.'
+    lore: 'Selama lima ribu tahun, para pencari kebenaran membaca pola tersembunyi di awal sebuah kehidupan — lewat angka, simbol, dan pertanda. Kelahiranmu menyimpan arsitektur makna yang tenang, menunggu untuk ditelusuri.'
   }
 };
 
@@ -711,12 +727,12 @@ function buildHeroPrompt(lang, idx) {
   var angle = HERO_ANGLES[idx % HERO_ANGLES.length];
 
   var system = isID
-    ? 'Kamu adalah penulis merek untuk aplikasi numerologi mewah bernama Digit Destiny. Tulis HANYA dalam format tiga baris yang diminta, SELURUHNYA dalam Bahasa Indonesia — termasuk judul dan paragraf, bukan hanya instruksinya. DILARANG KERAS menggunakan tanda bintang, tanda pagar, atau format markdown apapun, dan DILARANG menulis dalam Bahasa Inggris.'
-    : 'You are the brand copywriter for a luxury numerology app called Digit Destiny. Write ONLY in the exact three-line format requested. NEVER use asterisks, hashtags, or any markdown formatting.';
+    ? 'Kamu adalah penulis merek untuk aplikasi mistik pembacaan tanggal lahir bernama Digit Destiny. Tulis HANYA dalam format tiga baris yang diminta, SELURUHNYA dalam Bahasa Indonesia — termasuk judul dan paragraf, bukan hanya instruksinya. DILARANG KERAS menggunakan tanda bintang, tanda pagar, atau format markdown apapun, dan DILARANG menulis dalam Bahasa Inggris.'
+    : 'You are the brand copywriter for a mystical birth-date reading app called Digit Destiny. Write ONLY in the exact three-line format requested. NEVER use asterisks, hashtags, or any markdown formatting.';
 
   var user = isID
-    ? 'Tulis ulang judul utama beranda dalam nada mistik yang hangat dan elegan, terinspirasi tema: ' + angle + '. Balas PERSIS dalam tiga baris ini, SELURUHNYA dalam Bahasa Indonesia (jangan gunakan Bahasa Inggris sama sekali untuk isinya), tanpa teks lain:\nMAIN: <baris judul utama dalam Bahasa Indonesia, 3-6 kata>\nEM: <baris kedua yang ditekankan dalam Bahasa Indonesia, 3-6 kata>\nLORE: <satu paragraf 40-70 kata dalam Bahasa Indonesia tentang kebijaksanaan numerologi kuno, nada hangat dan personal>'
-    : 'Rewrite the homepage hero headline in a warm, elegant, mystical tone, inspired by the theme: ' + angle + '. Reply in EXACTLY this three-line format, no other text:\nMAIN: <main headline line, 3-6 words>\nEM: <emphasized second line, 3-6 words>\nLORE: <one paragraph, 40-70 words, about ancient numerological wisdom, warm and personal tone>';
+    ? 'Tulis ulang judul utama beranda dalam nada mistik yang hangat dan elegan, terinspirasi tema: ' + angle + '. Balas PERSIS dalam tiga baris ini, SELURUHNYA dalam Bahasa Indonesia (jangan gunakan Bahasa Inggris sama sekali untuk isinya), tanpa teks lain:\nMAIN: <baris judul utama dalam Bahasa Indonesia, 3-6 kata>\nEM: <baris kedua yang ditekankan dalam Bahasa Indonesia, 3-6 kata>\nLORE: <satu paragraf 40-70 kata dalam Bahasa Indonesia tentang kebijaksanaan tersembunyi di awal sebuah kehidupan — bersifat umum dan abadi, tidak terikat pada satu tradisi atau sistem tertentu, nada hangat dan personal>'
+    : 'Rewrite the homepage hero headline in a warm, elegant, mystical tone, inspired by the theme: ' + angle + '. Reply in EXACTLY this three-line format, no other text:\nMAIN: <main headline line, 3-6 words>\nEM: <emphasized second line, 3-6 words>\nLORE: <one paragraph, 40-70 words, about the hidden wisdom of a life\'s beginning — general and timeless, not tied to any single tradition or system, warm and personal tone>';
 
   return { system: system, user: user };
 }
@@ -1566,8 +1582,8 @@ async function handleWetonPetungan(req, env) {
   if (PETUNGAN_EVENT_TYPES.indexOf(body.event_type) === -1) {
     return errorResponse('INVALID_EVENT_TYPE', 'event_type must be one of: ' + PETUNGAN_EVENT_TYPES.join(', '));
   }
-  if (!isValidDate(body.event_date)) {
-    return errorResponse('INVALID_DATE', 'Invalid or future date');
+  if (!isValidEventDate(body.event_date)) {
+    return errorResponse('INVALID_DATE', 'Invalid date');
   }
 
   var lang = body.lang === 'id' ? 'id' : 'en';
