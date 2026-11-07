@@ -1560,6 +1560,76 @@
     }
     .top-banner-link:hover { opacity: 0.7; }
 
+    /* ── SITE NAV (sticky, prominent) ── */
+    .site-nav {
+      width: 100%;
+      padding: 14px 20px;
+      background: rgba(12,10,7,0.94);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(156,122,60,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .site-nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+    }
+    .site-nav-link {
+      font-family: var(--font-display);
+      font-size: 17px;
+      letter-spacing: 0.05em;
+      color: rgba(232,213,163,0.82);
+      text-decoration: none;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .site-nav-link:hover { color: var(--temple); }
+    .site-nav-sep { color: rgba(156,122,60,0.4); font-size: 15px; }
+
+    .site-nav-toggle {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: 1px solid rgba(156,122,60,0.4);
+      border-radius: 4px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-family: var(--font-display);
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      color: var(--vellum-dim);
+    }
+    .site-nav-toggle:hover { border-color: var(--bronze); color: var(--temple); }
+    .hamburger-icon { display: flex; flex-direction: column; gap: 3px; width: 15px; }
+    .hamburger-icon span { display: block; height: 1.5px; background: currentColor; }
+
+    @media (max-width: 640px) {
+      .site-nav { justify-content: flex-start; padding: 10px 14px; }
+      .site-nav-toggle { display: flex; }
+      .site-nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        width: 100%;
+        padding-top: 14px;
+      }
+      .site-nav-links.open { display: flex; }
+      .site-nav-links .site-nav-sep { display: none; }
+      .site-nav-link { font-size: 13px; }
+    }
+
     /* ── FOOTER EXPANDED ── */
     .site-footer {
       width: 100%;
@@ -1642,6 +1712,8 @@
       transition: color 0.2s;
     }
     .footer-product-link:hover { color: var(--bronze); }
+    .footer-bmc-link { color: var(--temple); }
+    .footer-bmc-link:hover { color: var(--vellum); }
     .footer-product-sep {
       color: rgba(156,122,60,0.25);
       font-size: 10px;
@@ -1953,6 +2025,25 @@
     <span class="top-banner-sep">·</span>
     <a href="https://neulab.xyz" target="_blank" rel="noopener" class="top-banner-link" id="topBannerLink">neulab.xyz ↗</a>
   </div>
+
+  <!-- Site nav -->
+  <nav class="site-nav" id="siteNav">
+    <button class="site-nav-toggle" id="siteNavToggle" onclick="toggleSiteNav()" aria-expanded="false" aria-controls="siteNavLinks">
+      <span id="siteNavMenuLabel">Menu</span>
+      <span class="hamburger-icon"><span></span><span></span><span></span></span>
+    </button>
+    <div class="site-nav-links" id="siteNavLinks">
+      <a class="site-nav-link" href="/technology.html" id="navTechLink">How It Works</a>
+      <span class="site-nav-sep">·</span>
+      <a class="site-nav-link" href="/guide-numerology.html" id="navGuideNumLink">Numerology Guide</a>
+      <span class="site-nav-sep">·</span>
+      <a class="site-nav-link" href="/guide-zodiac.html" id="navGuideZodiacLink">Zodiac Guide</a>
+      <span class="site-nav-sep">·</span>
+      <a class="site-nav-link" href="/guide-weton.html" id="navGuideWetonLink">Weton Guide</a>
+      <span class="site-nav-sep">·</span>
+      <a class="site-nav-link" href="/support.html" id="navSupportLink">Support Us</a>
+    </div>
+  </nav>
 
   <!-- ══ LANDING PAGE ══ -->
   <section class="landing" id="landingHero">
@@ -2393,6 +2484,8 @@
             <a href="/guide-weton.html" class="footer-product-link" id="footerGuideWetonLink">Weton Guide</a>
             <span class="footer-product-sep">·</span>
             <a href="/support.html" class="footer-product-link" id="footerSupportLink">Support Us</a>
+            <span class="footer-product-sep">·</span>
+            <a href="https://buymeacoffee.com/neulab" target="_blank" rel="noopener" class="footer-product-link footer-bmc-link" id="footerBmcLink">☕ Buy me a coffee</a>
           </div>
         </div>
         <div class="footer-right">
@@ -2447,9 +2540,9 @@
     var T = {
       en: {
         heroEyebrow: 'Digit Destiny',
-        heroHeadline: 'The number written',
+        heroHeadline: 'The pattern written',
         heroHeadlineEm: 'in your birth',
-        heroLore: 'For five thousand years, mystics and scholars have read the hidden language of numbers. Every date of birth encodes a Life Path — a thread of character, purpose, and fate woven into the mathematics of your arrival.',
+        heroLore: 'For five thousand years, seekers have turned to the patterns hidden in a life\'s beginning — read through number, symbol, and sign. Your birth carries its own quiet architecture of meaning, waiting to be traced.',
         heroCta: 'Consult the Numbers',
         heroAiLine: 'Readings composed by AI. Interpreted from five thousand years of tradition.',
         aiBannerText: 'Every reading is uniquely generated by AI — not a template, not a script. Written fresh for your number.',
@@ -2522,6 +2615,7 @@
         footerGuideZodiacLink: 'Zodiac Guide',
         footerGuideWetonLink: 'Weton Guide',
         footerSupportLink: 'Support Us',
+        footerBmcLink: '☕ Buy me a coffee',
         topBannerText: 'From the makers of Neural Stocks, NutriScan & more',
         topBannerLink: 'neulab.xyz ↗',
         errComplete: 'Please select a complete birth date.',
@@ -2566,9 +2660,9 @@
       },
       id: {
         heroEyebrow: 'Digit Destiny',
-        heroHeadline: 'Angka yang tertulis',
+        heroHeadline: 'Pola yang tertulis',
         heroHeadlineEm: 'dalam kelahiranmu',
-        heroLore: 'Selama lima ribu tahun, para mistikus dan cendekiawan membaca bahasa tersembunyi angka. Setiap tanggal lahir menyimpan Jalur Hidup — benang karakter, tujuan, dan takdir yang terjalin dalam matematika kedatanganmu.',
+        heroLore: 'Selama lima ribu tahun, para pencari kebenaran membaca pola tersembunyi di awal sebuah kehidupan — lewat angka, simbol, dan pertanda. Kelahiranmu menyimpan arsitektur makna yang tenang, menunggu untuk ditelusuri.',
         heroCta: 'Konsultasi Angka',
         heroAiLine: 'Bacaan disusun oleh AI. Ditafsirkan dari lima ribu tahun tradisi.',
         aiBannerText: 'Setiap bacaan dibuat unik oleh AI — bukan template, bukan skrip. Ditulis segar untuk angkamu.',
@@ -2641,6 +2735,7 @@
         footerGuideZodiacLink: 'Panduan Zodiak',
         footerGuideWetonLink: 'Panduan Weton',
         footerSupportLink: 'Dukung Kami',
+        footerBmcLink: '☕ Traktir kopi',
         topBannerText: 'Dari pembuat Neural Stocks, NutriScan & lainnya',
         topBannerLink: 'neulab.xyz ↗',
         errComplete: 'Pilih tanggal lahir lengkap.',
@@ -3261,6 +3356,12 @@
       document.getElementById('footerGuideZodiacLink').textContent = S.footerGuideZodiacLink;
       document.getElementById('footerGuideWetonLink').textContent = S.footerGuideWetonLink;
       document.getElementById('footerSupportLink').textContent = S.footerSupportLink;
+      document.getElementById('footerBmcLink').textContent = S.footerBmcLink;
+      document.getElementById('navTechLink').textContent = S.footerTechLink;
+      document.getElementById('navGuideNumLink').textContent = S.footerGuideNumLink;
+      document.getElementById('navGuideZodiacLink').textContent = S.footerGuideZodiacLink;
+      document.getElementById('navGuideWetonLink').textContent = S.footerGuideWetonLink;
+      document.getElementById('navSupportLink').textContent = S.footerSupportLink;
       document.getElementById('tabLifePathLabel').textContent  = S.tabLifePath;
       document.getElementById('tabZodiacLabel').textContent    = S.tabZodiac;
       document.getElementById('tabCombinedLabel').textContent  = S.tabCombined;
@@ -3585,6 +3686,14 @@
     function onStepsToggle() {
       var open = stepsBlock.classList.toggle('open');
       stepsToggle.textContent = open ? S.stepsHide : S.stepsShow;
+    }
+
+    // ── MOBILE NAV (Menu + hamburger) ──
+    function toggleSiteNav() {
+      var links = document.getElementById('siteNavLinks');
+      var toggle = document.getElementById('siteNavToggle');
+      var open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     }
 
     // ── READINGS ──
@@ -4085,5 +4194,6 @@
     init();
     fetchHeroContent();
   </script>
+  <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="neulab" data-description="Support me on Buy me a coffee!" data-message="" data-color="#C4A35A" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
 </body>
 </html>
